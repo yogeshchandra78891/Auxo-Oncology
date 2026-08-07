@@ -1,5 +1,4 @@
 .env
-requirements.txt
 ICD_raw_2025_with_category11.csv
 icd_category_cache_v2.json
 __pycache__/
