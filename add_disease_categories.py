@@ -14,8 +14,8 @@ from google.genai import types
 import truststore
 
 DEFAULT_INPUT = "ICD_raw_2025(in).csv"
-DEFAULT_OUTPUT = "ICD_raw_2025_with_category11.csv"
-DEFAULT_CACHE = "icd_category_cache_v2.json"
+DEFAULT_OUTPUT = "ICD_with_categories.csv"
+DEFAULT_CACHE = "icd_category_cache.json"
 DEFAULT_MODEL = "gemini-3.5-flash-lite"
 
 def parse_args() -> argparse.Namespace:
@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
         help="CSV column to categorize (D is description_2 in the supplied file).",
     )
     parser.add_argument("--model", default=DEFAULT_MODEL, help="Gemini model to use.")
-    parser.add_argument("--batch-size", type=int, default=75, help="Descriptions per API call.")
+    parser.add_argument("--batch-size", type=int, default=100, help="Descriptions per API call.")
     parser.add_argument(
         "--cache", default=DEFAULT_CACHE, help="JSON cache path; makes interrupted runs resumable."
     )
@@ -40,7 +40,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--refresh-cache",
         action="store_true",
-        help="Ignore prior cached model labels and regenerate all non-rule categories.",
+        help="Ignore prior cached labels and regenerate all categories with the LLM.",
     )
     return parser.parse_args()
 
@@ -64,27 +64,6 @@ def chunks(values: list[str], size: int) -> Iterable[list[str]]:
     for start in range(0, len(values), size):
         yield values[start : start + size]
 
-
-def rule_category(description: str) -> str | None:
-    """Return guaranteed disease-family labels for high-value ICD patterns."""
-    text = description.casefold()
-    if "tuberculosis" in text:
-        return "Tuberculosis"
-    if (
-        "lymphoma" in text
-        or "malignant immunoproliferative disease" in text
-        or "b-cell lymphoproliferative" in text
-        or "lymphoid leukemia" in text
-    ):
-        return "Lymphoma"
-    if "leukemia" in text or "leukaemia" in text:
-        return "Leukemia"
-    return None
-
-
-def normalize_category(description: str, category: str) -> str:
-    """Apply deterministic taxonomy rules after model output as a safety net."""
-    return rule_category(description) or category.strip()
 
 def categories_for_batch(
     client: genai.Client, model: str, descriptions: list[str]
@@ -151,17 +130,11 @@ Rules:
     expected_indexes = set(range(len(descriptions)))
     if set(by_index) != expected_indexes or any(not value for value in by_index.values()):
         raise ValueError("Gemini returned an incomplete category batch; no results were saved.")
-    return {
-        descriptions[index]: normalize_category(descriptions[index], by_index[index])
-        for index in range(len(descriptions))
-    }
+    return {descriptions[index]: by_index[index] for index in range(len(descriptions))}
 
 
 def create_gemini_client(api_key: str) -> genai.Client:
     """Use Windows trusted root certificates for corporate HTTPS proxies.
-
-    Set GEMINI_CA_BUNDLE in .env only when IT provides a PEM certificate bundle
-    that is not already installed in the Windows Trusted Root store.
     """
     ca_bundle = os.getenv("GEMINI_CA_BUNDLE")
     if ca_bundle:
@@ -199,17 +172,8 @@ def main() -> None:
         distinct = distinct[: args.limit]
 
     cache = {} if args.refresh_cache else load_cache(cache_path)
-    rule_based = {description: rule_category(description) for description in distinct}
-    for description, category in rule_based.items():
-        if category:
-            cache[description] = category
-    pending = [description for description in distinct if not rule_based[description] and description not in cache]
-    print(
-        f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; "
-        f"{sum(category is not None for category in rule_based.values()):,} rule-based; "
-        f"{len(pending):,} to classify with Gemini."
-    )
-    save_cache(cache, cache_path)
+    pending = [description for description in distinct if description not in cache]
+    print(f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; {len(pending):,} to classify with Gemini.")
 
     if pending:
         if not api_key or api_key == "paste_your_gemini_api_key_here":
