@@ -1,4 +1,7 @@
+"""Generate LLM-only ICD main categories with an Azure OpenAI GPT-4o mini deployment."""
+
 from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -6,21 +9,23 @@ import ssl
 import time
 from pathlib import Path
 from typing import Iterable
+
 import httpx
 import pandas as pd
-from dotenv import load_dotenv
-from google import genai
-from google.genai import types
 import truststore
+from dotenv import load_dotenv
+from openai import AzureOpenAI
+
 
 DEFAULT_INPUT = "ICD_raw_2025(in).csv"
 DEFAULT_OUTPUT = "ICD_with_categories.csv"
 DEFAULT_CACHE = "icd_category_cache.json"
-DEFAULT_MODEL = "gemini-3.5-flash-lite"
+DEFAULT_API_VERSION = "2025-01-01-preview"
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate concise main categories for ICD descriptions using Gemini."
+        description="Generate concise ICD main categories using an Azure OpenAI deployment."
     )
     parser.add_argument("--input", default=DEFAULT_INPUT, help="Input ICD CSV path.")
     parser.add_argument("--output", default=DEFAULT_OUTPUT, help="Output CSV path.")
@@ -29,21 +34,19 @@ def parse_args() -> argparse.Namespace:
         default="description_2",
         help="CSV column to categorize (D is description_2 in the supplied file).",
     )
-    parser.add_argument("--model", default=DEFAULT_MODEL, help="Gemini model to use.")
+    parser.add_argument(
+        "--deployment",
+        help="Azure GPT-4o mini deployment name. Overrides AZURE_OPENAI_CHAT_DEPLOYMENT.",
+    )
     parser.add_argument("--batch-size", type=int, default=100, help="Descriptions per API call.")
-    parser.add_argument(
-        "--cache", default=DEFAULT_CACHE, help="JSON cache path; makes interrupted runs resumable."
-    )
-    parser.add_argument(
-        "--limit", type=int, help="Only process this many distinct descriptions (useful for a trial run)."
-    )
+    parser.add_argument("--cache", default=DEFAULT_CACHE, help="JSON cache path for resumable runs.")
+    parser.add_argument("--limit", type=int, help="Only process this many distinct descriptions.")
     parser.add_argument(
         "--refresh-cache",
         action="store_true",
         help="Ignore prior cached labels and regenerate all categories with the LLM.",
     )
     return parser.parse_args()
-
 
 def load_cache(path: Path) -> dict[str, str]:
     if not path.exists():
@@ -54,7 +57,6 @@ def load_cache(path: Path) -> dict[str, str]:
 
 
 def save_cache(cache: dict[str, str], path: Path) -> None:
-    """Write atomically so a stopped run does not corrupt the cache."""
     temporary_path = path.with_suffix(path.suffix + ".tmp")
     with temporary_path.open("w", encoding="utf-8") as file:
         json.dump(cache, file, ensure_ascii=False, indent=2)
@@ -66,33 +68,15 @@ def chunks(values: list[str], size: int) -> Iterable[list[str]]:
 
 
 def categories_for_batch(
-    client: genai.Client, model: str, descriptions: list[str]
+    client: AzureOpenAI, deployment: str, descriptions: list[str]
 ) -> dict[str, str]:
-    """Ask Gemini for one concise category per description as structured JSON."""
+    """Request one JSON category per description, using no local override rules."""
     numbered_descriptions = "\n".join(
         f"{index}. {description}" for index, description in enumerate(descriptions)
     )
-    response_schema = {
-        "type": "object",
-        "properties": {
-            "categories": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "index": {"type": "integer"},
-                        "category": {"type": "string"},
-                    },
-                    "required": ["index", "category"],
-                    "additionalProperties": False,
-                },
-            }
-        },
-        "required": ["categories"],
-        "additionalProperties": False,
-    }
     instructions = """You normalize ICD diagnosis descriptions into a short, reusable Main Category.
-Return exactly one category for each numbered description.
+Return JSON only in exactly this shape: {"categories": [{"index": 0, "category": "..."}]}.
+Return exactly one item for every supplied index.
 
 Rules:
 - The category is a stable disease FAMILY, not a restatement of the diagnosis.
@@ -101,54 +85,53 @@ Rules:
   'Malignant neoplasm of lip' -> 'Lip Cancer'.
 - Prefer a well-known disease-family label when it is more useful: for example,
   'Follicular lymphoma' -> 'Lymphoma'.
-- Always group every form, complication, site, sequela, and qualifier of tuberculosis
-  under 'Tuberculosis': 'Respiratory tuberculosis' -> 'Tuberculosis';
+- Group every form, complication, site, sequela, and qualifier of tuberculosis under
+  'Tuberculosis': 'Respiratory tuberculosis' -> 'Tuberculosis';
   'Sequelae of tuberculosis' -> 'Tuberculosis'.
-- Always group lymphoma, B-cell lymphoma, Hodgkin lymphoma, non-Hodgkin lymphoma,
-  and malignant immunoproliferative diseases under 'Lymphoma':
-  'Malignant immunoproliferative diseases and certain other B-cell lymphomas' -> 'Lymphoma'.
+- Group lymphoma, B-cell lymphoma, Hodgkin lymphoma, non-Hodgkin lymphoma, and malignant
+  immunoproliferative diseases under 'Lymphoma'.
 - Remove qualifiers such as unspecified, acute/chronic, laterality, stage, recurrence,
-  sequela, manifestation, organism, site, and subtype unless they fundamentally
-  change the disease family.
-- Do not invent anatomy or a diagnosis that is absent from the description.
-- Do not use ICD codes in the category.
+  sequela, manifestation, organism, site, and subtype unless they fundamentally change
+  the disease family.
+- Do not invent anatomy or a diagnosis absent from the description. Do not use ICD codes.
 """
-    response = client.models.generate_content(
-        model=model,
-        contents=f"Descriptions to categorize:\n{numbered_descriptions}",
-        config=types.GenerateContentConfig(
-            system_instruction=instructions,
-            response_mime_type="application/json",
-            response_json_schema=response_schema,
-        ),
+    response = client.chat.completions.create(
+        model=deployment,
+        messages=[
+            {"role": "system", "content": instructions},
+            {"role": "user", "content": f"Descriptions to categorize:\n{numbered_descriptions}"},
+        ],
+        temperature=0,
+        response_format={"type": "json_object"},
     )
-    if not response.text:
-        raise ValueError("Gemini returned no text response for this batch.")
+    content = response.choices[0].message.content
+    if not content:
+        raise ValueError("Azure OpenAI returned no text response for this batch.")
 
-    items = json.loads(response.text)["categories"]
-    by_index = {item["index"]: item["category"].strip() for item in items}
+    items = json.loads(content)["categories"]
+    by_index = {item["index"]: str(item["category"]).strip() for item in items}
     expected_indexes = set(range(len(descriptions)))
     if set(by_index) != expected_indexes or any(not value for value in by_index.values()):
-        raise ValueError("Gemini returned an incomplete category batch; no results were saved.")
+        raise ValueError("The model returned an incomplete category batch; no results were saved.")
     return {descriptions[index]: by_index[index] for index in range(len(descriptions))}
 
 
-def create_gemini_client(api_key: str) -> genai.Client:
-    """Use Windows trusted root certificates for corporate HTTPS proxies.
-    """
-    ca_bundle = os.getenv("GEMINI_CA_BUNDLE")
+def create_azure_client(endpoint: str, api_key: str, api_version: str) -> AzureOpenAI:
+    """Keep TLS validation enabled while supporting corporate Windows certificates."""
+    ca_bundle = os.getenv("AZURE_OPENAI_CA_BUNDLE")
     if ca_bundle:
         certificate_path = Path(ca_bundle).expanduser()
         if not certificate_path.is_file():
-            raise SystemExit(f"GEMINI_CA_BUNDLE does not exist: {certificate_path}")
+            raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
         verify: ssl.SSLContext | str = str(certificate_path)
     else:
         verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
-    http_client = httpx.Client(verify=verify, trust_env=True, timeout=60.0)
-    return genai.Client(
+    return AzureOpenAI(
+        azure_endpoint=endpoint,
         api_key=api_key,
-        http_options=types.HttpOptions(httpx_client=http_client),
+        api_version=api_version,
+        http_client=httpx.Client(verify=verify, trust_env=True, timeout=90.0),
     )
 
 
@@ -156,7 +139,6 @@ def main() -> None:
     args = parse_args()
     env_path = Path(__file__).with_name(".env")
     load_dotenv(env_path)
-    api_key = os.getenv("GEMINI_API_KEY")
     if args.batch_size < 1:
         raise SystemExit("--batch-size must be at least 1.")
 
@@ -173,26 +155,43 @@ def main() -> None:
 
     cache = {} if args.refresh_cache else load_cache(cache_path)
     pending = [description for description in distinct if description not in cache]
-    print(f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; {len(pending):,} to classify with Gemini.")
+    print(f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; {len(pending):,} to classify with Azure OpenAI.")
 
     if pending:
-        if not api_key or api_key == "paste_your_gemini_api_key_here":
-            raise SystemExit(f"GEMINI_API_KEY is not set. Add it to {env_path} before running this script.")
-        client = create_gemini_client(api_key)
-        for batch_number, batch in enumerate(chunks(pending, args.batch_size), start=1):
-            for attempt in range(3):
-                try:
-                    cache.update(categories_for_batch(client, args.model, batch))
-                    save_cache(cache, cache_path)
-                    completed = min(batch_number * args.batch_size, len(pending))
-                    print(f"Completed batch {batch_number} ({completed:,}/{len(pending):,}).")
-                    break
-                except Exception as error:  # Network/rate-limit errors are safe to retry.
-                    if attempt == 2:
-                        raise RuntimeError(f"Batch {batch_number} failed after 3 attempts.") from error
-                    wait_seconds = 2**attempt
-                    print(f"Batch {batch_number} failed ({error}); retrying in {wait_seconds}s.")
-                    time.sleep(wait_seconds)
+        endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+        api_key = os.getenv("AZURE_OPENAI_API_KEY")
+        deployment = args.deployment or os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
+        api_version = os.getenv("AZURE_OPENAI_API_VERSION", DEFAULT_API_VERSION)
+        missing = [
+            name
+            for name, value in {
+                "AZURE_OPENAI_ENDPOINT": endpoint,
+                "AZURE_OPENAI_API_KEY": api_key,
+                "AZURE_OPENAI_CHAT_DEPLOYMENT": deployment,
+            }.items()
+            if not value
+        ]
+        if missing:
+            raise SystemExit(f"Missing .env values: {', '.join(missing)}")
+
+        client = create_azure_client(endpoint, api_key, api_version)
+        try:
+            for batch_number, batch in enumerate(chunks(pending, args.batch_size), start=1):
+                for attempt in range(3):
+                    try:
+                        cache.update(categories_for_batch(client, deployment, batch))
+                        save_cache(cache, cache_path)
+                        completed = min(batch_number * args.batch_size, len(pending))
+                        print(f"Completed batch {batch_number} ({completed:,}/{len(pending):,}).")
+                        break
+                    except Exception as error:
+                        if attempt == 2:
+                            raise RuntimeError(f"Batch {batch_number} failed after 3 attempts.") from error
+                        wait_seconds = 2**attempt
+                        print(f"Batch {batch_number} failed ({error}); retrying in {wait_seconds}s.")
+                        time.sleep(wait_seconds)
+        finally:
+            client.close()
 
     output = source.copy()
     output["Category"] = descriptions.map(cache)
