@@ -15,13 +15,25 @@ from utils.cache import load, save
 from utils.json_utils import fingerprint, read_json, write_json
 
 
-PROMPT_VERSION = "knowledge-base-grounded-v1"
+PROMPT_VERSION = "knowledge-base-grounded-v3-oncology-alias-style"
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
 TEXT_FIELDS = ("title", "summary", "condition", "interventions", "abstract")
+# These words describe a broad diagnosis but do not identify a disease or site.
+# They must never be enough to make a PubMed/trial record eligible as evidence.
+GENERIC_ENTITY_TOKENS = frozenset({
+    "and", "are", "cancer", "disease", "disorder", "ill", "malignant",
+    "neoplasm", "of", "organ", "organs", "other", "specified", "system",
+    "the", "undefined", "unspecified",
+})
 
 
 def tokens(value: str) -> set[str]:
     return {token for token in TOKEN_PATTERN.findall(value.casefold()) if len(token) > 2}
+
+
+def entity_tokens(value: str) -> set[str]:
+    """Return disease/site tokens that can prove a KB record is entity-specific."""
+    return tokens(value) - GENERIC_ENTITY_TOKENS
 
 
 def load_knowledge_base() -> list[dict[str, str]]:
@@ -46,11 +58,13 @@ def load_knowledge_base() -> list[dict[str, str]]:
 
 
 def relevant_context(query: str, knowledge_base: list[dict[str, str]], limit: int) -> str:
-    """Return only locally matching evidence; an empty result means 404."""
-    query_tokens = tokens(query)
+    """Return evidence only when it mentions a disease/site-specific query token."""
+    specific_tokens = entity_tokens(query)
+    if not specific_tokens:
+        return ""
     matches = []
     for record in knowledge_base:
-        score = len(query_tokens & tokens(record["text"]))
+        score = len(specific_tokens & tokens(record["text"]))
         if score:
             matches.append((score, record))
     matches.sort(key=lambda item: -item[0])
@@ -63,11 +77,23 @@ def relevant_context(query: str, knowledge_base: list[dict[str, str]], limit: in
 def abbreviations_from_entity(client, deployment: str, field: str, value: str, context: str) -> list[str]:
     instructions = """You extract clinically valid abbreviations and aliases for one canonical ICD entity field using an approved knowledge base.
 
-Use the supplied evidence as the only knowledge source. Return only abbreviations, acronyms, or alternate clinical names explicitly supported by that evidence and directly relevant to the supplied canonical field. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge. Do not infer or invent names.
+Use the supplied evidence as the only knowledge source. The submitted category or description must be specifically mentioned by the evidence. If it is not, return exactly [\"404\"]. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge.
 
-Style example only: for a canonical value "Tongue Cancer", evidence may support aliases such as "Tongue Carcinoma", "Tongue Malignancy", and "Glossal Cancer". Do not output codes such as "C02" or "C02.0".
+Return the complete practical alias family in the single "abbreviations" array. This field intentionally includes acronyms and clinically meaningful alternate phrases, not acronyms alone. Include every unique, directly relevant variant supported by the evidence, such as:
+- the common disease name;
+- a site + "Cancer" form;
+- a site + "Carcinoma" form;
+- a site + "Malignancy" form or "malignancy of <site>" form;
+- an established anatomical synonym; and
+- an acronym only when it appears in the evidence.
 
-If the evidence does not mention the supplied category/description, or does not support any abbreviation or alternate name, return exactly [\"404\"]. Never combine "404" with other values.
+Required output style examples:
+- "Malignant neoplasm of lip" may yield "Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", and "Lip Carcinoma" when supported by the evidence.
+- "Tongue Cancer" may yield "Tongue Carcinoma", "Tongue Malignancy", "Glossal Cancer", and "Tongue Cancer" when supported by the evidence.
+- Do not return standalone modifiers such as "malignant" or "pulmonary". Return a complete entity-specific phrase only, such as "Pulmonary Cancer", and only if that exact phrase or an equivalent is supported by the evidence.
+- Do not output codes such as "C02" or "C02.0".
+
+If the evidence does not support any entity-specific alias, return exactly [\"404\"]. Never combine "404" with other values.
 Return JSON only in this exact form: {\"abbreviations\": [\"...\"]}. The array must contain unique strings."""
     response = client.chat.completions.create(
         model=deployment,
