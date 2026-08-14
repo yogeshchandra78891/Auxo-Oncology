@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import argparse
 import json
 import re
 import sys
 import time
 from pathlib import Path
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -15,7 +18,7 @@ from utils.cache import load, save
 from utils.json_utils import fingerprint, read_json, write_json
 
 
-PROMPT_VERSION = "knowledge-base-grounded-v3-oncology-alias-style"
+PROMPT_VERSION = "knowledge-base-grounded-v4-multiclass-alias"
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
 TEXT_FIELDS = ("title", "summary", "condition", "interventions", "abstract")
 # These words describe a broad diagnosis but do not identify a disease or site.
@@ -40,12 +43,9 @@ def load_knowledge_base() -> list[dict[str, str]]:
     """Load the two approved evidence sources from the data directory."""
     records: list[dict[str, str]] = []
     if PUBMED.exists():
-        pubmed_articles = re.split(r"(?m)(?=^\d+\.\s)", PUBMED.read_text(encoding="utf-8-sig"))
-        records.extend(
-            {"source": "PubMed", "text": article.strip()}
-            for article in pubmed_articles
-            if article.strip()
-        )
+        for entry in read_json(PUBMED):
+            if isinstance(entry, dict) and entry.get("text", "").strip():
+                records.append({"source": "PubMed", "text": entry["text"].strip()})
     for trial in read_json(CLINICAL_TRIALS):
         if not isinstance(trial, dict):
             continue
@@ -75,26 +75,64 @@ def relevant_context(query: str, knowledge_base: list[dict[str, str]], limit: in
 
 
 def abbreviations_from_entity(client, deployment: str, field: str, value: str, context: str) -> list[str]:
-    instructions = """You extract clinically valid abbreviations and aliases for one canonical ICD entity field using an approved knowledge base.
+    instructions = """You extract a complete, clinically valid alias family for one canonical ICD entity field using an approved knowledge base.
 
-Use the supplied evidence as the only knowledge source. The submitted category or description must be specifically mentioned by the evidence. If it is not, return exactly [\"404\"]. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge.
+Use the supplied evidence as the only knowledge source. The submitted category or description must be specifically mentioned or clearly implied by the evidence. If it is not, return exactly ["404"]. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge.
 
-Return the complete practical alias family in the single "abbreviations" array. This field intentionally includes acronyms and clinically meaningful alternate phrases, not acronyms alone. Include every unique, directly relevant variant supported by the evidence, such as:
-- the common disease name;
-- a site + "Cancer" form;
-- a site + "Carcinoma" form;
-- a site + "Malignancy" form or "malignancy of <site>" form;
-- an established anatomical synonym; and
-- an acronym only when it appears in the evidence.
+━━━ WHAT TO INCLUDE ━━━
+Return every unique, directly relevant variant supported by the evidence:
+- The canonical common disease name (e.g., "Liver Cancer", "Lung Cancer")
+- <site> Cancer, <site> Carcinoma, <site> Malignancy, Malignancy of <site>
+- Established histological subtypes mentioned in the evidence (e.g., "Hepatocellular Carcinoma", "Adenocarcinoma of Lung")
+- Widely used acronyms that unambiguously refer to this entity (e.g., "HCC", "NSCLC", "TNBC")
+- Established anatomical synonyms (e.g., "Glossal Cancer" for tongue, "Hepatoma" for liver cell carcinoma)
+- Lay terms in clinical use (e.g., "Voice Box Cancer" for laryngeal cancer)
+- Directional/laterality qualifiers when the description specifies a site (e.g., "Right Ovarian Cancer")
+- Combination/overlapping terms when the description covers multiple named sites
 
-Required output style examples:
-- "Malignant neoplasm of lip" may yield "Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", and "Lip Carcinoma" when supported by the evidence.
-- "Tongue Cancer" may yield "Tongue Carcinoma", "Tongue Malignancy", "Glossal Cancer", and "Tongue Cancer" when supported by the evidence.
-- Do not return standalone modifiers such as "malignant" or "pulmonary". Return a complete entity-specific phrase only, such as "Pulmonary Cancer", and only if that exact phrase or an equivalent is supported by the evidence.
-- Do not output codes such as "C02" or "C02.0".
+━━━ WHAT TO EXCLUDE ━━━
+- Standalone modifiers without a complete entity phrase (never "malignant", "pulmonary", "hepatic" alone)
+- ICD codes or numeric codes of any kind
+- Aliases for a DIFFERENT cancer, organ, or body system
+- Duplicate values (case-insensitive)
+- The sentinel "404" combined with real values
 
-If the evidence does not support any entity-specific alias, return exactly [\"404\"]. Never combine "404" with other values.
-Return JSON only in this exact form: {\"abbreviations\": [\"...\"]}. The array must contain unique strings."""
+━━━ REQUIRED OUTPUT STYLE — STUDY THESE EXAMPLES ━━━
+
+Input: category="Lip Cancer", description="Malignant neoplasm of lip"
+Output: ["Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", "Lip Carcinoma"]
+
+Input: category="Tongue Cancer", description="Malignant neoplasm of tongue"
+Output: ["Tongue Cancer", "Tongue Carcinoma", "Tongue Malignancy", "Glossal Cancer", "Lingual Cancer"]
+
+Input: category="Liver Cancer", description="Malignant neoplasm of liver and intrahepatic bile ducts"
+Output: ["Liver Cancer", "Liver Carcinoma", "Hepatocellular Carcinoma", "HCC", "Hepatoma", "Liver Cell Carcinoma", "Intrahepatic Cholangiocarcinoma", "ICC", "Malignant Neoplasm of Liver", "Primary Liver Cancer"]
+
+Input: category="Lung Cancer", description="Malignant neoplasm of upper lobe, bronchus or lung"
+Output: ["Lung Cancer", "Pulmonary Cancer", "Lung Carcinoma", "Non-Small Cell Lung Cancer", "NSCLC", "Small Cell Lung Cancer", "SCLC", "Adenocarcinoma of Lung", "Bronchogenic Carcinoma"]
+
+Input: category="Lymphoma", description="Nodular sclerosis classical Hodgkin lymphoma"
+Output: ["Nodular Sclerosis Hodgkin Lymphoma", "NSHL", "Nodular Sclerosis HL", "NS Hodgkin Lymphoma", "Classical HL - Nodular Sclerosis", "Hodgkin Lymphoma", "HL", "Hodgkin's Lymphoma"]
+
+Input: category="Breast Cancer", description="Malignant neoplasm of central portion of female breast"
+Output: ["Breast Cancer", "Mammary Carcinoma", "Breast Carcinoma", "Ductal Carcinoma", "Lobular Carcinoma", "Triple-Negative Breast Cancer", "TNBC", "HER2-Positive Breast Cancer", "Metastatic Breast Cancer", "mBC"]
+
+Input: category="Leukemia", description="Acute myeloblastic leukemia"
+Output: ["Acute Myeloblastic Leukemia", "AML", "Myeloid Leukemia", "Leukemia"]
+
+Input: category="Atherosclerosis", description="Atherosclerosis of native arteries of extremities with intermittent claudication"
+Output: ["Atherosclerosis", "Peripheral Artery Disease", "PAD", "Peripheral Vascular Disease", "PVD", "ASCVD", "Atherosclerotic Cardiovascular Disease", "claudication"]
+
+Input: category="Ischemic Heart Disease", description="Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+Output: ["Ischemic Heart Disease", "Coronary Artery Disease", "CAD", "Acute Coronary Syndrome", "ACS", "Unstable Angina"]
+
+Input: category="Lipidemias", description="Pure hypercholesterolemia, unspecified"
+Output: ["Hypercholesterolemia", "Lipidemias", "High Cholesterol", "Dyslipidemia", "Familial Hypercholesterolemia", "FH"]
+
+━━━ SENTINEL RULE ━━━
+If the evidence does not support ANY entity-specific alias, return exactly ["404"]. Never combine "404" with other values.
+
+Return JSON only in this exact form: {"abbreviations": ["..."]}. The array must contain unique strings."""
     response = client.chat.completions.create(
         model=deployment,
         temperature=0,
@@ -112,35 +150,60 @@ Return JSON only in this exact form: {\"abbreviations\": [\"...\"]}. The array m
     return ["404"] if not cleaned or "404" in cleaned else cleaned
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate knowledge-base-grounded abbreviations for canonical category or description fields.")
-    parser.add_argument("--mode", choices=("category", "description"), required=True)
-    parser.add_argument("--input", default=str(CANONICAL_INPUT))
-    parser.add_argument("--output")
-    parser.add_argument("--top-k", type=int, default=5, help="Maximum relevant PubMed/trial records supplied as evidence.")
-    parser.add_argument("--refresh-cache", action="store_true")
-    args = parser.parse_args()
-    entities = read_json(Path(args.input))
-    field = "category" if args.mode == "category" else "description_2"
-    payload_field = "payload_category" if args.mode == "category" else "payload_description"
-    output_path = Path(args.output or (CATEGORY_OUTPUT if args.mode == "category" else DESCRIPTION_OUTPUT))
-    cache_path = CACHE / f"{args.mode}_abbreviations_cache.json"
-    cache = {} if args.refresh_cache else load(cache_path)
-    knowledge_base = load_knowledge_base()
-    knowledge_base_version = fingerprint(knowledge_base)
+def run_abbreviations(
+    entities: list[dict],
+    mode: str,
+    output_path: Path,
+    top_k: int = 5,
+    refresh_cache: bool = False,
+    knowledge_base: Optional[list] = None,
+) -> list[dict]:
+    """
+    Core abbreviation logic — callable in-process by the orchestrator.
+
+    Args:
+        entities:       List of canonical entity dicts (category, description_2, category_description2).
+        mode:           "category" or "description".
+        output_path:    Where to write the output JSON.
+        top_k:          Max KB records to include as evidence per query.
+        refresh_cache:  If True, ignore existing cache entries.
+        knowledge_base: Pre-loaded KB records. If None, loads from PUBMED/CLINICAL_TRIALS files.
+
+    Returns:
+        List of output dicts written to output_path.
+    """
+    if mode not in ("category", "description"):
+        raise ValueError(f"mode must be 'category' or 'description', got {mode!r}")
+
+    field = "category" if mode == "category" else "description_2"
+    payload_field = "payload_category" if mode == "category" else "payload_description"
+    cache_path = CACHE / f"{mode}_abbreviations_cache.json"
+    cache = {} if refresh_cache else load(cache_path)
+
+    # Accept a pre-loaded KB (from orchestrator) or load from disk
+    kb = knowledge_base if knowledge_base is not None else load_knowledge_base()
+    knowledge_base_version = fingerprint(kb)
 
     def cache_key(query: str) -> str:
-        return fingerprint({"mode": args.mode, "query": query, "top_k": args.top_k,
-                            "knowledge_base_version": knowledge_base_version, "prompt_version": PROMPT_VERSION})
+        return fingerprint({
+            "mode": mode,
+            "query": query,
+            "top_k": top_k,
+            "knowledge_base_version": knowledge_base_version,
+            "prompt_version": PROMPT_VERSION,
+        })
 
-    unique_queries = list(dict.fromkeys(str(entity.get(field, "")).strip() for entity in entities if entity.get(field)))
+    unique_queries = list(dict.fromkeys(
+        str(entity.get(field, "")).strip() for entity in entities if entity.get(field)
+    ))
     missing = [query for query in unique_queries if cache_key(query) not in cache]
-    print(f"{len(entities):,} entities; {len(unique_queries):,} unique {args.mode} payloads; {len(missing):,} to process.")
+    print(f"  [{mode}] {len(entities):,} entities | {len(unique_queries):,} unique queries | {len(missing):,} to process")
+
     client = deployment = None
     try:
         for query in missing:
             key = cache_key(query)
-            context = relevant_context(query, knowledge_base, args.top_k)
+            context = relevant_context(query, kb, top_k)
             if not context:
                 cache[key] = {"abbreviations": ["404"]}
                 save(cache, cache_path)
@@ -172,7 +235,30 @@ def main() -> None:
             "abbreviations": cache.get(key, {}).get("abbreviations", []),
         })
     write_json(output, output_path)
-    print(f"Wrote {len(output):,} records to {output_path.resolve()}")
+    print(f"  [{mode}] Wrote {len(output):,} records → {output_path.resolve()}")
+    return output
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate knowledge-base-grounded abbreviations for canonical category or description fields.")
+    parser.add_argument("--mode", choices=("category", "description"), required=True)
+    parser.add_argument("--input", default=str(CANONICAL_INPUT))
+    parser.add_argument("--output")
+    parser.add_argument("--top-k", type=int, default=5, help="Maximum relevant PubMed/trial records supplied as evidence.")
+    parser.add_argument("--refresh-cache", action="store_true")
+    args = parser.parse_args()
+
+    entities = read_json(Path(args.input))
+    output_path = Path(args.output or (CATEGORY_OUTPUT if args.mode == "category" else DESCRIPTION_OUTPUT))
+
+    run_abbreviations(
+        entities=entities,
+        mode=args.mode,
+        output_path=output_path,
+        top_k=args.top_k,
+        refresh_cache=args.refresh_cache,
+        knowledge_base=None,  # load from disk when run as CLI
+    )
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ from typing import Iterable
 
 import httpx
 import pandas as pd
-import truststore
+# import truststore
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 
@@ -81,35 +81,87 @@ def categories_for_batch(
         f"{index}. {description}" for index, description in enumerate(descriptions)
     )
     instructions = """ 
-You normalize ICD diagnosis descriptions into a short, reusable Main Category.
-Return JSON only in exactly this shape: {"categories": [{"index": 0, "category": "..."}]}.
-Return exactly one item for every supplied index.
- 
-PRIMARY OBJECTIVE: Preserve the MOST SPECIFIC clinically supported disease family and
-anatomical site in the description. Do not replace a named subsite with a broader parent
-organ, body system, or lay term. Specificity is more important than making categories broad.
- 
-Rules:
-- Use a clinically meaningful category of 1-3 words in Title Case.
-- Remove administrative/detail qualifiers only (for example: unspecified, laterality,
-  stage, recurrence, episode, manifestation, organism, or histologic subtype) when doing
-  so does NOT remove a meaningful anatomical site or disease distinction.
-- For malignant neoplasms, use the most specific named anatomical cancer category.
-  Preserve the stated subsite and append 'Cancer'. Examples:
-  * 'Malignant neoplasm of lip' -> 'Lip Cancer'
-  * 'Malignant neoplasm of oropharynx' -> 'Oropharyngeal Cancer', NOT 'Throat Cancer'
-  * 'Malignant neoplasm of palate' -> 'Palate Cancer', NOT 'Oral Cancer'
-  * 'Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system'
-    -> 'Spinal Cord Cancer', NOT 'CNS Cancer'
-- Never generalize a specific site to a broader site: do NOT map oropharynx to throat,
-  palate to oral cavity, spinal cord to CNS, or any named subsite to a parent organ/system.
-- If a description contains multiple named sites, select the most specific primary site
-  stated in the diagnosis; do not use a generic umbrella category.
-- Prefer a recognized disease family only when it retains the intended clinical meaning:
-  'Follicular lymphoma' -> 'Lymphoma'.
-- Group lymphoma, B-cell lymphoma, Hodgkin lymphoma, non-Hodgkin lymphoma, and malignant
-  immunoproliferative diseases under 'Lymphoma'.
-- Do not invent anatomy or a diagnosis absent from the description. Do not use ICD codes.
+You are an ICD-10-CM diagnosis normalization engine.
+
+Convert each description_2 into ONE canonical Main Category using ONLY the information explicitly stated in description_2.
+
+CORE OBJECTIVE:
+Generate the most appropriate standardized category while preserving the clinically meaningful disease and anatomical site.
+
+IMPORTANT:
+The goal is CONSISTENT CATEGORY NORMALIZATION, not free-form medical summarization.
+Always prefer the standard category wording defined by the rules and examples below.
+
+RULES:
+
+1. Preserve a meaningful anatomical site when it is explicitly stated.
+2. Do not generalize a specific anatomical site to an unrelated broader site.
+3. For malignant neoplasms, use the canonical cancer category for the stated site.
+4. Remove administrative qualifiers such as:
+   unspecified, other, laterality, stage, sequela, and similar qualifiers.
+5. Do not invent anatomy, disease, histology, or clinical information.
+6. Use the canonical disease name rather than simply repeating the wording from description_2.
+7. Do not add qualifiers such as "Chronic", "Acute", "Gland", "Cerebral", etc. when they are not part of the canonical category.
+8. Use 1–3 words in Title Case whenever possible.
+9. Lymphoma variants → Lymphoma.
+10. Return exactly one category per supplied index.
+
+CANONICAL MAPPINGS:
+
+Malignant melanoma of skin → Skin Cancer
+Other and unspecified malignant neoplasm of skin → Non-Melanoma Skin Cancer
+
+Cerebral infarction → Ischemic Stroke
+Chronic ischemic heart disease → Ischemic Heart Disease
+Acute myocardial infarction → Heart Attack
+Angina pectoris → Angina
+Arterial embolism and thrombosis → Arterial Embolism And Thrombosis
+
+Disorders of lipoprotein metabolism and other lipidemias → Lipidemia
+
+Occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction
+→ Occlusion And Stenosis Of Precerebral Arteries
+
+Occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction
+→ Occlusion And Stenosis Of Precerebral Arteries
+
+Malignant neoplasm of other and unspecified female genital organs
+→ Fallopian Tube Cancer
+
+Malignant neoplasm of peripheral nerves and autonomic nervous system
+→ Peripheral Nerve Sheath Tumor
+
+Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue
+→ Blood Cancer
+
+Malignant neoplasm of adrenal gland → Adrenal Cancer
+Malignant neoplasm of other endocrine glands and related structures → Endocrine Cancer
+Malignant neoplasm of accessory sinuses → Sinus Cancer
+Malignant neoplasm of retroperitoneum and peritoneum → Retroperitoneal Cancer
+Malignant neoplasm of other and unspecified parts of biliary tract → Bile Duct Cancer
+Malignant neoplasm of meninges → Meningioma
+Malignant neoplasm of ureter → Ureteral Cancer
+
+ANATOMICAL SPECIFICITY EXAMPLES:
+
+Malignant neoplasm of oropharynx → Oropharyngeal Cancer
+Malignant neoplasm of palate → Palate Cancer
+Malignant neoplasm of tongue → Tongue Cancer
+Malignant neoplasm of spinal cord → Spinal Cord Cancer
+
+Never convert:
+Oropharynx → Throat Cancer
+Palate → Oral Cancer
+Tongue → Oral Cancer
+Spinal Cord → CNS Cancer
+
+CONSISTENCY RULE:
+If the description matches one of the canonical mappings above, ALWAYS return exactly the specified canonical category.
+
+Do not create a synonym or alternative wording.
+
+Return JSON only:
+{"categories":[{"index":0,"category":"..."}]}
 """
     response = client.chat.completions.create(
         model=deployment,
@@ -133,15 +185,16 @@ Rules:
 
 
 def create_azure_client(endpoint: str, api_key: str, api_version: str) -> AzureOpenAI:
-    """Keep TLS validation enabled while supporting corporate Windows certificates."""
-    ca_bundle = os.getenv("AZURE_OPENAI_CA_BUNDLE")
-    if ca_bundle:
-        certificate_path = Path(ca_bundle).expanduser()
-        if not certificate_path.is_file():
-            raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
-        verify: ssl.SSLContext | str = str(certificate_path)
-    else:
-        verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    # """Keep TLS validation enabled while supporting corporate Windows certificates."""
+    # ca_bundle = os.getenv("AZURE_OPENAI_CA_BUNDLE")
+    # if ca_bundle:
+    #     certificate_path = Path(ca_bundle).expanduser()
+    #     if not certificate_path.is_file():
+    #         raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
+    #     verify: ssl.SSLContext | str = str(certificate_path)
+    # else:
+    #     print("AZURE_OPENAI_CA_BUNDLE not set; using system trust store for TLS validation.")
+    #     # verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
     return AzureOpenAI(
         azure_endpoint=endpoint,
