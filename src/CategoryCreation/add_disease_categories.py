@@ -80,25 +80,35 @@ def categories_for_batch(
     numbered_descriptions = "\n".join(
         f"{index}. {description}" for index, description in enumerate(descriptions)
     )
-    instructions = """You normalize ICD diagnosis descriptions into a short, reusable Main Category.
+    instructions = """ 
+You normalize ICD diagnosis descriptions into a short, reusable Main Category.
 Return JSON only in exactly this shape: {"categories": [{"index": 0, "category": "..."}]}.
 Return exactly one item for every supplied index.
-
+ 
+PRIMARY OBJECTIVE: Preserve the MOST SPECIFIC clinically supported disease family and
+anatomical site in the description. Do not replace a named subsite with a broader parent
+organ, body system, or lay term. Specificity is more important than making categories broad.
+ 
 Rules:
-- The category is a stable disease FAMILY, not a restatement of the diagnosis.
-- Use a clinically meaningful broad label of 1-4 words in Title Case.
-- For malignant neoplasms, use the anatomical cancer category when clear: for example,
-  'Malignant neoplasm of lip' -> 'Lip Cancer'.
-- Prefer a well-known disease-family label when it is more useful: for example,
+- Use a clinically meaningful category of 1-3 words in Title Case.
+- Remove administrative/detail qualifiers only (for example: unspecified, laterality,
+  stage, recurrence, episode, manifestation, organism, or histologic subtype) when doing
+  so does NOT remove a meaningful anatomical site or disease distinction.
+- For malignant neoplasms, use the most specific named anatomical cancer category.
+  Preserve the stated subsite and append 'Cancer'. Examples:
+  * 'Malignant neoplasm of lip' -> 'Lip Cancer'
+  * 'Malignant neoplasm of oropharynx' -> 'Oropharyngeal Cancer', NOT 'Throat Cancer'
+  * 'Malignant neoplasm of palate' -> 'Palate Cancer', NOT 'Oral Cancer'
+  * 'Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system'
+    -> 'Spinal Cord Cancer', NOT 'CNS Cancer'
+- Never generalize a specific site to a broader site: do NOT map oropharynx to throat,
+  palate to oral cavity, spinal cord to CNS, or any named subsite to a parent organ/system.
+- If a description contains multiple named sites, select the most specific primary site
+  stated in the diagnosis; do not use a generic umbrella category.
+- Prefer a recognized disease family only when it retains the intended clinical meaning:
   'Follicular lymphoma' -> 'Lymphoma'.
-- Group every form, complication, site, sequela, and qualifier of tuberculosis under
-  'Tuberculosis': 'Respiratory tuberculosis' -> 'Tuberculosis';
-  'Sequelae of tuberculosis' -> 'Tuberculosis'.
 - Group lymphoma, B-cell lymphoma, Hodgkin lymphoma, non-Hodgkin lymphoma, and malignant
   immunoproliferative diseases under 'Lymphoma'.
-- Remove qualifiers such as unspecified, acute/chronic, laterality, stage, recurrence,
-  sequela, manifestation, organism, site, and subtype unless they fundamentally change
-  the disease family.
 - Do not invent anatomy or a diagnosis absent from the description. Do not use ICD codes.
 """
     response = client.chat.completions.create(
