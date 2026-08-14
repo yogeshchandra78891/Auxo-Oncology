@@ -1,9 +1,0 @@
-pandas>=2.0
-google-genai>=1.0
-python-dotenv>=1.0
-httpx>=0.28
-truststore>=0.10
-openai>=1.0
-biopython>=1.80
-requests>=2.31
- 

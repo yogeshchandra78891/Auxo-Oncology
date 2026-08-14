@@ -4,4 +4,4 @@ python-dotenv>=1.0
 httpx>=0.28
 truststore>=0.10
 openai>=1.0
- 
+biopython>=1.80
