@@ -1,0 +1,361 @@
+[
+  {
+    "category_description2": "liver cancer|malignant neoplasm of liver and intrahepatic bile ducts",
+    "category": "Liver Cancer",
+    "description_2": "Malignant neoplasm of liver and intrahepatic bile ducts",
+    "payload_llm": {
+      "category": "Liver Cancer",
+      "description_2": "Malignant neoplasm of liver and intrahepatic bile ducts"
+    },
+    "abbreviations": [
+      "Cholangiocarcinoma",
+      "Intrahepatic Bile Duct Cancer",
+      "Bile Duct Carcinoma",
+      "Malignancy of Liver and Intrahepatic Bile Ducts",
+      "Liver and Bile Duct Malignancy",
+      "Liver and Intrahepatic Bile Duct Malignancy",
+      "Hepatic Bile Duct Carcinoma",
+      "Bile Duct Malignancy",
+      "Malignant Neoplasm of Intrahepatic Bile Ducts"
+    ]
+  },
+  {
+    "category_description2": "lip cancer|malignant neoplasm of lip",
+    "category": "Lip Cancer",
+    "description_2": "Malignant neoplasm of lip",
+    "payload_llm": {
+      "category": "Lip Cancer",
+      "description_2": "Malignant neoplasm of lip"
+    },
+    "abbreviations": [
+      "Vermilion Border Cancer",
+      "Lip's Cancer",
+      "Cheilitis Maligna",
+      "Lip Sarcoma",
+      "Lip Adenocarcinoma",
+      "Malignant Tumor of Lip",
+      "Lip Basal Cell Carcinoma",
+      "Basal Cell Carcinoma of Lip",
+      "Lip Melanoma",
+      "Melanoma of Lip",
+      "Lip Carcinoma in Situ",
+      "Invasive Lip Cancer"
+    ]
+  },
+  {
+    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
+    "category": "Tongue Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
+    "payload_llm": {
+      "category": "Tongue Cancer",
+      "description_2": "Malignant neoplasm of other and unspecified parts of tongue"
+    },
+    "abbreviations": [
+      "Malignant Neoplasm of Other Parts of Tongue",
+      "Malignant Neoplasm of Unspecified Parts of Tongue",
+      "Other Tongue Cancer",
+      "Unspecified Tongue Cancer",
+      "Tongue Malignancy of Other Parts",
+      "Tongue Malignancy of Unspecified Parts",
+      "Non-Specific Tongue Cancer",
+      "Non-Specific Tongue Carcinoma"
+    ]
+  },
+  {
+    "category_description2": "skin cancer|malignant melanoma of skin",
+    "category": "Skin Cancer",
+    "description_2": "Malignant melanoma of skin",
+    "payload_llm": {
+      "category": "Skin Cancer",
+      "description_2": "Malignant melanoma of skin"
+    },
+    "abbreviations": [
+      "Melanoma of Skin",
+      "Malignant Melanoma of Skin",
+      "Skin Malignancy",
+      "Malignancy of Skin",
+      "Superficial Melanoma",
+      "Nodular Melanoma",
+      "Lentigo Maligna Melanoma",
+      "Skin's Melanoma",
+      "Cutaneous Malignancy",
+      "Skin Melanoma"
+    ]
+  },
+  {
+    "category_description2": "gum cancer|malignant neoplasm of gum",
+    "category": "Gum Cancer",
+    "description_2": "Malignant neoplasm of gum",
+    "payload_llm": {
+      "category": "Gum Cancer",
+      "description_2": "Malignant neoplasm of gum"
+    },
+    "abbreviations": [
+      "Gingival Malignancy",
+      "Malignant Neoplasm of Gum",
+      "Gum's Cancer",
+      "Gingival Malignancy of Mouth",
+      "Gingival Sarcoma",
+      "Gingival Squamous Cell Carcinoma",
+      "Gum Squamous Cell Carcinoma",
+      "Gum Tissue Cancer",
+      "Gum Neoplasm",
+      "Gingival Tumor",
+      "Gingival Adenocarcinoma",
+      "Gingival Melanoma",
+      "Gingival Soft Tissue Sarcoma",
+      "Gingival Lymphoma"
+    ]
+  },
+  {
+    "category_description2": "palate cancer|malignant neoplasm of palate",
+    "category": "Palate Cancer",
+    "description_2": "Malignant neoplasm of palate",
+    "payload_llm": {
+      "category": "Palate Cancer",
+      "description_2": "Malignant neoplasm of palate"
+    },
+    "abbreviations": [
+      "Palatine Cancer",
+      "Palate Malignancy",
+      "Malignancy of Palatal Region",
+      "Palate Squamous Cell Carcinoma",
+      "Palate Adenocarcinoma",
+      "Palate Sarcoma",
+      "Oral Palate Cancer",
+      "Hard Palate Cancer",
+      "Soft Palate Cancer",
+      "Palate Neoplasm",
+      "Palate Tumor"
+    ]
+  },
+  {
+    "category_description2": "salivary gland cancer|malignant neoplasm of other and unspecified major salivary glands",
+    "category": "Salivary Gland Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified major salivary glands",
+    "payload_llm": {
+      "category": "Salivary Gland Cancer",
+      "description_2": "Malignant neoplasm of other and unspecified major salivary glands"
+    },
+    "abbreviations": [
+      "Malignancy of Other Major Salivary Glands",
+      "Malignant Neoplasm of Unspecified Major Salivary Glands",
+      "Adenocarcinoma of Salivary Glands"
+    ]
+  },
+  {
+    "category_description2": "tonsil cancer|malignant neoplasm of tonsil",
+    "category": "Tonsil Cancer",
+    "description_2": "Malignant neoplasm of tonsil",
+    "payload_llm": {
+      "category": "Tonsil Cancer",
+      "description_2": "Malignant neoplasm of tonsil"
+    },
+    "abbreviations": [
+      "Tonsil Malignancy",
+      "Malignancy of Tonsil",
+      "Tonsillar Malignancy",
+      "Tonsil's Cancer",
+      "Tonsillar Neoplasm",
+      "Tonsil Squamous Cell Carcinoma",
+      "Malignant Tumor of Tonsil"
+    ]
+  },
+  {
+    "category_description2": "oropharyngeal cancer|malignant neoplasm of oropharynx",
+    "category": "Oropharyngeal Cancer",
+    "description_2": "Malignant neoplasm of oropharynx",
+    "payload_llm": {
+      "category": "Oropharyngeal Cancer",
+      "description_2": "Malignant neoplasm of oropharynx"
+    },
+    "abbreviations": [
+      "Oropharyngeal Malignancy of the Tonsil",
+      "Oropharyngeal Malignancy of the Base of Tongue",
+      "Oropharyngeal Malignancy of the Soft Palate",
+      "Oropharyngeal Malignancy of the Pharyngeal Wall",
+      "Oropharyngeal Adenocarcinoma",
+      "Oropharyngeal Lymphoepithelial Carcinoma",
+      "Oropharyngeal Cancer Related to Tobacco",
+      "Oropharyngeal Cancer Related to Alcohol"
+    ]
+  },
+  {
+    "category_description2": "nasopharyngeal cancer|malignant neoplasm of nasopharynx",
+    "category": "Nasopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of nasopharynx",
+    "payload_llm": {
+      "category": "Nasopharyngeal Cancer",
+      "description_2": "Malignant neoplasm of nasopharynx"
+    },
+    "abbreviations": [
+      "Nasopharyngeal Malignancy",
+      "Malignancy of the Nasopharynx",
+      "Nasopharyngeal Neoplasm",
+      "Carcinoma of Nasopharynx",
+      "Keratinizing Squamous Cell Carcinoma of Nasopharynx",
+      "Malignant Tumor of Nasopharynx",
+      "Nasopharyngeal Sarcoma",
+      "Nasopharyngeal Lymphoma",
+      "Lymphoepithelial Carcinoma of Nasopharynx",
+      "Primary Nasopharyngeal Cancer",
+      "Nasopharyngeal Adenocarcinoma",
+      "Malignant Lymphoma of Nasopharynx"
+    ]
+  },
+  {
+    "category_description2": "hypopharyngeal cancer|malignant neoplasm of hypopharynx",
+    "category": "Hypopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of hypopharynx",
+    "payload_llm": {
+      "category": "Hypopharyngeal Cancer",
+      "description_2": "Malignant neoplasm of hypopharynx"
+    },
+    "abbreviations": [
+      "Hypopharyngeal Malignancy",
+      "Hypopharyngeal Neoplasm",
+      "Cancer of the Hypopharynx",
+      "Hypopharyngeal Adenocarcinoma",
+      "Hypopharyngeal Sarcoma",
+      "Hypopharyngeal Lymphoma",
+      "Hypopharyngeal Tumor",
+      "Hypopharyngeal Cancerous Growth",
+      "Hypopharyngeal Lesion",
+      "Malignant Tumor of Hypopharynx",
+      "Neoplastic Disease of Hypopharynx"
+    ]
+  },
+  {
+    "category_description2": "esophageal cancer|malignant neoplasm of esophagus",
+    "category": "Esophageal Cancer",
+    "description_2": "Malignant neoplasm of esophagus",
+    "payload_llm": {
+      "category": "Esophageal Cancer",
+      "description_2": "Malignant neoplasm of esophagus"
+    },
+    "abbreviations": [
+      "Esophageal Malignancy",
+      "Malignancy of Esophageal Region",
+      "Esophagus Cancer",
+      "Esophageal Sarcoma",
+      "Malignant Neoplasm of Esophageal Tissue"
+    ]
+  },
+  {
+    "category_description2": "stomach cancer|malignant neoplasm of stomach",
+    "category": "Stomach Cancer",
+    "description_2": "Malignant neoplasm of stomach",
+    "payload_llm": {
+      "category": "Stomach Cancer",
+      "description_2": "Malignant neoplasm of stomach"
+    },
+    "abbreviations": [
+      "Gastric Malignancy",
+      "Malignancy of Gastric",
+      "Gastric Adenocarcinoma",
+      "Gastric Sarcoma",
+      "Stomach Malignancy",
+      "Stomach Carcinoma",
+      "Gastric Lymphoma",
+      "Gastric MALT Lymphoma",
+      "Gastric Neuroendocrine Tumor",
+      "Gastric GIST",
+      "Gastric Signet Ring Cell Carcinoma",
+      "Stomach's Cancer",
+      "Malignant Tumor of Stomach"
+    ]
+  },
+  {
+    "category_description2": "small intestinal cancer|malignant neoplasm of small intestine",
+    "category": "Small Intestinal Cancer",
+    "description_2": "Malignant neoplasm of small intestine",
+    "payload_llm": {
+      "category": "Small Intestinal Cancer",
+      "description_2": "Malignant neoplasm of small intestine"
+    },
+    "abbreviations": []
+  },
+  {
+    "category_description2": "colon cancer|malignant neoplasm of colon",
+    "category": "Colon Cancer",
+    "description_2": "Malignant neoplasm of colon",
+    "payload_llm": {
+      "category": "Colon Cancer",
+      "description_2": "Malignant neoplasm of colon"
+    },
+    "abbreviations": [
+      "Colonic Malignancy",
+      "Colonic Carcinoma",
+      "Adenocarcinoma of Colon",
+      "Colon Adenocarcinoma",
+      "Malignancy of Colonic Tissue",
+      "Colon Tumor",
+      "Colon Neoplasm",
+      "Colon Cell Carcinoma",
+      "Large Intestinal Cancer",
+      "Large Bowel Cancer",
+      "Colon Cancer Stage IV",
+      "Metastatic Colon Cancer",
+      "Colon Cancer with Metastasis"
+    ]
+  },
+  {
+    "category_description2": "anal cancer|malignant neoplasm of anus and anal canal",
+    "category": "Anal Cancer",
+    "description_2": "Malignant neoplasm of anus and anal canal",
+    "payload_llm": {
+      "category": "Anal Cancer",
+      "description_2": "Malignant neoplasm of anus and anal canal"
+    },
+    "abbreviations": [
+      "Malignant Neoplasm of Anus",
+      "Malignant Neoplasm of Anal Canal",
+      "Adenocarcinoma of Anus",
+      "Adenocarcinoma of Anal Canal",
+      "Anal Adenocarcinoma",
+      "Anal Canal Cancer",
+      "Cancer of the Anus"
+    ]
+  },
+  {
+    "category_description2": "bile duct cancer|malignant neoplasm of other and unspecified parts of biliary tract",
+    "category": "Bile Duct Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of biliary tract",
+    "payload_llm": {
+      "category": "Bile Duct Cancer",
+      "description_2": "Malignant neoplasm of other and unspecified parts of biliary tract"
+    },
+    "abbreviations": [
+      "Biliary Carcinoma",
+      "Malignant Neoplasm of Bile Duct",
+      "Bile Duct Malignancy",
+      "Bile Duct Adenocarcinoma",
+      "Biliary Duct Cancer",
+      "Biliary Tract Adenocarcinoma",
+      "Cholangiocellular Carcinoma"
+    ]
+  },
+  {
+    "category_description2": "pancreatic cancer|malignant neoplasm of pancreas",
+    "category": "Pancreatic Cancer",
+    "description_2": "Malignant neoplasm of pancreas",
+    "payload_llm": {
+      "category": "Pancreatic Cancer",
+      "description_2": "Malignant neoplasm of pancreas"
+    },
+    "abbreviations": [
+      "Pancreas Cancer",
+      "Malignancy of Pancreas",
+      "Pancreatic Neoplasm",
+      "Adenocarcinoma of Pancreas",
+      "Pancreatic Islet Cell Carcinoma",
+      "Islet Cell Tumor",
+      "Neuroendocrine Tumor of Pancreas",
+      "Pancreatic Endocrine Tumor",
+      "Malignant Tumor of Pancreas",
+      "Exocrine Pancreatic Cancer",
+      "Pancreatic Sarcoma",
+      "Malignant Neoplasm of Exocrine Pancreas"
+    ]
+  }
+]
