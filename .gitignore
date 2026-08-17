@@ -1,5 +1,8 @@
 .env
-ICD_raw_2025_with_category.csv
-icd_category_cache_v2.json
-__pycache__/
+.venv
 *.py[cod]
+data/
+category_mismatches.csv
+ICD_new.csv
+test_correct_category.py
+test_keyword_difference.py

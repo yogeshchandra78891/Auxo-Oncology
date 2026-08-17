@@ -2,11 +2,9 @@ import os
 import ssl
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
-
 import httpx
 import truststore
 from dotenv import load_dotenv
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 from openai import AzureOpenAI

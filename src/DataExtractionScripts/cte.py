@@ -130,7 +130,6 @@ def fetch_top_10_clinical_trials(
 
         # Fetch more candidates first
         "pageSize": FETCH_LIMIT,
-        "sort": "@relevance",
     }
 
     try:

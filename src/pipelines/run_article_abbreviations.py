@@ -66,19 +66,6 @@ def flush_kb_files() -> None:
             print(f"  [flush] Removed {path.name}")
 
 
-def prune_output_to_canonical(path: Path, canonical_ids: set[str]) -> None:
-    """Remove generated records that no longer exist in canonical_entities.json."""
-    records = read_json(path)
-    retained = [
-        record for record in records
-        if record.get("category_description2") in canonical_ids
-    ]
-    removed = len(records) - len(retained)
-    if removed:
-        write_json(retained, path)
-        print(f"  [cleanup] Removed {removed:,} stale record(s) from {path.name}")
-
-
 def fetch_kb_for_category(category: str, descriptions: list[str]) -> None:
     """Fetch PubMed abstracts and ClinicalTrials studies for *category* and
     its *descriptions*, then write them to the shared data-directory paths
@@ -122,11 +109,6 @@ def run(
     all_entities: list[dict] = read_json(CANONICAL_INPUT)
     if not all_entities:
         raise SystemExit(f"No entities found in {CANONICAL_INPUT}. Run build_input.py first.")
-    canonical_ids = {entity["category_description2"] for entity in all_entities}
-    # Clean the generated source tables first. The merge stage can then remain
-    # a direct union of those tables without inheriting old canonical records.
-    for output_path in (CATEGORY_OUTPUT, DESCRIPTION_OUTPUT, LLM_OUTPUT):
-        prune_output_to_canonical(output_path, canonical_ids)
 
     # ---- Determine categories to process ------------------------------------
     all_categories: list[str] = list(dict.fromkeys(
@@ -213,18 +195,8 @@ def run(
     # Always upsert by category_description2 key.
     # Records for categories processed in this run overwrite existing entries;
     # records for categories NOT in this run are preserved from the output files.
-    # Canonical input is authoritative: do not preserve records from an older
-    # canonical file when a scoped run upserts its new results.
-    existing_cat = {
-        record["category_description2"]: record
-        for record in read_json(CATEGORY_OUTPUT)
-        if record.get("category_description2") in canonical_ids
-    }
-    existing_desc = {
-        record["category_description2"]: record
-        for record in read_json(DESCRIPTION_OUTPUT)
-        if record.get("category_description2") in canonical_ids
-    }
+    existing_cat  = {r["category_description2"]: r for r in read_json(CATEGORY_OUTPUT)}
+    existing_desc = {r["category_description2"]: r for r in read_json(DESCRIPTION_OUTPUT)}
     for r in all_category_results:
         existing_cat[r["category_description2"]] = r
     for r in all_description_results:
@@ -260,14 +232,8 @@ def run(
             entities=scoped_entities,
             output_path=LLM_OUTPUT.parent / "_tmp_llm_scoped.json",
             refresh_cache=refresh_cache,
-            category_records=all_category_results,
-            description_records=all_description_results,
         )
-        existing_llm = {
-            record["category_description2"]: record
-            for record in read_json(LLM_OUTPUT)
-            if record.get("category_description2") in canonical_ids
-        }
+        existing_llm = {r["category_description2"]: r for r in read_json(LLM_OUTPUT)}
         for r in llm_scoped:
             existing_llm[r["category_description2"]] = r
         llm_results = list(existing_llm.values())

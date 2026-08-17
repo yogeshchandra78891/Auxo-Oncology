@@ -1,7 +1,6 @@
 """Generate LLM-only ICD main categories with an Azure OpenAI GPT-4o mini deployment."""
 
 from __future__ import annotations
-
 import argparse
 import json
 import os
@@ -9,7 +8,6 @@ import ssl
 import time
 from pathlib import Path
 from typing import Iterable
-
 import httpx
 import pandas as pd
 import truststore
@@ -17,7 +15,7 @@ from dotenv import load_dotenv
 from openai import AzureOpenAI
 
 
-DEFAULT_INPUT = "data/ICD_raw_2025(in).csv"
+DEFAULT_INPUT = "data/ICD_raw_2025(in)-new.csv"
 DEFAULT_OUTPUT = "data/ICD_with_categories.csv"
 DEFAULT_CACHE = "data/icd_category_cache.json"
 DEFAULT_API_VERSION = "2025-01-01-preview"
@@ -41,7 +39,7 @@ def parse_args() -> argparse.Namespace:
         "--deployment",
         help="Azure GPT-4o mini deployment name. Overrides AZURE_OPENAI_DEPLOYMENT.",
     )
-    parser.add_argument("--batch-size", type=int, default=100, help="Descriptions per API call.")
+    parser.add_argument("--batch-size", type=int, default=70, help="Descriptions per API call.")
     # Reuse the cache created before the data-directory restructuring when present.
     default_cache = LEGACY_CACHE_PATH if not DEFAULT_CACHE_PATH.exists() and LEGACY_CACHE_PATH.exists() else DEFAULT_CACHE_PATH
     parser.add_argument("--cache", default=str(default_cache), help="JSON cache path for resumable runs.")
@@ -80,36 +78,53 @@ def categories_for_batch(
     numbered_descriptions = "\n".join(
         f"{index}. {description}" for index, description in enumerate(descriptions)
     )
+
+    # 5. Use the canonical disease name rather than simply repeating the wording from description_2.
     instructions = """ 
-You normalize ICD diagnosis descriptions into a short, reusable Main Category.
-Return JSON only in exactly this shape: {"categories": [{"index": 0, "category": "..."}]}.
-Return exactly one item for every supplied index.
- 
-PRIMARY OBJECTIVE: Preserve the MOST SPECIFIC clinically supported disease family and
-anatomical site in the description. Do not replace a named subsite with a broader parent
-organ, body system, or lay term. Specificity is more important than making categories broad.
- 
-Rules:
-- Use a clinically meaningful category of 1-3 words in Title Case.
-- Remove administrative/detail qualifiers only (for example: unspecified, laterality,
-  stage, recurrence, episode, manifestation, organism, or histologic subtype) when doing
-  so does NOT remove a meaningful anatomical site or disease distinction.
-- For malignant neoplasms, use the most specific named anatomical cancer category.
-  Preserve the stated subsite and append 'Cancer'. Examples:
-  * 'Malignant neoplasm of lip' -> 'Lip Cancer'
-  * 'Malignant neoplasm of oropharynx' -> 'Oropharyngeal Cancer', NOT 'Throat Cancer'
-  * 'Malignant neoplasm of palate' -> 'Palate Cancer', NOT 'Oral Cancer'
-  * 'Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system'
-    -> 'Spinal Cord Cancer', NOT 'CNS Cancer'
-- Never generalize a specific site to a broader site: do NOT map oropharynx to throat,
-  palate to oral cavity, spinal cord to CNS, or any named subsite to a parent organ/system.
-- If a description contains multiple named sites, select the most specific primary site
-  stated in the diagnosis; do not use a generic umbrella category.
-- Prefer a recognized disease family only when it retains the intended clinical meaning:
-  'Follicular lymphoma' -> 'Lymphoma'.
-- Group lymphoma, B-cell lymphoma, Hodgkin lymphoma, non-Hodgkin lymphoma, and malignant
-  immunoproliferative diseases under 'Lymphoma'.
-- Do not invent anatomy or a diagnosis absent from the description. Do not use ICD codes.
+You are an ICD-10-CM diagnosis normalization engine.
+Convert each description_2 into ONE canonical Main Category using ONLY the information explicitly stated in description_2.
+
+CORE OBJECTIVE:
+Generate the most appropriate standardized category while preserving the clinically meaningful disease and anatomical site.
+The goal is CONSISTENT CATEGORY NORMALIZATION, not free-form medical summarization.
+
+RULES:
+
+1. Do not generalize a specific anatomical site to an unrelated broader site,like Oropharynx → Oropharyngeal Cancer, NOT Throat Cancer
+2. For malignant neoplasms, use the canonical cancer category for the stated site, like Malignant neoplasm of ureter → Ureteral Cancer.
+3. Remove administrative qualifiers such as: unspecified, other, laterality, stage, sequela, and similar qualifiers.
+4. Do not invent anatomy, disease, histology, or clinical information.
+5. Do not add qualifiers such as "Chronic", "Acute", "Gland", "Cerebral", etc.
+6. Use 1–4 words in Title Case whenever possible.
+7. Lymphoma variants → Lymphoma.
+8. Return exactly one category per supplied index.
+
+Some examples of Canonical Category conversions(for illustration only):
+
+Malignant melanoma of skin → Skin Cancer
+Other and unspecified malignant neoplasm of skin → Non-Melanoma Skin Cancer
+Malignant neoplasm of accessory sinuses → Sinus Cancer
+Malignant neoplasm of other and unspecified parts of biliary tract → Bile Duct Cancer
+Malignant neoplasm of meninges → Meningioma
+Cerebral infarction → Ischemic Stroke
+Acute myocardial infarction → Heart Attack
+Angina pectoris → Angina
+Disorders of lipoprotein metabolism and other lipidemias → Lipidemia
+
+Occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction
+→ Occlusion And Stenosis Of Precerebral Arteries
+
+Malignant neoplasm of other and unspecified female genital organs
+→ Fallopian Tube Cancer
+
+Malignant neoplasm of peripheral nerves and autonomic nervous system
+→ Peripheral Nerve Sheath Tumor
+
+Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue
+→ Blood Cancer
+
+Return JSON only:
+{"categories":[{"index":0,"category":"..."}]}
 """
     response = client.chat.completions.create(
         model=deployment,
@@ -141,6 +156,7 @@ def create_azure_client(endpoint: str, api_key: str, api_version: str) -> AzureO
             raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
         verify: ssl.SSLContext | str = str(certificate_path)
     else:
+        print("AZURE_OPENAI_CA_BUNDLE not set; using system trust store for TLS validation.")
         verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
     return AzureOpenAI(
