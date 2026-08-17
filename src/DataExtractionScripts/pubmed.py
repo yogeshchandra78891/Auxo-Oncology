@@ -6,10 +6,8 @@ deduplicated by PMID before the final `max_results` cap is applied.
 """
 
 from __future__ import annotations
-
 import json
 import re
-
 from Bio import Entrez
 from pathlib import Path
 
@@ -99,7 +97,6 @@ def fetch_top_pubmed_abstracts(
 
 def main() -> None:
     fetch_top_pubmed_abstracts("lung cancer", max_results=10)
-
 
 if __name__ == "__main__":
     main()

@@ -47,56 +47,14 @@ Every returned phrase must refer to the exact site, disease, and histology repre
 category="Lip Cancer", description="Malignant neoplasm of lip"
 → ["Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", "Lip Carcinoma"]
 
-category="Tongue Cancer", description="Malignant neoplasm of tongue"
-→ ["Tongue Cancer", "Tongue Carcinoma", "Tongue Malignancy", "Glossal Cancer", "Lingual Cancer"]
-
-category="Gingival Cancer", description="Malignant neoplasm of gum"
-→ ["Gingival Cancer", "Gum Cancer", "Gingival Carcinoma", "Squamous Cell Carcinoma of Gum", "Gingival Squamous Cell Carcinoma", "GSCC"]
-
-category="Laryngeal Cancer", description="Malignant neoplasm of glottis"
-→ ["Laryngeal Cancer", "Laryngeal Carcinoma", "LSCC", "Laryngeal Squamous Cell Carcinoma", "Glottic Cancer", "Vocal Cord Cancer", "Voice Box Cancer", "Cancer of Vocal Cords"]
-
 category="Lung Cancer", description="Malignant neoplasm of upper lobe, bronchus or lung"
 → ["Lung Cancer", "Pulmonary Cancer", "Lung Carcinoma", "Non-Small Cell Lung Cancer", "NSCLC", "Small Cell Lung Cancer", "SCLC", "Adenocarcinoma of Lung", "Bronchogenic Carcinoma", "Malignant Neoplasm of Upper Lobe of Lung"]
-
-category="Liver Cancer", description="Malignant neoplasm of liver and intrahepatic bile ducts"
-→ ["Liver Cancer", "Liver Carcinoma", "Hepatocellular Carcinoma", "HCC", "Hepatoma", "Liver Cell Carcinoma", "Intrahepatic Cholangiocarcinoma", "ICC", "Malignant Neoplasm of Liver", "Primary Liver Cancer"]
-
-category="Pancreatic Cancer", description="Malignant neoplasm of head of pancreas"
-→ ["Pancreatic Cancer", "Pancreatic Carcinoma", "Pancreatic Adenocarcinoma", "PDAC", "Pancreatic Head Carcinoma", "Adenocarcinoma of Pancreatic Head"]
 
 category="Breast Cancer", description="Malignant neoplasm of central portion of female breast"
 → ["Breast Cancer", "Mammary Carcinoma", "Breast Carcinoma", "IBC", "Ductal Carcinoma", "Lobular Carcinoma", "Triple-Negative Breast Cancer", "TNBC", "HER2-Positive Breast Cancer", "HER2+ BC", "Metastatic Breast Cancer", "mBC", "ER+ BC"]
 
-category="Ovarian Cancer", description="Malignant neoplasm of right ovary"
-→ ["Ovarian Cancer", "Ovarian Carcinoma", "Ovarian Germ Cell Tumor", "Right Ovarian Cancer", "Ovary Cancer"]
-
-category="Cervical Cancer", description="Malignant neoplasm of endocervix"
-→ ["Cervical Cancer", "Cervical Carcinoma", "Cervical Squamous Cell Carcinoma", "CSCC", "Adenocarcinoma of the Cervix", "Cervical Adenocarcinoma", "CAC", "Cervix Carcinoma"]
-
-category="Renal Cancer", description="Malignant neoplasm of right kidney, except renal pelvis"
-→ ["Renal Cancer", "Kidney Cancer", "Renal Cell Carcinoma", "RCC", "Clear Cell Renal Cell Carcinoma", "ccRCC", "Papillary Renal Cell Carcinoma", "pRCC", "Malignant Neoplasm of Kidney", "Wilms Tumor", "Nephroblastoma"]
-
-category="Lymphoma", description="Nodular sclerosis classical Hodgkin lymphoma"
-→ ["Hodgkin Lymphoma", "HL", "Hodgkin's Lymphoma", "Nodular Sclerosis Hodgkin Lymphoma", "NSHL", "Classical HL - Nodular Sclerosis"]
-
 category="Lymphoma", description="Chronic lymphocytic leukemia/small lymphocytic lymphoma"
 → ["CLL", "Chronic Lymphocytic Leukemia", "B-CLL", "Small Lymphocytic Lymphoma", "SLL", "CLL/SLL", "B-Cell Chronic Lymphocytic Leukemia", "Lymphoma"]
-
-category="Leukemia", description="Acute myeloblastic leukemia, without maturation"
-→ ["Acute Myeloid Leukemia", "AML", "Acute Myeloblastic Leukemia", "Myeloid Leukemia", "Leukemia"]
-
-category="Myeloma", description="Multiple myeloma"
-→ ["Multiple Myeloma", "Myeloma", "Kahler Disease", "Plasmacytic Myeloma", "Myelomatosis", "Malignant Plasma Cell Neoplasm"]
-
-category="Melanoma", description="Malignant melanoma of skin of ear and external auricular canal"
-→ ["Melanoma", "Cutaneous Melanoma", "Skin Cancer", "Ear Melanoma", "Cutaneous Oncogenesis"]
-
-category="Non-melanoma Skin Cancer", description="Basal cell carcinoma of skin of face"
-→ ["Non-Melanoma Skin Cancer", "NMSC", "Basal Cell Carcinoma", "Nonmelanoma Skin Cancer"]
-
-category="Ischemic Heart Disease", description="Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
-→ ["Ischemic Heart Disease", "Coronary Artery Disease", "CAD", "Acute Coronary Syndrome", "ACS", "Unstable Angina"]
 
 category="Atherosclerosis", description="Atherosclerosis of native arteries of extremities with intermittent claudication"
 → ["Atherosclerosis", "Peripheral Artery Disease", "PAD", "Peripheral Vascular Disease", "PVD", "ASCVD", "Atherosclerotic Cardiovascular Disease", "claudication"]
@@ -104,11 +62,6 @@ category="Atherosclerosis", description="Atherosclerosis of native arteries of e
 category="Angina", description="Unstable angina"
 → ["Angina", "Unstable Angina", "Chest Pain", "Crescendo Angina", "Pre-infarction Angina", "Coronary Artery Disease", "CAD", "Angina Pectoris"]
 
-category="Lipidemias", description="Familial hypercholesterolemia"
-→ ["Familial Hypercholesterolemia", "FH", "HeFH", "Hypercholesterolemia", "Lipidemias", "Hereditary Hypercholesterolemia", "High Cholesterol"]
-
-category="Ischemic Stroke", description="Cerebral infarction due to thrombosis of middle cerebral artery"
-→ ["Ischemic Stroke", "Cerebral Infarction", "Thrombotic Stroke", "Cerebrovascular Accident", "CVA", "Stroke"]
 
 ━━━ SENTINEL RULE ━━━
 Return an empty array [] only when absolutely no clinically valid alias can be derived from the input. Never return ICD codes.

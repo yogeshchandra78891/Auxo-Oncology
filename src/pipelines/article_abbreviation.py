@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import argparse
 import json
 import re
@@ -77,7 +76,7 @@ def relevant_context(query: str, knowledge_base: list[dict[str, str]], limit: in
 def abbreviations_from_entity(client, deployment: str, field: str, value: str, context: str) -> list[str]:
     instructions = """You extract a complete, clinically valid alias family for one canonical ICD entity field using an approved knowledge base.
 
-Use the supplied evidence as the only knowledge source. The submitted category or description must be specifically mentioned or clearly implied by the evidence. If it is not, return exactly ["404"]. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge.
+Use the supplied Context as the only knowledge source. The submitted category or description must be specifically mentioned or clearly implied by the evidence. If it is not, return exactly ["404"]. Do not use ICD codes, code_3, description_3, other canonical entities, or outside knowledge.
 
 ━━━ WHAT TO INCLUDE ━━━
 Return every unique, directly relevant variant supported by the evidence:
@@ -94,13 +93,10 @@ Return every unique, directly relevant variant supported by the evidence:
 - Standalone modifiers without a complete entity phrase (never "malignant", "pulmonary", "hepatic" alone)
 - ICD codes or numeric codes of any kind
 - Aliases for a DIFFERENT cancer, organ, or body system
-- Duplicate values (case-insensitive)
+- Duplicate values (case-insensitive)   
 - The sentinel "404" combined with real values
 
-━━━ REQUIRED OUTPUT STYLE — STUDY THESE EXAMPLES ━━━
-
-Input: category="Lip Cancer", description="Malignant neoplasm of lip"
-Output: ["Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", "Lip Carcinoma"]
+━━━ REQUIRED OUTPUT STYLE — STUDY THESE EXAMPLES (for illustration purposes) ━━━
 
 Input: category="Tongue Cancer", description="Malignant neoplasm of tongue"
 Output: ["Tongue Cancer", "Tongue Carcinoma", "Tongue Malignancy", "Glossal Cancer", "Lingual Cancer"]
@@ -108,23 +104,14 @@ Output: ["Tongue Cancer", "Tongue Carcinoma", "Tongue Malignancy", "Glossal Canc
 Input: category="Liver Cancer", description="Malignant neoplasm of liver and intrahepatic bile ducts"
 Output: ["Liver Cancer", "Liver Carcinoma", "Hepatocellular Carcinoma", "HCC", "Hepatoma", "Liver Cell Carcinoma", "Intrahepatic Cholangiocarcinoma", "ICC", "Malignant Neoplasm of Liver", "Primary Liver Cancer"]
 
-Input: category="Lung Cancer", description="Malignant neoplasm of upper lobe, bronchus or lung"
-Output: ["Lung Cancer", "Pulmonary Cancer", "Lung Carcinoma", "Non-Small Cell Lung Cancer", "NSCLC", "Small Cell Lung Cancer", "SCLC", "Adenocarcinoma of Lung", "Bronchogenic Carcinoma"]
-
 Input: category="Lymphoma", description="Nodular sclerosis classical Hodgkin lymphoma"
 Output: ["Nodular Sclerosis Hodgkin Lymphoma", "NSHL", "Nodular Sclerosis HL", "NS Hodgkin Lymphoma", "Classical HL - Nodular Sclerosis", "Hodgkin Lymphoma", "HL", "Hodgkin's Lymphoma"]
 
 Input: category="Breast Cancer", description="Malignant neoplasm of central portion of female breast"
 Output: ["Breast Cancer", "Mammary Carcinoma", "Breast Carcinoma", "Ductal Carcinoma", "Lobular Carcinoma", "Triple-Negative Breast Cancer", "TNBC", "HER2-Positive Breast Cancer", "Metastatic Breast Cancer", "mBC"]
 
-Input: category="Leukemia", description="Acute myeloblastic leukemia"
-Output: ["Acute Myeloblastic Leukemia", "AML", "Myeloid Leukemia", "Leukemia"]
-
 Input: category="Atherosclerosis", description="Atherosclerosis of native arteries of extremities with intermittent claudication"
 Output: ["Atherosclerosis", "Peripheral Artery Disease", "PAD", "Peripheral Vascular Disease", "PVD", "ASCVD", "Atherosclerotic Cardiovascular Disease", "claudication"]
-
-Input: category="Ischemic Heart Disease", description="Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
-Output: ["Ischemic Heart Disease", "Coronary Artery Disease", "CAD", "Acute Coronary Syndrome", "ACS", "Unstable Angina"]
 
 Input: category="Lipidemias", description="Pure hypercholesterolemia, unspecified"
 Output: ["Hypercholesterolemia", "Lipidemias", "High Cholesterol", "Dyslipidemia", "Familial Hypercholesterolemia", "FH"]

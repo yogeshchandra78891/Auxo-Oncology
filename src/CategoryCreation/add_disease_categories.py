@@ -1,7 +1,6 @@
 """Generate LLM-only ICD main categories with an Azure OpenAI GPT-4o mini deployment."""
 
 from __future__ import annotations
-
 import argparse
 import json
 import os
@@ -9,15 +8,14 @@ import ssl
 import time
 from pathlib import Path
 from typing import Iterable
-
 import httpx
 import pandas as pd
-# import truststore
+import truststore
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 
 
-DEFAULT_INPUT = "data/ICD_raw_2025(in).csv"
+DEFAULT_INPUT = "data/ICD_raw_2025(in)-new.csv"
 DEFAULT_OUTPUT = "data/ICD_with_categories.csv"
 DEFAULT_CACHE = "data/icd_category_cache.json"
 DEFAULT_API_VERSION = "2025-01-01-preview"
@@ -41,7 +39,7 @@ def parse_args() -> argparse.Namespace:
         "--deployment",
         help="Azure GPT-4o mini deployment name. Overrides AZURE_OPENAI_DEPLOYMENT.",
     )
-    parser.add_argument("--batch-size", type=int, default=100, help="Descriptions per API call.")
+    parser.add_argument("--batch-size", type=int, default=70, help="Descriptions per API call.")
     # Reuse the cache created before the data-directory restructuring when present.
     default_cache = LEGACY_CACHE_PATH if not DEFAULT_CACHE_PATH.exists() and LEGACY_CACHE_PATH.exists() else DEFAULT_CACHE_PATH
     parser.add_argument("--cache", default=str(default_cache), help="JSON cache path for resumable runs.")
@@ -80,49 +78,40 @@ def categories_for_batch(
     numbered_descriptions = "\n".join(
         f"{index}. {description}" for index, description in enumerate(descriptions)
     )
+
+    # 5. Use the canonical disease name rather than simply repeating the wording from description_2.
     instructions = """ 
 You are an ICD-10-CM diagnosis normalization engine.
-
 Convert each description_2 into ONE canonical Main Category using ONLY the information explicitly stated in description_2.
 
 CORE OBJECTIVE:
 Generate the most appropriate standardized category while preserving the clinically meaningful disease and anatomical site.
-
-IMPORTANT:
 The goal is CONSISTENT CATEGORY NORMALIZATION, not free-form medical summarization.
-Always prefer the standard category wording defined by the rules and examples below.
 
 RULES:
 
-1. Preserve a meaningful anatomical site when it is explicitly stated.
-2. Do not generalize a specific anatomical site to an unrelated broader site.
-3. For malignant neoplasms, use the canonical cancer category for the stated site.
-4. Remove administrative qualifiers such as:
-   unspecified, other, laterality, stage, sequela, and similar qualifiers.
-5. Do not invent anatomy, disease, histology, or clinical information.
-6. Use the canonical disease name rather than simply repeating the wording from description_2.
-7. Do not add qualifiers such as "Chronic", "Acute", "Gland", "Cerebral", etc. when they are not part of the canonical category.
-8. Use 1–3 words in Title Case whenever possible.
-9. Lymphoma variants → Lymphoma.
-10. Return exactly one category per supplied index.
+1. Do not generalize a specific anatomical site to an unrelated broader site,like Oropharynx → Oropharyngeal Cancer, NOT Throat Cancer
+2. For malignant neoplasms, use the canonical cancer category for the stated site, like Malignant neoplasm of ureter → Ureteral Cancer.
+3. Remove administrative qualifiers such as: unspecified, other, laterality, stage, sequela, and similar qualifiers.
+4. Do not invent anatomy, disease, histology, or clinical information.
+5. Do not add qualifiers such as "Chronic", "Acute", "Gland", "Cerebral", etc.
+6. Use 1–4 words in Title Case whenever possible.
+7. Lymphoma variants → Lymphoma.
+8. Return exactly one category per supplied index.
 
-CANONICAL MAPPINGS:
+Some examples of Canonical Category conversions(for illustration only):
 
 Malignant melanoma of skin → Skin Cancer
 Other and unspecified malignant neoplasm of skin → Non-Melanoma Skin Cancer
-
+Malignant neoplasm of accessory sinuses → Sinus Cancer
+Malignant neoplasm of other and unspecified parts of biliary tract → Bile Duct Cancer
+Malignant neoplasm of meninges → Meningioma
 Cerebral infarction → Ischemic Stroke
-Chronic ischemic heart disease → Ischemic Heart Disease
 Acute myocardial infarction → Heart Attack
 Angina pectoris → Angina
-Arterial embolism and thrombosis → Arterial Embolism And Thrombosis
-
 Disorders of lipoprotein metabolism and other lipidemias → Lipidemia
 
 Occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction
-→ Occlusion And Stenosis Of Precerebral Arteries
-
-Occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction
 → Occlusion And Stenosis Of Precerebral Arteries
 
 Malignant neoplasm of other and unspecified female genital organs
@@ -133,32 +122,6 @@ Malignant neoplasm of peripheral nerves and autonomic nervous system
 
 Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue
 → Blood Cancer
-
-Malignant neoplasm of adrenal gland → Adrenal Cancer
-Malignant neoplasm of other endocrine glands and related structures → Endocrine Cancer
-Malignant neoplasm of accessory sinuses → Sinus Cancer
-Malignant neoplasm of retroperitoneum and peritoneum → Retroperitoneal Cancer
-Malignant neoplasm of other and unspecified parts of biliary tract → Bile Duct Cancer
-Malignant neoplasm of meninges → Meningioma
-Malignant neoplasm of ureter → Ureteral Cancer
-
-ANATOMICAL SPECIFICITY EXAMPLES:
-
-Malignant neoplasm of oropharynx → Oropharyngeal Cancer
-Malignant neoplasm of palate → Palate Cancer
-Malignant neoplasm of tongue → Tongue Cancer
-Malignant neoplasm of spinal cord → Spinal Cord Cancer
-
-Never convert:
-Oropharynx → Throat Cancer
-Palate → Oral Cancer
-Tongue → Oral Cancer
-Spinal Cord → CNS Cancer
-
-CONSISTENCY RULE:
-If the description matches one of the canonical mappings above, ALWAYS return exactly the specified canonical category.
-
-Do not create a synonym or alternative wording.
 
 Return JSON only:
 {"categories":[{"index":0,"category":"..."}]}
@@ -185,16 +148,16 @@ Return JSON only:
 
 
 def create_azure_client(endpoint: str, api_key: str, api_version: str) -> AzureOpenAI:
-    # """Keep TLS validation enabled while supporting corporate Windows certificates."""
-    # ca_bundle = os.getenv("AZURE_OPENAI_CA_BUNDLE")
-    # if ca_bundle:
-    #     certificate_path = Path(ca_bundle).expanduser()
-    #     if not certificate_path.is_file():
-    #         raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
-    #     verify: ssl.SSLContext | str = str(certificate_path)
-    # else:
-    #     print("AZURE_OPENAI_CA_BUNDLE not set; using system trust store for TLS validation.")
-    #     # verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    """Keep TLS validation enabled while supporting corporate Windows certificates."""
+    ca_bundle = os.getenv("AZURE_OPENAI_CA_BUNDLE")
+    if ca_bundle:
+        certificate_path = Path(ca_bundle).expanduser()
+        if not certificate_path.is_file():
+            raise SystemExit(f"AZURE_OPENAI_CA_BUNDLE does not exist: {certificate_path}")
+        verify: ssl.SSLContext | str = str(certificate_path)
+    else:
+        print("AZURE_OPENAI_CA_BUNDLE not set; using system trust store for TLS validation.")
+        verify = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
     return AzureOpenAI(
         azure_endpoint=endpoint,

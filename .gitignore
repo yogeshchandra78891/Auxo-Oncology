@@ -1,6 +1,8 @@
 .env
 .venv
-category_mismatches.csv
-ICD-new.csv
 *.py[cod]
 data/
+category_mismatches.csv
+ICD_new.csv
+test_correct_category.py
+test_keyword_difference.py

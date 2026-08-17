@@ -1,4 +1,4 @@
-"""Fetch ClinicalTrials.gov studies as structured JSON for the RAG pipeline.
+"""Fetch ClinicalTrials.gov studies as structured JSON..
 
 When multiple keywords are supplied (e.g. category + description_2 values),
 `per_term_limit` studies are fetched per keyword and the results are
@@ -6,10 +6,8 @@ deduplicated by NCT ID before the final `max_results` cap is applied.
 """
 
 from __future__ import annotations
-
 import json
 from pathlib import Path
-
 import requests
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -97,7 +95,6 @@ def fetch_top_10_clinical_trials(
 
 def main() -> None:
     fetch_top_10_clinical_trials("lung cancer", max_results=10)
-
 
 if __name__ == "__main__":
     main()
