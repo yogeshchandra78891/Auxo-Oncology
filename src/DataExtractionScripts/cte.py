@@ -1,4 +1,4 @@
-"""Fetch ClinicalTrials.gov studies as structured JSON for the RAG pipeline."""
+from __future__ import annotations
 
 import json
 from pathlib import Path
@@ -6,99 +6,231 @@ from pathlib import Path
 import requests
 
 
-keyword = "lung cancer"
+# ============================================================
+# CONFIGURATION
+# ============================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "top_10_clinical_trials.txt"
 
+DEFAULT_OUTPUT = (
+    PROJECT_ROOT / "data" / "top_10_clinical_trials.json"
+)
+
+API_URL = "https://clinicaltrials.gov/api/v2/studies"
+
+# Fetch more than required so we can verify ranking
+FETCH_LIMIT = 100
+
+
+# ============================================================
+# PARSE STUDY
+# ============================================================
+
+def _parse_study(study: dict) -> dict:
+
+    protocol = study.get("protocolSection", {})
+
+    identification = protocol.get(
+        "identificationModule", {}
+    )
+
+    status_module = protocol.get(
+        "statusModule", {}
+    )
+
+    design_module = protocol.get(
+        "designModule", {}
+    )
+
+    conditions_module = protocol.get(
+        "conditionsModule", {}
+    )
+
+    arms_module = protocol.get(
+        "armsInterventionsModule", {}
+    )
+
+    description_module = protocol.get(
+        "descriptionModule", {}
+    )
+
+    nct_id = identification.get(
+        "nctId", ""
+    )
+
+    return {
+        "nct_id": nct_id,
+
+        "title": identification.get(
+            "briefTitle", ""
+        ),
+
+        "summary": description_module.get(
+            "briefSummary", ""
+        ),
+
+        "detailed_description": description_module.get(
+            "detailedDescription", ""
+        ),
+
+        "condition": ", ".join(
+            conditions_module.get(
+                "conditions", []
+            )
+        ),
+
+        "status": status_module.get(
+            "overallStatus", ""
+        ),
+
+        "study_type": design_module.get(
+            "studyType", ""
+        ),
+
+        "interventions": ", ".join(
+            item.get("name", "")
+            for item in arms_module.get(
+                "interventions", []
+            )
+        ),
+
+        "url": (
+            f"https://clinicaltrials.gov/study/{nct_id}"
+            if nct_id
+            else ""
+        ),
+    }
+
+
+# ============================================================
+# FETCH STUDIES
+# ============================================================
 
 def fetch_top_10_clinical_trials(
     keyword: str,
-    output: Path = DEFAULT_OUTPUT
+    max_results: int = 10,
+    output: Path = DEFAULT_OUTPUT,
 ) -> None:
 
-    response = requests.get(
-        "https://clinicaltrials.gov/api/v2/studies",
-        params={
-            "query.cond": keyword,
-            "pageSize": 10,
-            "format": "json",
-        },
-        timeout=30,
+    keyword = keyword.strip()
+
+    if not keyword:
+        print("[warn] Empty search term.")
+        return
+
+    # --------------------------------------------------------
+    # API SEARCH
+    # --------------------------------------------------------
+
+    params = {
+        # IMPORTANT:
+        # This corresponds to the ClinicalTrials.gov
+        # "Condition/disease" search field.
+        "query.cond": keyword,
+
+        # Fetch more candidates first
+        "pageSize": FETCH_LIMIT,
+        "sort": "@relevance",
+    }
+
+    try:
+
+        response = requests.get(
+            API_URL,
+            params=params,
+            timeout=30,
+        )
+
+        response.raise_for_status()
+
+        data = response.json()
+
+    except requests.RequestException as exc:
+
+        print(
+            f"[ERROR] ClinicalTrials.gov request failed: {exc}"
+        )
+
+        return
+
+    # --------------------------------------------------------
+    # READ RESULTS
+    # --------------------------------------------------------
+
+    studies = data.get(
+        "studies",
+        []
     )
 
-    response.raise_for_status()
-
-    studies = response.json().get("studies", [])
-
     if not studies:
-        print("No clinical trials found.")
+
+        print(
+            f"[WARN] No studies found for: {keyword}"
+        )
+
         return
+
+    print()
+    print("=" * 70)
+    print("CLINICALTRIALS.GOV SEARCH")
+    print("=" * 70)
+    print(f"Search term : {keyword}")
+    print(f"Results API : {len(studies)}")
+    print()
+
+    # --------------------------------------------------------
+    # PARSE RESULTS IN API ORDER
+    # --------------------------------------------------------
 
     records = []
 
+    seen_ids = set()
+
     for study in studies:
 
-        protocol = study.get("protocolSection", {})
+        record = _parse_study(study)
 
-        identification = protocol.get(
-            "identificationModule", {}
+        nct_id = record["nct_id"]
+
+        if not nct_id:
+            continue
+
+        if nct_id in seen_ids:
+            continue
+
+        seen_ids.add(nct_id)
+
+        records.append(record)
+
+    # --------------------------------------------------------
+    # TAKE TOP RESULTS
+    # --------------------------------------------------------
+
+    records = records[:max_results]
+
+    # --------------------------------------------------------
+    # PRINT RESULTS FOR COMPARISON
+    # --------------------------------------------------------
+
+    print("TOP RESULTS FROM API:")
+    print("-" * 70)
+
+    for index, record in enumerate(
+        records,
+        start=1
+    ):
+
+        print(
+            f"{index:2}. "
+            f"{record['nct_id']} | "
+            f"{record['title']}"
         )
 
-        status_module = protocol.get(
-            "statusModule", {}
-        )
+    print("-" * 70)
 
-        design = protocol.get(
-            "designModule", {}
-        )
-
-        conditions_module = protocol.get(
-            "conditionsModule", {}
-        )
-
-        arms_module = protocol.get(
-            "armsInterventionsModule", {}
-        )
-
-        description_module = protocol.get(
-            "descriptionModule", {}
-        )
-
-        records.append({
-            "nct_id": identification.get(
-                "nctId", ""
-            ),
-
-            "title": identification.get(
-                "briefTitle", ""
-            ),
-
-            "summary": description_module.get(
-                "briefSummary", ""
-            ),
-
-            "condition": ", ".join(
-                conditions_module.get(
-                    "conditions", []
-                )
-            ),
-
-            "status": status_module.get(
-                "overallStatus", ""
-            ),
-
-            "study_type": design.get(
-                "studyType", ""
-            ),
-
-            "interventions": ", ".join(
-                item.get("name", "")
-                for item in arms_module.get(
-                    "interventions", []
-                )
-            ),
-        })
+    # --------------------------------------------------------
+    # SAVE JSON
+    # --------------------------------------------------------
 
     output.parent.mkdir(
         parents=True,
@@ -111,16 +243,25 @@ def fetch_top_10_clinical_trials(
             ensure_ascii=False,
             indent=2
         ),
-        encoding="utf-8"
+        encoding="utf-8",
     )
 
+    print()
     print(
-        f"Saved {len(records)} trials to {output}"
+        f"[cte] Saved {len(records)} studies → {output}"
     )
 
 
-def main() -> None:
-    fetch_top_10_clinical_trials(keyword)
+# ============================================================
+# MAIN
+# ============================================================
+
+def main():
+
+    fetch_top_10_clinical_trials(
+        keyword="lung cancer",
+        max_results=10,
+    )
 
 
 if __name__ == "__main__":
