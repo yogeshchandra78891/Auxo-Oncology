@@ -15,13 +15,13 @@ from utils.cache import load, save
 from utils.json_utils import fingerprint, read_json, write_json
 
 
-PROMPT_VERSION = "canonical-only-alias-v3-multiclass"
+PROMPT_VERSION = "canonical-only-alias-v4-separate-fields"
 
 
 def generate(client, deployment: str, payload: dict[str, str]) -> list[str]:
-    instructions = """Generate a complete, clinically valid alias family for exactly one canonical ICD entity.
+    instructions = """Generate a complete, clinically valid alias family for exactly one canonical ICD field value.
 
-Use only the input `category` and `description_2`. This is a canonical-only task: do not rely on PubMed articles, ClinicalTrials records, any other knowledge base, ICD codes, code_3, description_3, or other entities. Do not return aliases for a related condition simply because it shares an organ system or disease family.
+Use only the supplied `field` and `value`. This is a canonical-only task: do not rely on PubMed articles, ClinicalTrials records, any other knowledge base, ICD codes, code_3, description_3, or other entities. Do not return aliases for a related condition simply because it shares an organ system or disease family.
 
 Every returned phrase must refer to the exact site, disease, and histology represented by the supplied input. Preserve the site: never substitute a different site, organ, histology, stage, or metastasis.
 
@@ -97,20 +97,30 @@ def run_llm(
     cache_path = CACHE / "llm_abbreviations_cache.json"
     cache = {} if refresh_cache else load(cache_path)
 
-    def cache_key(payload: dict[str, str]) -> str:
-        return fingerprint({"payload": payload, "prompt_version": PROMPT_VERSION})
+    def cache_key(field: str, value: str) -> str:
+        return fingerprint({"field": field, "value": value, "prompt_version": PROMPT_VERSION})
 
+    category_values = list(dict.fromkeys(
+        str(entity.get("category", "")).strip() for entity in entities if entity.get("category")
+    ))
+    description_values = list(dict.fromkeys(
+        str(entity.get("description_2", "")).strip() for entity in entities if entity.get("description_2")
+    ))
+    passes = (("category", category_values), ("description_2", description_values))
     missing = [
-        entity for entity in entities
-        if cache_key({"category": entity["category"], "description_2": entity["description_2"]}) not in cache
+        (field, value)
+        for field, values in passes
+        for value in values
+        if cache_key(field, value) not in cache
     ]
-    print(f"  [llm] {len(entities):,} entities | {len(missing):,} to process")
+    print(f"  [llm] category pass: {len(category_values):,} values; description pass: {len(description_values):,} values; {len(missing):,} to process")
 
     client = deployment = None
     try:
-        for entity in missing:
-            payload = {"category": entity["category"], "description_2": entity["description_2"]}
-            key = cache_key(payload)
+        # The tuple order makes the category pass complete before descriptions.
+        for field, value in missing:
+            payload = {"field": field, "value": value}
+            key = cache_key(field, value)
             if client is None:
                 client, deployment = create_client()
             for attempt in range(3):
@@ -128,8 +138,14 @@ def run_llm(
 
     output = []
     for entity in entities:
-        payload = {"category": entity["category"], "description_2": entity["description_2"]}
-        output.append({**entity, "payload_llm": payload, "abbreviations": cache[cache_key(payload)]["abbreviations"]})
+        category = str(entity["category"]).strip()
+        description = str(entity["description_2"]).strip()
+        values = cache[cache_key("category", category)]["abbreviations"] + cache[cache_key("description_2", description)]["abbreviations"]
+        output.append({
+            **entity,
+            "payload_llm": {"category": category, "description_2": description},
+            "abbreviations": list(dict.fromkeys(value.strip() for value in values if value.strip())),
+        })
 
     write_json(output, output_path)
     print(f"  [llm] Wrote {len(output):,} records → {output_path.resolve()}")

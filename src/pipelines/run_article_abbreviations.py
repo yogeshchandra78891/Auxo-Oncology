@@ -66,32 +66,29 @@ def flush_kb_files() -> None:
             print(f"  [flush] Removed {path.name}")
 
 
-def fetch_kb_for_category(category: str, descriptions: list[str]) -> None:
-    """Fetch PubMed abstracts and ClinicalTrials studies for *category* and
-    its *descriptions*, then write them to the shared data-directory paths
-    that load_knowledge_base() reads from."""
-    search_terms = [category] + descriptions
-    print(f"  [fetch] PubMed  ← {category!r} + {len(descriptions)} description(s)")
+def fetch_kb_for_query(query: str) -> list[dict]:
+    """Fetch both sources for one category *or* one description query only."""
+    flush_kb_files()
+    print(f"  [fetch] PubMed for {query!r}")
     try:
         fetch_top_pubmed_abstracts(
-            topic=search_terms,
+            topic=query,
             max_results=10,
-            per_term_limit=5,
             output=PUBMED,
         )
     except Exception as exc:
-        print(f"  [warn]  PubMed fetch failed for {category!r}: {exc}")
+        print(f"  [warn]  PubMed fetch failed for {query!r}: {exc}")
 
-    print(f"  [fetch] CTE     ← {category!r} + {len(descriptions)} description(s)")
+    print(f"  [fetch] CTE for {query!r}")
     try:
         fetch_top_10_clinical_trials(
-            keyword=search_terms,
+            keyword=query,
             max_results=10,
-            per_term_limit=5,
             output=CLINICAL_TRIALS,
         )
     except Exception as exc:
-        print(f"  [warn]  CTE fetch failed for {category!r}: {exc}")
+        print(f"  [warn]  CTE fetch failed for {query!r}: {exc}")
+    return load_knowledge_base()
 
 
 # ---------------------------------------------------------------------------
@@ -109,6 +106,7 @@ def run(
     all_entities: list[dict] = read_json(CANONICAL_INPUT)
     if not all_entities:
         raise SystemExit(f"No entities found in {CANONICAL_INPUT}. Run build_input.py first.")
+    canonical_ids = {entity["category_description2"] for entity in all_entities}
 
     # ---- Determine categories to process ------------------------------------
     all_categories: list[str] = list(dict.fromkeys(
@@ -132,7 +130,7 @@ def run(
     print(f"Categories to process: {len(categories_to_run)}")
     if only_category:
         print(f"Scope limited to: {only_category!r}")
-    print(f"Steps: article ✓ | llm {'SKIP' if skip_llm else '✓'} | merge {'SKIP' if skip_merge else '✓'}")
+    print(f"Steps: article=run | llm={'SKIP' if skip_llm else 'run'} | merge={'SKIP' if skip_merge else 'run'}")
     print(f"{'='*60}\n")
 
     # Accumulators for article abbreviation results
@@ -144,16 +142,10 @@ def run(
         cat_entities = [e for e in all_entities if e.get("category") == category]
         print(f"[{idx}/{len(categories_to_run)}] Category: {category!r}  ({len(cat_entities)} entities)")
 
-        flush_kb_files()
-
-        unique_descriptions = list(dict.fromkeys(
-            e["description_2"] for e in cat_entities if e.get("description_2")
-        ))
-        fetch_kb_for_category(category, unique_descriptions)
-
-        knowledge_base = load_knowledge_base()
+        # Category search and category generation use category evidence only.
+        knowledge_base = fetch_kb_for_query(category)
         if not knowledge_base:
-            print(f"  [warn]  No KB records loaded for {category!r}; both modes will return 404.")
+            print(f"  [warn]  No KB records loaded for category {category!r}.")
 
         cat_output = CATEGORY_OUTPUT.parent / f"_tmp_cat_{idx:03d}.json"
         try:
@@ -169,19 +161,31 @@ def run(
         except Exception as exc:
             print(f"  [error] category mode failed for {category!r}: {exc}")
 
-        desc_output = DESCRIPTION_OUTPUT.parent / f"_tmp_desc_{idx:03d}.json"
-        try:
-            desc_results = run_abbreviations(
-                entities=cat_entities,
-                mode="description",
-                output_path=desc_output,
-                top_k=top_k,
-                refresh_cache=refresh_cache,
-                knowledge_base=knowledge_base,
-            )
-            all_description_results.extend(desc_results)
-        except Exception as exc:
-            print(f"  [error] description mode failed for {category!r}: {exc}")
+        # Each description gets a separate PubMed/CTE fetch and separate KB.
+        descriptions = list(dict.fromkeys(
+            entity["description_2"] for entity in cat_entities if entity.get("description_2")
+        ))
+        for description_index, description in enumerate(descriptions, start=1):
+            description_entities = [
+                entity for entity in cat_entities if entity.get("description_2") == description
+            ]
+            print(f"  [description {description_index}/{len(descriptions)}] {description!r}")
+            description_kb = fetch_kb_for_query(description)
+            if not description_kb:
+                print(f"  [warn]  No KB records loaded for description {description!r}.")
+            desc_output = DESCRIPTION_OUTPUT.parent / f"_tmp_desc_{idx:03d}_{description_index:03d}.json"
+            try:
+                desc_results = run_abbreviations(
+                    entities=description_entities,
+                    mode="description",
+                    output_path=desc_output,
+                    top_k=top_k,
+                    refresh_cache=refresh_cache,
+                    knowledge_base=description_kb,
+                )
+                all_description_results.extend(desc_results)
+            except Exception as exc:
+                print(f"  [error] description mode failed for {description!r}: {exc}")
 
         if idx < len(categories_to_run):
             time.sleep(1)
@@ -190,13 +194,21 @@ def run(
 
     # ---- Step 8: Write article abbreviation outputs ------------------------
     print(f"{'='*60}")
-    print("Step 8 — Writing article abbreviation outputs...")
+    print("Step 8 - Writing article abbreviation outputs...")
 
     # Always upsert by category_description2 key.
     # Records for categories processed in this run overwrite existing entries;
     # records for categories NOT in this run are preserved from the output files.
-    existing_cat  = {r["category_description2"]: r for r in read_json(CATEGORY_OUTPUT)}
-    existing_desc = {r["category_description2"]: r for r in read_json(DESCRIPTION_OUTPUT)}
+    existing_cat = {
+        record["category_description2"]: record
+        for record in read_json(CATEGORY_OUTPUT)
+        if record.get("category_description2") in canonical_ids
+    }
+    existing_desc = {
+        record["category_description2"]: record
+        for record in read_json(DESCRIPTION_OUTPUT)
+        if record.get("category_description2") in canonical_ids
+    }
     for r in all_category_results:
         existing_cat[r["category_description2"]] = r
     for r in all_description_results:
@@ -205,10 +217,10 @@ def run(
     all_description_results = list(existing_desc.values())
 
     write_json(all_category_results, CATEGORY_OUTPUT)
-    print(f"  category_abbreviations    → {len(all_category_results):,} records → {CATEGORY_OUTPUT.resolve()}")
+    print(f"  category_abbreviations: {len(all_category_results):,} records to {CATEGORY_OUTPUT.resolve()}")
 
     write_json(all_description_results, DESCRIPTION_OUTPUT)
-    print(f"  description_abbreviations → {len(all_description_results):,} records → {DESCRIPTION_OUTPUT.resolve()}")
+    print(f"  description_abbreviations: {len(all_description_results):,} records to {DESCRIPTION_OUTPUT.resolve()}")
 
     # Clean up temp files
     for tmp in CATEGORY_OUTPUT.parent.glob("_tmp_cat_*.json"):
@@ -220,10 +232,10 @@ def run(
     llm_results: Optional[list] = None
 
     if skip_llm:
-        print(f"\nStep 9 — LLM abbreviations SKIPPED (--skip-llm).")
+        print("\nStep 9 - LLM abbreviations SKIPPED (--skip-llm).")
     else:
         print(f"\n{'='*60}")
-        print(f"Step 9 — LLM-only abbreviations ({len(scoped_entities)} entities in scope)...")
+        print(f"Step 9 - LLM-only abbreviations ({len(scoped_entities)} entities in scope)...")
 
         # Run LLM for the scoped entities, then upsert into the existing LLM
         # output file so records from other categories are preserved and the
@@ -233,7 +245,11 @@ def run(
             output_path=LLM_OUTPUT.parent / "_tmp_llm_scoped.json",
             refresh_cache=refresh_cache,
         )
-        existing_llm = {r["category_description2"]: r for r in read_json(LLM_OUTPUT)}
+        existing_llm = {
+            record["category_description2"]: record
+            for record in read_json(LLM_OUTPUT)
+            if record.get("category_description2") in canonical_ids
+        }
         for r in llm_scoped:
             existing_llm[r["category_description2"]] = r
         llm_results = list(existing_llm.values())
@@ -245,10 +261,10 @@ def run(
 
     # ---- Step 10: Merge ----------------------------------------------------
     if skip_merge:
-        print(f"\nStep 10 — Merge SKIPPED (--skip-merge).")
+        print("\nStep 10 - Merge SKIPPED (--skip-merge).")
     else:
         print(f"\n{'='*60}")
-        print("Step 10 — Merging all abbreviation sources → master_abbreviations.json...")
+        print("Step 10 - Merging all abbreviation sources to master_abbreviations.json...")
         run_merge(
             category_records=all_category_results,
             description_records=all_description_results,
@@ -258,12 +274,12 @@ def run(
 
     print(f"\n{'='*60}")
     print(f"Done. Processed {len(categories_to_run)} category/categories.")
-    print(f"  category_abbreviations    → {CATEGORY_OUTPUT.resolve()}")
-    print(f"  description_abbreviations → {DESCRIPTION_OUTPUT.resolve()}")
+    print(f"  category_abbreviations: {CATEGORY_OUTPUT.resolve()}")
+    print(f"  description_abbreviations: {DESCRIPTION_OUTPUT.resolve()}")
     if not skip_llm:
-        print(f"  llm_abbreviations         → {LLM_OUTPUT.resolve()}")
+        print(f"  llm_abbreviations: {LLM_OUTPUT.resolve()}")
     if not skip_merge:
-        print(f"  master_abbreviations      → {MASTER_OUTPUT.resolve()}")
+        print(f"  master_abbreviations: {MASTER_OUTPUT.resolve()}")
 
 
 # ---------------------------------------------------------------------------
@@ -272,7 +288,7 @@ def run(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="End-to-end abbreviation orchestrator: article → LLM → merge."
+        description="End-to-end abbreviation orchestrator: article, LLM, then merge."
     )
     parser.add_argument(
         "--top-k", type=int, default=5,

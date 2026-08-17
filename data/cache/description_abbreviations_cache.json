@@ -1,14 +1,17 @@
 [
   {
-    "0e00a4aeac53a0e380ce48d6b1146036c228030b6f7c1563a7177e2067b515ec": {
+    "9aa784b5635f34b8e78d60d1988ff64a80a6cf578acf97364cf4ce8c9a8e92dd": {
       "abbreviations": [
-        "Pancreatic Cancer",
-        "Pancreatic Carcinoma",
-        "Pancreatic Malignancy",
-        "Malignant Neoplasm of Pancreas",
-        "Pancreatic Ductal Adenocarcinoma",
-        "PDAC",
-        "Malignant Disease of Pancreas"
+        "Lip Cancer",
+        "Lip Carcinoma",
+        "Malignancy of Lip",
+        "Lower Lip Cancer",
+        "Lower Lip Carcinoma",
+        "Squamous Cell Carcinoma of Lip",
+        "Basal Cell Carcinoma of Lip",
+        "Keratoacanthoma of Lip",
+        "Actinic Keratosis of Lip",
+        "Malignant Neoplasm of Lip"
       ]
     }
   }
