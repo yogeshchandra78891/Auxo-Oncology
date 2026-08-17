@@ -15,5 +15,26 @@
       "Vermilion Border Cancer",
       "Lip Carcinoma"
     ]
+  },
+  {
+    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
+    "category": "Tongue Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
+    "payload_llm": {
+      "category": "Tongue Cancer",
+      "description_2": "Malignant neoplasm of other and unspecified parts of tongue"
+    },
+    "abbreviations": [
+      "Tongue Cancer",
+      "Malignant neoplasm of Tongue",
+      "Tongue Carcinoma",
+      "Glossal Cancer",
+      "Malignancy of Tongue",
+      "Malignancy of Glossal",
+      "Malignant Neoplasm of Tongue",
+      "Oral Cancer",
+      "Cancer of the Tongue",
+      "Tongue Malignancy"
+    ]
   }
 ]

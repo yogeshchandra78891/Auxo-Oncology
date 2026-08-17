@@ -14,5 +14,20 @@
       "LSCC",
       "Malignant Neoplasm of Lip"
     ]
+  },
+  {
+    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
+    "category": "Tongue Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
+    "payload_category": {
+      "category": "Tongue Cancer"
+    },
+    "abbreviations": [
+      "Tongue Cancer",
+      "Tongue Carcinoma",
+      "Glossal Cancer",
+      "Lingual Cancer",
+      "Malignant Neoplasm of Tongue"
+    ]
   }
 ]

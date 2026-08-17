@@ -174,6 +174,10 @@ def fetch_top_10_clinical_trials(
     # SEARCH CLINICALTRIALS.GOV
 
     # --------------------------------------------------------
+
+    # Request a larger candidate pool so we can skip studies with no
+    # summary/description and still reach max_results valid studies.
+    candidate_size = max_results * 3
  
     params = {
 
@@ -189,7 +193,7 @@ def fetch_top_10_clinical_trials(
  
         # Number of results requested
 
-        "pageSize": max_results,
+        "pageSize": candidate_size,
 
     }
  
@@ -245,7 +249,7 @@ def fetch_top_10_clinical_trials(
  
     # --------------------------------------------------------
 
-    # PARSE + DEDUPLICATE
+    # PARSE + DEDUPLICATE + SKIP EMPTY STUDIES
 
     # --------------------------------------------------------
  
@@ -255,6 +259,10 @@ def fetch_top_10_clinical_trials(
  
     for study in studies:
  
+        if len(records) >= max_results:
+
+            break
+
         record = _parse_study(study)
  
         nct_id = record["nct_id"]
@@ -266,18 +274,18 @@ def fetch_top_10_clinical_trials(
         if nct_id in seen_ids:
 
             continue
+
+        # Skip studies that have neither a summary nor a detailed description —
+        # they carry no useful evidence for abbreviation generation.
+        if not record.get("summary", "").strip() and not record.get("detailed_description", "").strip():
+
+            print(f"[skip] {nct_id} has no summary or description — trying next candidate")
+
+            continue
  
         seen_ids.add(nct_id)
  
         records.append(record)
- 
-    # --------------------------------------------------------
-
-    # KEEP TOP N
-
-    # --------------------------------------------------------
- 
-    records = records[:max_results]
  
     # --------------------------------------------------------
 

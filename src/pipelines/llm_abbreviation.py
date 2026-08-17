@@ -9,13 +9,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from config.config import CACHE, CANONICAL_INPUT, LLM_OUTPUT
+from config.config import CANONICAL_INPUT, LLM_OUTPUT
 from utils.azure_client import create_client
-from utils.cache import load, save
-from utils.json_utils import fingerprint, read_json, write_json
-
-
-PROMPT_VERSION = "canonical-only-alias-v4-separate-fields"
+from utils.json_utils import read_json, write_json
 
 
 def generate(client, deployment: str, payload: dict[str, str]) -> list[str]:
@@ -80,25 +76,18 @@ Return JSON only in this exact form: {"abbreviations": ["..."]}."""
 def run_llm(
     entities: list,
     output_path: Optional[Path] = None,
-    refresh_cache: bool = False,
 ) -> list:
     """Generate LLM-only abbreviations for *entities* and return the output list.
 
     Args:
-        entities:       List of canonical entity dicts (must have 'category' and
-                        'description_2' keys).
-        output_path:    Where to write the output JSON. Defaults to LLM_OUTPUT.
-        refresh_cache:  If True, ignore existing cache entries.
+        entities:    List of canonical entity dicts (must have 'category' and
+                     'description_2' keys).
+        output_path: Where to write the output JSON. Defaults to LLM_OUTPUT.
 
     Returns:
         List of output dicts written to output_path.
     """
     output_path = output_path or LLM_OUTPUT
-    cache_path = CACHE / "llm_abbreviations_cache.json"
-    cache = {} if refresh_cache else load(cache_path)
-
-    def cache_key(field: str, value: str) -> str:
-        return fingerprint({"field": field, "value": value, "prompt_version": PROMPT_VERSION})
 
     category_values = list(dict.fromkeys(
         str(entity.get("category", "")).strip() for entity in entities if entity.get("category")
@@ -106,27 +95,22 @@ def run_llm(
     description_values = list(dict.fromkeys(
         str(entity.get("description_2", "")).strip() for entity in entities if entity.get("description_2")
     ))
-    passes = (("category", category_values), ("description_2", description_values))
-    missing = [
-        (field, value)
-        for field, values in passes
-        for value in values
-        if cache_key(field, value) not in cache
-    ]
-    print(f"  [llm] category pass: {len(category_values):,} values; description pass: {len(description_values):,} values; {len(missing):,} to process")
+    pairs = (
+        [("category", v) for v in category_values] +
+        [("description_2", v) for v in description_values]
+    )
+    print(f"  [llm] category pass: {len(category_values):,} values; description pass: {len(description_values):,} values; {len(pairs):,} to process")
 
+    results: dict[tuple[str, str], list[str]] = {}
     client = deployment = None
     try:
-        # The tuple order makes the category pass complete before descriptions.
-        for field, value in missing:
+        for field, value in pairs:
             payload = {"field": field, "value": value}
-            key = cache_key(field, value)
             if client is None:
                 client, deployment = create_client()
             for attempt in range(3):
                 try:
-                    cache[key] = {"abbreviations": generate(client, deployment, payload)}
-                    save(cache, cache_path)
+                    results[(field, value)] = generate(client, deployment, payload)
                     break
                 except Exception:
                     if attempt == 2:
@@ -140,11 +124,14 @@ def run_llm(
     for entity in entities:
         category = str(entity["category"]).strip()
         description = str(entity["description_2"]).strip()
-        values = cache[cache_key("category", category)]["abbreviations"] + cache[cache_key("description_2", description)]["abbreviations"]
+        values = (
+            results.get(("category", category), []) +
+            results.get(("description_2", description), [])
+        )
         output.append({
             **entity,
             "payload_llm": {"category": category, "description_2": description},
-            "abbreviations": list(dict.fromkeys(value.strip() for value in values if value.strip())),
+            "abbreviations": list(dict.fromkeys(v.strip() for v in values if v.strip())),
         })
 
     write_json(output, output_path)
@@ -156,10 +143,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate LLM-only abbreviations from canonical entities.")
     parser.add_argument("--input", default=str(CANONICAL_INPUT))
     parser.add_argument("--output", default=str(LLM_OUTPUT))
-    parser.add_argument("--refresh-cache", action="store_true")
     args = parser.parse_args()
     entities = read_json(Path(args.input))
-    run_llm(entities=entities, output_path=Path(args.output), refresh_cache=args.refresh_cache)
+    run_llm(entities=entities, output_path=Path(args.output))
 
 
 if __name__ == "__main__":
