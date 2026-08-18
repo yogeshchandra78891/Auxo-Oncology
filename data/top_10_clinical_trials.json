@@ -1,112 +1,101 @@
 [
   {
-    "nct_id": "NCT03305302",
-    "title": "Isolation and Establishment of Gustatory Cell Lines in Patients Operated on for Cancer of the Mobile Tongue - ImmortTasteCELL",
-    "summary": "In terms of incidence, cancer of the tongue is one of the leading cancers in France. Moreover, this cancer is associated with physiological complications ranging from swallowing disorders to loss of taste. Following surgery, impaired perception of food taste may lead to cachexia. It is therefore necessary to carry out research in the field of impaired taste, notably with regard to the regeneration of taste buds. However, there is currently no available functional model of taste bud cells.\n\nIt is therefore necessary to obtain a cell line of human taste cells. These immortalised human cells will allow us to better orient our investigations for applications in humans: search for and characterisation of \"taste modifiers\" synthesised using organic chemistry, able to trigger the perception of food in cases of taste loss or taste impairment.\n\nMoreover, given recent studies conducted by the investigating team proposing the existence of a fatty taste and its implication in obesity, the work of the team could be oriented towards the synthesis of lipid-receptor agonists, by analogy with artificial sweeteners instead of sugar. The availability of these chemical molecules would lead to a reduction in lipid intake as these agents contain no (or very few) calories. They will act as an organoleptic decoy.",
-    "detailed_description": "",
-    "condition": "Cancer of the Tongue",
-    "status": "COMPLETED",
-    "study_type": "OBSERVATIONAL",
-    "interventions": "Sample of cancerous epithelium from the tongue",
-    "url": "https://clinicaltrials.gov/study/NCT03305302"
-  },
-  {
-    "nct_id": "NCT00594724",
-    "title": "Improving Therapeutic Outcomes in the Tongue Carcinoma Patient: Assessment of Adaptation Using Functional Magnetic Resonance Imaging and Diffusion Tensor Imaging",
-    "summary": "The purpose of this study is to see how the brain re-learns to control the tongue in speaking and swallowing when either portions of the tongue have been removed, or when the tongue has been treated with radiation, in order to treat cancer. We hope the results of this study will help us to improve healing for patients who are being treated for cancer of the tongue.\n\nWhen patients with cancer of the tongue are treated by removing parts of the tongue (surgery) or by destroying the cancer with radiation to the tongue, they have significant difficulty speaking and swallowing after such treatments. At this time, patients who have been treated for cancer of the tongue re-learn speaking and swallowing through exercises taught by a speech pathologist.\n\nWhat is needed is information on how the brain re-learns to control speaking and swallowing so that we can help these patients re-learn faster after their treatments.",
-    "detailed_description": "The purpose of this investigation is to determine cortical mechanisms of adaptation to surgical or radiation treatment to the tongue. This study will use a non-invasive imaging technique, Functional Magnetic Resonance Imaging (fMRI), to investigate cortical responses to partial glossectomy or radiation therapy for treatment of a tongue malignancy. Patients with Stage I-IV (AJCC) malignancies of the tongue who are treated with surgery and or radiation therapy will be imaged using fMRI pre-operatively and at approximately six months postoperatively.\n\nPatterns of brain activity from the fMRI studies will be compared with matched healthy control subjects. The results of this investigation will provide needed information on both central and peripheral mechanisms of adaptation.",
-    "condition": "Tongue Carcinoma",
-    "status": "COMPLETED",
-    "study_type": "INTERVENTIONAL",
-    "interventions": "MRI",
-    "url": "https://clinicaltrials.gov/study/NCT00594724"
-  },
-  {
-    "nct_id": "NCT06169605",
-    "title": "Assessment of the Effect of Tumor Thickness and Site on Level IV Cervical Lymph Nodes in Squamous Cell Carcinoma of the Tongue and Floor of the Mouth: A Case Series Study",
-    "summary": "Regarding oral cavity cancer, the high incidence of neck metastasis along with its impact on survival and prognosis are in favor of elective neck dissection. Moreover, occult metastases could develop at lower levels in the neck (levels IV-V) Regarding the tongue, the rate of skip (occult) metastasis involving unremoved level IV cervical lymph nodes in squamous cell carcinoma of the tongue ranges from 0 % - 11.4 %. However, no data is available or a correlation between the risk of level IV involvement and the affection of specific tongue subsites or a certain cutoff value of tumor thickness.",
-    "detailed_description": "",
-    "condition": "Tongue Neoplasms",
-    "status": "UNKNOWN",
-    "study_type": "INTERVENTIONAL",
-    "interventions": "removal of primary tumor, neck dissection",
-    "url": "https://clinicaltrials.gov/study/NCT06169605"
-  },
-  {
-    "nct_id": "NCT06988449",
-    "title": "Use of ST250 to Reconstruct Lateral Tongue Defects",
-    "summary": "To assess the use of SupraThel 250 for mucosal reconstruction in the Head \\& Neck region. The membrane is applied to reconstruct lateral tongue defects . healing of the mucosa and regaining of normal tongue movement and speech are assessed postoperatively.",
-    "detailed_description": "Lateral tongue defects are usually treated using radial fore-arm free grafts which require a prolonged hospital stay with higher morbidity rates. It also entails the need of multiple rehabilitation and remodeling porcdures of the transplnted flap to enable intelligible speech and tongue function.",
-    "condition": "Tongue Neoplasms",
-    "status": "COMPLETED",
-    "study_type": "OBSERVATIONAL",
-    "interventions": "",
-    "url": "https://clinicaltrials.gov/study/NCT06988449"
-  },
-  {
-    "nct_id": "NCT04041141",
-    "title": "Oral Stent Device for Radiation Treatments of Oral Cancers",
-    "summary": "The purpose of this study is to examine that ability of the experimental oral stent device to reduce the volume of mandible receiving \\>55 Gy by 50%during radiation treatment as assessed duri radiation treatment planning. Patients will have CT scans at three time-points during their standard of care radiation treatment. During these visits patients will receive scans via CT or cone beam CT scan, with both the standard and experimental oral stent devices.\n\nDuring radiation treatment patients will receive the standard oral stent device.",
-    "detailed_description": "",
-    "condition": "Tongue Tumor, Tongue Cancer",
-    "status": "WITHDRAWN",
-    "study_type": "OBSERVATIONAL",
-    "interventions": "CT Scan, Experimental Oral Stent Device",
-    "url": "https://clinicaltrials.gov/study/NCT04041141"
-  },
-  {
-    "nct_id": "NCT07124520",
-    "title": "Normative Ranges of Lingual Strength and Endurance and the Impact of the IOPI Lingual Strength Trainer on Quantitative Functional Outcomes and Patient-Reported Outcomes After Partial Glossectomy or Hemiglossectomy for Oral Tongue Cancer, An Unblinded: Randomized Pilot Study",
-    "summary": "The purpose of this study is to learn more about tongue strength and endurance by using the Iowa Oral Performance Instrument (IOPI). The IOPI is a device that measures tongue pressure.",
-    "detailed_description": "",
-    "condition": "Tongue Cancer",
-    "status": "RECRUITING",
-    "study_type": "INTERVENTIONAL",
-    "interventions": "Iowa Oral Performance Instrument (IOPI)",
-    "url": "https://clinicaltrials.gov/study/NCT07124520"
-  },
-  {
-    "nct_id": "NCT04337853",
-    "title": "Radiotherapy of Tongue Cancer Using an Intraoral Stent",
-    "summary": "Radiotherapy of tongue cancer is associated with acute and late morbidity. Use of an intraoral stent will provide a larger distance between the tongue and palate and can reduce side-effects. The aim of the present study is to confirm that an intraoral stent will give lower dose to the palate throughout the treatment period.",
-    "detailed_description": "Radiotherapy of tongue cancer is associated with acute and late morbidity. Use of an intraoral stent will provide a larger distance between the tongue and palate and can reduce side-effects. The main objective of the present study is to confirm that the use of an intraoral stent will result in lower dose to the palate throughout the treatment period. A secondary objective is to measure the reduction in acute mucositis in the palate.\n\nThe intraoral stent used in the present study is available in two sizes, 10 and 20mm thickness. The intervention group and control group will consist of approximately five patients each. Target coverage will be measured by the minimum dose covering 98% of the clinical target volume (D98CTV). Dose to the organs at risk (hard and soft palate) will be measured by the mean dose. Data will be collected from the planning computed tomography (CT) and daily cone-beam CT (CBCT). Acute mucositis will be scored by Common Terminology Criteria for Adverse Events (CTCAE) v3.0.",
-    "condition": "Tongue Cancer",
-    "status": "COMPLETED",
-    "study_type": "INTERVENTIONAL",
-    "interventions": "Intraoral stent, No intraoral stent",
-    "url": "https://clinicaltrials.gov/study/NCT04337853"
-  },
-  {
-    "nct_id": "NCT02584270",
-    "title": "Prosthesis Guided Speech Rehabilitation of T1/T2 Cancers of the Tongue",
-    "summary": "This study will fill a scientific gap in the current knowledge providing data for evaluation of the palatal augmentation prosthesis (PAP) as a therapeutic modality post-surgery. This is a robust scientific randomized prospective clinical trial.\n\nPositive outcomes from this study have the potential to dramatically alter the most common issues of oral cancer therapy, namely speech and swallowing functions. Patients will have been diagnosed with a cancer lesion of the tongue requiring surgery and removal of part of the tongue. Smaller cancers of the tongue are sized as T1 or T2. For patients with smaller lesions, a PAP, which can aid in speaking and swallowing, is not routinely provided.",
-    "detailed_description": "This study will randomize patients into two arms; one for oral cancer patients that receive a small device, similar to a denture, called a PAP. The other arm will be patients who serve as a control and will not receive a PAP.\n\nThe PAP requires patients to have a dental mold created. A dentist customizes the PAP to specifically fit the individual's mouth.\n\nThe study will investigate whether the PAP improves speech following tongue cancer as measured by three different scales. Both groups will see a speech language therapist for additional measures of speech evaluation.",
-    "condition": "Tongue Neoplasms, Tongue Cancer, Oral Cancer",
-    "status": "RECRUITING",
-    "study_type": "INTERVENTIONAL",
-    "interventions": "Palatal Augmentation Prosthesis (PAP), Articulation Therapy",
-    "url": "https://clinicaltrials.gov/study/NCT02584270"
-  },
-  {
-    "nct_id": "NCT04793672",
-    "title": "Establishment of Tongue Image Database and Machine Learning Model for Malignant Tumors Diagnosis",
-    "summary": "The tongue images of malignant tumors and corresponding healthy people will be collected to establish the tongue image database. Deep learning will be carried out by computer and artificial intelligence to construct the early screening, diagnosis, prognosis and prognosis model of various malignant tumors based on tongue image for the diagnosis and treatment of malignant tumors.",
-    "detailed_description": "",
-    "condition": "Malignant Tumor",
-    "status": "COMPLETED",
-    "study_type": "OBSERVATIONAL",
-    "interventions": "Tongue images, coating on the tongue and clinical data of patients with malignant tumors and healthy people will be collected.",
-    "url": "https://clinicaltrials.gov/study/NCT04793672"
-  },
-  {
-    "nct_id": "NCT07682467",
-    "title": "Anterolateral Thigh Myofascial Fat Composite Flap for Reconstruction of Hemiglossectomy Defects in Obese Patients With Tongue Cancer",
-    "summary": "Tongue cancer is a common malignant tumor in oral and maxillofacial surgery. After surgical resection, it is often accompanied by hemitongue defect. For obese patients (BMI≥30) with tongue cancer, the repair of hemitongue defect is due to thick subcutaneous fat and bloated traditional free flaps, which leads to swallowing and speech dysfunction. As a result, there is still a lack of good clinical repair plans at present, which seriously affects the quality of life of patients. There is an urgent need for safe and efficient targeted repair techniques.\n\nThis study intends to retrospectively collect 35 patients with hemitongue defects after surgery for obese (BMI≥30) tongue squamous cell carcinoma in a single center, to compare the repair effects of ALT-MF and traditional free flaps, and to evaluate the postoperative Wada drinking water test scores, speech acuity, etc. of the two groups of patients. This study explores solutions to problems such as bloat, slow functional recovery, and significant donor site damage caused by traditional repair techniques in obese patients, verifies the safety and efficacy of ALT-MF, clarifies the repair mechanism, provides a new strategy for hemitongue defect repair in obese tongue cancer patients, improves the quality of life of patients, and has important clinical value and social significance.",
-    "detailed_description": "",
-    "condition": "Tongue Cancer",
+    "nct_id": "NCT03224000",
+    "title": "Trial of Magnetic Resonance Imaging Guided Radiotherapy Dose Adaptation in Human Papilloma Virus Positive Oropharyngeal Cancer",
+    "summary": "The goal of this clinical research study is to compare the use of MRI simulations to plan different doses of intensity modulated radiotherapy (IMRT) to the standard IMRT dose in patients with low risk human papilloma virus positive oropharyngeal cancer.\n\nThis is an investigational study. MRI simulations and radiation therapy are delivered using FDA-approved and commercially available methods. The use of MRI imaging to plan the dose is investigational.\n\nUp to 90 participants will be enrolled in this study. All will take part at MD Anderson.",
+    "detailed_description": "Baseline Visit:\n\nIf you are found to be eligible to take part in this study and agree, you will have a baseline visit. The following tests and procedures will be performed:\n\n* You will have a hearing test.\n* You will have a dental exam. During this exam, your saliva flow will be measured and you will be checked for lockjaw.\n* Your swallowing function will be tested with a special type of x-ray called a modified barium swallow (MBS). During the test, you will eat and drink foods and liquids mixed with a \"contrast\" chemical called barium that will make your throat more visible in the x-rays. A special x-ray tube will be connected to a television screen to allow the doctor to watch the foods and liquids pass from your mouth and down your throat.\n* You will complete a questionnaire about swallowing that should take about 5 minutes to complete.\n* You will have a video-strobe procedure to check your vocal cords. To perform a video-strobe procedure, a small camera will be inserted into the throat through your nose or mouth. You will be awake for this procedure and the study staff will give you the option of receiving a numbing spray for your nose and/or throat.\n* Photos of the inside of your mouth will be taken to check for mouth sores.\n* You will fill out questionnaires about your quality of life, work status, medical history, smoking status, and any symptoms you may have. Completing these questionnaires should take about 10-15 minutes.\n\nStudy Groups:\n\nIf you are among the first 15 patients enrolled in the study, you will be in Group 1.\n\nIf you join the study after the first 15 patients have enrolled, you will be randomly assigned (as a flip of a coin) to 1 of 2 study groups. This is done because no one knows if one study group is better, the same, or worse than the other group.\n\n* If you are in Group 1, an MRI will be used to plan your IMRT.\n* If you are in Group 2, you will receive standard-of-care IMRT.\n\nLength of Study Participation:\n\nNo matter which group you are in, you may continue receiving radiation therapy for up to 6 ½ weeks. You will no longer be able to take part in this study if the disease gets worse, if intolerable side effects occur, or if you are unable to follow study directions.\n\nYour overall participation on the study will be over after 5 years.\n\nTreatment Planning and Schedule:\n\nYou will receive a standard CT simulation which will cover your head and neck for treatment planning. You will also have a PET-CT to check the status of the disease and for treatment planning purposes.\n\nIf you are among the first 15 participants or are in Group 1, you also will have an MRI simulation for treatment planning purposes.\n\nAll groups will then receive radiation therapy 1 time each day, 5 days a week (Monday through Friday) for up to 33 treatments (about 6 ½ weeks).\n\nStudy Visits:\n\nEvery week while you are receiving radiation therapy:\n\n* You will have a physical exam.\n* Blood (about 1-2 tablespoons) will be drawn for routine tests.\n* You will fill out the same questionnaires as before.\n* You will have an MRI.\n\nAt Weeks 3 and 6:\n\n* Photos of the inside of your mouth will be taken to check for mouth sores.\n* You will have a dental exam.\n\nIf you are among the first 15 participants or are in Group 1, you will also have the MRI simulation at the end of Weeks 1, 2, 3, and 4 of treatment.\n\nSix (6) weeks after finishing radiation therapy, you will complete the same questionnaires as before.\n\nWithin 8-12 weeks after finishing radiation therapy:\n\n* Photos of the inside of your mouth will be taken to check for mouth sores.\n* You will have a hearing test.\n* If you are among the first 15 participants or are in Group 1, you will have an MRI simulation.\n\nSix (6) months, 1 year, and 2 years after finishing radiation therapy:\n\n* You will fill out the same questionnaires as before.\n* You will have a mouth exam to check your swallowing function.\n* Photos of the inside of your mouth will be taken to check for mouth sores.\n* You will fill out the same questionnaires as before.\n* You will have a video-strobe procedure to check your vocal cords.\n* At 1 year only, you will have a dental exam and an MBS exam to test your swallowing function.\n* At 1 year and 2 years only, you will also have a hearing test.\n\nThree to six (3-6) months, 1 year, and 18-24 months after finishing radiation therapy:\n\n* You will have an MBS exam to test your swallowing function.\n* You will fill out the same questionnaires as before.\n* You will have the video-strobe procedure to check your vocal cords.\n\nTwo (2) years after finishing radiation therapy and if the disease gets worse, blood (about 3 teaspoons) will be drawn for circulating tumor cells (CTCs). This is a test of how many tumor cells are in the blood.\n\nFive (5) years after finishing radiation therapy, you will have an MBS exam to test your swallowing function and will complete the same questionnaires as before.\n\nIf the doctor thinks it is needed during follow-up, you will have a tumor biopsy for tumor marker testing and a CT scan, MRI scan and/or PET/CT scan to check the status of the disease.\n\nFollow-Up Calls:\n\nDuring the 8-12 weeks while you are recovering from treatment, you will be called or emailed by an automated system every 2 weeks.\n\nThis will be to remind you to fill out a web-based form that asks about any side effects you may have had. Completing the form should take about 10-15 minutes each time.",
+    "condition": "Malignant Neoplasms of Lip Oral Cavity and Pharynx, Oropharyngeal Cancer",
     "status": "ACTIVE_NOT_RECRUITING",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Modified Barium Swallow (MBS), Swallowing Questionnaire, Symptom Questionnaire, Video-Strobe Procedure, MRI Guided Intensity Modulated Radiotherapy (IMRT) Planning, Standard-of-Care Intensity Modulated Radiotherapy (IMRT) Planning, Intensity Modulated Radiotherapy (IMRT)",
+    "url": "https://clinicaltrials.gov/study/NCT03224000"
+  },
+  {
+    "nct_id": "NCT04277273",
+    "title": "Characteristics of a Maxillofacial Prosthesis Consultation Within Assistance Publique - Hopitaux de Paris",
+    "summary": "Patients treated with Maxillofacial Prosthesis have loss of maxillary and/or mandibular substances. Few data are available on quality of life of these patients and its association with some of their socio-demographic, medical and clinical characteristics.",
+    "detailed_description": "Patients treated with Maxillofacial Prosthesis have loss of maxillary and/or mandibular substances (oral-nasal or oral-sinusal communication, removal of the soft palate, removal of part of the lower jaw). These losses are mainly due to the surgical consequences of cancers of the upper aerodigestive tract, trauma or sequelae of labio-palate clefts. Depending on the etiology of substance loss, there are 3 main therapeutics: surgical approach, radiotherapy and chemotherapy. The effects of these treatments are functional, aesthetic and psychological. The functions impacted are chewing, phonation, ventilation and swallowing.\n\nFew data are available on quality of life of these patients and its association with some of their socio-demographic, medical and clinical characteristics (drug use, type of maxillo-mandibular loss of substance, disorder(s) associated with substance loss, ...).\n\nThis study investigates the socio-demographic, medical and quality of life characteristics of Maxillofacial Prosthesis consultation's patients (Department of Dentistry, GHPS) and the potential associations between quality of life and some of these characteristics.",
+    "condition": "Head and Neck Neoplasm, Cleft Palate, Cleft Lip",
+    "status": "COMPLETED",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Questionnaire",
+    "url": "https://clinicaltrials.gov/study/NCT04277273"
+  },
+  {
+    "nct_id": "NCT03602079",
+    "title": "Study of A166 in Patients With Relapsed/Refractory Cancers Expressing HER2 Antigen or Having Amplified HER2 Gene",
+    "summary": "Open-label, Phase I-II, first-in-human (FIH) study for A166 monotherapy in HER2-expressing or amplified patients who progressed on or did not respond to available standard therapies. Patients must have documented HER2 expression or amplification. The patient must have exhausted available standard therapies. Patients will receive study drug as a single IV infusion. Cycles will continue until disease progression or unacceptable toxicity.",
+    "detailed_description": "This is an open-label, Phase I-II, first-in-human (FIH) study for A166 as monotherapy in HER2-expressing patients who progressed on or did not respond to available standard therapies. Patients enrolled in this Phase III study must have documented HER2 positivity defined as positive on in situ hybridization (ISH) or next-generation sequencing (NGS) or HER2 expression, defined as at least 1+ by validated immunohistochemistry (IHC) test. The patient must be, in the judgment of the investigator, an appropriate candidate for experimental therapy after available standard therapies have ceased to provide clinical benefit for their disease. Patients will receive study drug as a single IV infusion at the prescribed dose level in each treatment cycle. Cycles will continue until disease progression or unacceptable toxicity. The study is divided into 2 parts (Phase I and Phase II).",
+    "condition": "HER2-positive Breast Cancer, HER2 Gene Mutation, HER-2 Gene Amplification, HER2 Positive Gastric Cancer, Salivary Gland Cancer, Salivary Gland Tumor, Salivary Gland Carcinoma, Salivary Gland Neoplasms, Lung Cancer, Colo-rectal Cancer, Rare Diseases, Solid Tumor, Recurrent Gastric Cancer, Recurrent Colon Cancer, Recurrent Breast Cancer, Head and Neck Cancer, Head and Neck Carcinoma, Bladder Cancer, Cervical Cancer, Liver Cancer, Bile Duct Cancer, Urologic Cancer, Pancreatic Cancer, Prostate Cancer, Recurrent Prostate Cancer, Rectal Cancer, Recurrent Ovarian Carcinoma, Recurrent Renal Cell Cancer, Rectal Cancer Stage II, Rectal Cancer Stage I, Rectal Cancer Stage III, Skin Cancer, Mouth Cancer, Lip Cancer Stage I, Tongue Cancer, Breast Neoplasm Malignant Primary, Larynx Cancer, Tonsil Cancer, Palate Cancer, Mucoepidermoid Carcinoma, Primary Peritoneal Carcinoma, Mucinous Adenocarcinoma Gastric, Mucinous Breast Cancer Recurrent, Cholangiocarcinoma",
+    "status": "COMPLETED",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "A166",
+    "url": "https://clinicaltrials.gov/study/NCT03602079"
+  },
+  {
+    "nct_id": "NCT00080028",
+    "title": "Motexafin Gadolinium With Chemotherapy and Radiation Therapy for the Treatment of Advanced Head and Neck Cancer",
+    "summary": "The purpose of this study is to evaluate the safety of adding the investigational drug Motexafin Gadolinium to the standard treatment of radiation therapy and chemotherapy with drugs called 5-FU and cisplatin in patients with advanced head and neck cancer.",
+    "detailed_description": "",
+    "condition": "Head and Neck Cancer, Oropharynx Cancer, Larynx Cancer, Hypopharynx Cancer",
+    "status": "TERMINATED",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Motexafin Gadolinium Injection",
+    "url": "https://clinicaltrials.gov/study/NCT00080028"
+  },
+  {
+    "nct_id": "NCT07552558",
+    "title": "Ficerafusp Alfa, Pembrolizumab, and Stereotactic Body Radiotherapy (SBRT) for Head and Neck Squamous Cell Carcinoma (HNSCC)",
+    "summary": "The study is an open-label phase I/II clinical trial. The study will enroll patients to receive neoadjuvant SBRT plus 1 or 2 doses of neoadjuvant pembrolizumab with concurrent ficerafusp alfa (4 doses) prior to definitive surgical resection for high-risk, locoregionally advanced HPV-negative head and neck squamous cell carcinoma (HNSCC). Approximately 6 weeks after end of SBRT, patients will undergo standard of care (SOC) surgical resection followed by SOC adjuvant chemoradiation per National Comprehensive Cancer Network (NCCN) guidelines. Adjuvant therapy is not part of this study and therefore is not dictated by study protocol.",
+    "detailed_description": "",
+    "condition": "Head and Neck Squamous Cell Carcinoma, HPV-Negative Squamous Cell Carcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Hypofractionated Stereotactic Body Radiotherapy (SBRT), Pembrolizumab, Ficerafusp alfa",
+    "url": "https://clinicaltrials.gov/study/NCT07552558"
+  },
+  {
+    "nct_id": "NCT03890783",
+    "title": "Functional Results of Soft Palate Free Flap Reconstruction",
+    "summary": "The oropharynx is a complex anatomical structure necessary for nasal breathing, swallowing and phonation. The removal of oropharyngeal cancers can lead to sequelae, particularly in the case of resections affecting the soft palate. The main sequelae are represented by rhinolalia and swallowing disorders with nasal regurgitation.\n\nThe treatment of oropharyngeal tumors is based on primary surgery or radiotherapy, but tumors of the soft palate are often treated by radiotherapy or radio-chemotherapy first. Surgery is often kept for relapses, because it is considered to lead to important sequelae. However, chemoradiotherapy of the oropharynx is also responsible for acute toxicities, and late sequelae can be frequent and important.\n\nRecent publications tend to show that primary surgery would give better survival rates compared to radiotherapy, particularly in advanced stages, including viro-induced cancers. In addition, primary surgery can reduce the dose of radiation delivered to the oropharynx and thus reduce its long-term toxicity.\n\nIt is currently possible to reconstruct a loss of substance after surgery of oropharyngeal cancers, including the soft palate by using free flaps, limiting the postoperative sequelae usually observed without reconstruction.\n\nThere is little data on reconstructions of the soft palate, their sequelae and their impact on the quality of life.",
+    "detailed_description": "",
+    "condition": "Oropharyngeal Cancer, Palate Free Flap Reconstruction",
+    "status": "COMPLETED",
     "study_type": "OBSERVATIONAL",
-    "interventions": "The anterolateral femoral myofascial fat composite flap (ALT-MF) repairs tongue defects in patients with tongue cancer",
-    "url": "https://clinicaltrials.gov/study/NCT07682467"
+    "interventions": "Evaluation of phonation quality, Evaluation of swallowing quality, global quality of life questionnaire",
+    "url": "https://clinicaltrials.gov/study/NCT03890783"
+  },
+  {
+    "nct_id": "NCT03239834",
+    "title": "Clinical Evaluation of the OncAlert RAPID in Subjects Presenting for Evaluation and/or Initial Biopsy; Impact on Decision-Making",
+    "summary": "Objectives Validate the OncAlert® RAPID Test by demonstrating that NPV \\> (1 -prevalence).\n\nEvaluate the independent and associated contribution of readily available clinical variables including age, race, gender, HPV status, socioeconomic level, tobacco, and alcohol use with the biopsy and test results.\n\nEvaluate OncAlert® RAPID Test results in patients without immediate biopsy, both at baseline and scheduled follow-up visit (approximately 1-3 months±14 days), to assess impact on outcome.\n\nPlanned Number of Subjects A total enrollment of up to 1000 individuals is projected with 600 as the minimum accrued. Patients in the primary cohort (1a and 1b) will be followed until pathology of clinically directed incisional / diagnostic biopsy pathology report is received.\n\nUp to 200 'non-biopsy subjects' will be followed during a 1-3 month ±14 days clinic visit.\n\nPatient Population\n\nCohorts 1a and 1b:\n\nSubjects with a clinical suspicion of oral potentially malignant disorders, oral or oropharyngeal cancer, or both based in part on clinical examination, symptoms, clinical history, suspicious lesion(s) in mouth without history of a prior positive biopsy. Even if the suspicion is low for cancer or precancer, the patient is eligible if a biopsy is performed, in part, to rule this out. For example, if a subject has findings on imaging, or worrisome localizing symptoms in the oral cavity or oropharynx, they would be eligible. In addition, subjects with papillomas or other findings where there is a low level of concern, but cancer is still in the differential, are also eligible.\n\n* Cohort 1a: oral cavity\n* Cohort 1b: oropharynx\n\nCohort 2:\n\nSubjects are enrolled with a clinical suspicion of oral potentially malignant disorders, oral or oropharyngeal cancer, or both based in part on clinical examination, symptoms, clinical history, suspicious lesion(s) in mouth without history of a prior positive biopsy; however, based on clinical impression and or patient related issues no immediate biopsy is obtained.\n\nScreen Fail Rate: A 20% Screen Fail Rate is anticipated.\n\nInvestigational Product Name: OncAlert Oral Cancer RAPID Test (OncAlert RAPID)\n\nMethodology Overview\n\nProspectively collect 5cc of normal saline after a combination of swish, gargle and spit into the provided collection specimen cup. Specimens will be collected at baseline (time of biopsy) as per standard practice at each site. The OncAlert RAPID Test cassette is inserted into the specimen cup and read directly from the cassette in 10 minutes. In addition, comprehensive clinical - pathology and patient demographic features including age, gender, race, ethnicity, and all pathology biopsy results will be collected. Any pertinent additional clinical data including HPV status, socioeconomic status, smoking, drinking history, and pertinent features related to oral health will be obtained. A central pathology review for all biopsy results will be performed and incorporated into the final analyses.",
+    "detailed_description": "Overview\n\nThe OncAlert Oral Cancer RAPID Test (OncAlert RAPID) is a qualitative point-of-care lateral flow assay to aid in the decision to biopsy in patients with clinical features associated with oral potentially malignant disorders and or oral/oropharyngeal cancer (i.e. head and neck squamous cell carcinoma).\n\nProposed Intended Use Statement\n\nThe device measures soluble CD44 and total protein in saliva samples collected in saline. The test is an adjunct to the biopsy decision process, and not intended as a screening or stand-alone diagnostic assay. To be used in adults 23 years and older. Not intended for use in pregnant women.\n\nSTUDY OBJECTIVES\n\nThe principal objectives of this study are to:\n\n* Validate the OncAlert RAPID Test, with an NPV ≥ (1-prevalence),\n* Evaluate OncAlert RAPID Test results in patients without immediate biopsy, both at baseline and scheduled follow-up visit (approximately 1-3 months), to assess impact on outcome,\n* Evaluate the independent and associated contribution of readily available clinical variables including age, race, gender, HPV status, socioeconomic level, tobacco, and alcohol use with the biopsy and test results.\n\nSTUDY OVERVIEW\n\nStudy Approach\n\nProspectively collect 5cc of normal saline after a combination of swish, gargle and spit into the provided collection specimen cup. 1cc will be removed and sequestered for subsequent downstream analyses (Section 7). Specimens will be collected at baseline (time of biopsy) as per standard practice at each site. The OncAlert RAPID Test cassette is inserted into the specimen cup and read directly from the cassette in 10 minutes. In addition, acquire comprehensive clinical - pathology and patient demographic features including age, gender, race, ethnicity, and all pathology biopsy results. Also, obtain any pertinent additional clinical data including HPV status, socioeconomic status, smoking, drinking history, and pertinent features related to oral health. It is presumed that some patients within the current biopsy protocol will undergo treatment as a result of the biopsy diagnosis. The clinical-pathology data, when accessible, for these patients will be collected for subsequent secondary analyses. A central pathology review for all biopsy results will be performed and incorporated into the final analyses.\n\nStudy Duration\n\nFor Cohorts 1a and 1b patients, the pathology results of clinically directed incisional / diagnostic biopsy will be followed until finalized and received.\n\nCohort 2 patients not having an initial incisional / diagnostic biopsy at the initial visit will have an additional OncAlert® RAPID test performed within 1 -3 months±14 days (or as defined by standard of care (SOC)after the initial visit.)\n\nThe study will conclude after all data is collected and analyzed. This could vary from 12 to 36 months or more depending on accrual rates at the open sites and other factors.",
+    "condition": "Palatal Neoplasms, Lip Neoplasm, Gingival Neoplasms, Leukoplakia, Oral, Tongue Neoplasms, Oropharyngeal Neoplasms, Oral Ulcer",
+    "status": "COMPLETED",
+    "study_type": "OBSERVATIONAL",
+    "interventions": "OncAlert",
+    "url": "https://clinicaltrials.gov/study/NCT03239834"
+  },
+  {
+    "nct_id": "NCT04009811",
+    "title": "A New Membrane Obturator Prothesis Concept for Soft Palate Defects",
+    "summary": "When soft palate defects lead to palatal insufficiency, the patient's quality of life is affected by difficulties swallowing, hypernasality, and poor intelligibility of speech. If immediate surgical reconstruction is not an option, the patient may benefit from the placement of a rigid obturator prosthesis. Unfortunately, the residual muscle stumps are often unable to adequately move this stiff and inert obturator to properly restore the velopharyngeal valve function. The objective of this case report was to describe the use of a membrane obturator prosthesis that incorporates a dental dam to compensate for the soft palate defect.",
+    "detailed_description": "The velopharyngeal sphincter seals the oropharynx from the nasopharynx during swallowing and speech. This three-dimensional muscular valve closes through the synergistic behavior of the soft palate and the lateral and posterior walls of the pharynx. A soft palate defect surgically acquired in the context of oral cancer may impede complete closure and lead to a palatopharyngeal insufficiency. The resultant airflow escape results in hypernasality, poor speech intelligibility, and swallowing problems (such as leakage of foods and fluids into the nasal airways). The best way to rehabilitate and restore chewing and swallowing is one of the top ten research priorities in head and neck cancer. When the velopharyngeal function cannot be immediately restored with surgical reconstruction, patients can benefit from an obturator prosthesis. This obturator is a rigid extension of acrylic resin positioned at the level of the hard palate that provides surface contact for the remaining musculature. Often, the residual muscle stumps cannot move adequately around this stiff and inert obturator to properly restore the velopharyngeal valve function. The resulting blockage, or free space between the tissues and obturator, is a main cause of prosthetic failure. Subsequently, in many cases, oral functions remain impaired, with a negative impact on the patient's quality of life.\n\nThe compensating treatment consists of a provisional removable partial denture (RPD) with a membrane obturator. The membrane consisted of a thick dental dam shaped with scissors to create a 10-mm overlap with the pharyngeal walls that was then perforated with four holes using punch pliers.\n\nThe follow-up ends after the last visit. However, our team can provide cares of any patient seeking for dental care, prosthetic treatments and routine follow-up.",
+    "condition": "Mouth Neoplasms, Velopharyngeal Insufficiency, Speech Disorders, Deglutition Disorders",
+    "status": "COMPLETED",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Suersen and membraneous obturators evaluation",
+    "url": "https://clinicaltrials.gov/study/NCT04009811"
+  },
+  {
+    "nct_id": "NCT07552545",
+    "title": "Full-wrap Versus Conventional Suspension for Reducing Soft Palate Injury Rate in Transoral Surgery",
+    "summary": "This study aims to evaluate whether the use of full-wrap suspension, compared with the traditional double-strap suspension, can effectively reduce the risk of intraoperative and postoperative soft palate injury in transoral/transnasal pharyngeal surgery. Through a prospective, multicenter, randomized controlled design, this study will provide evidence-based support for the clinical promotion and standardized application of full-wrap suspension.",
+    "detailed_description": "This study is a prospective, parallel-group, multicenter clinical study. A total of 138 subjects will be enrolled, including 69 in the control group (using double-strap suspension) and 69 in the experimental group (using full-wrap suspension). By comparing the incidence of soft palate injury, postoperative pain score (VAS), healing time of soft palate injury, incidence of non-soft-palate complications, and System Usability Scale (SUS) score between the two groups, the study aims to investigate whether the use of full-wrap suspension can effectively reduce soft palate injury caused by intraoperative manipulation.",
+    "condition": "Adenoid Hypertrophy, Tonsillar Hypertrophy, Nasopharyngeal Diseases, Nasopharyngeal Tumors, Parapharyngeal or Skull Base Lesions, Required Soft Palate Suspension",
+    "status": "NOT_YET_RECRUITING",
+    "study_type": "INTERVENTIONAL",
+    "interventions": "Intraoperative soft palate suspension using the double-strap method., Intraoperative soft palate suspension using the full-wrap method.",
+    "url": "https://clinicaltrials.gov/study/NCT07552545"
   }
 ]

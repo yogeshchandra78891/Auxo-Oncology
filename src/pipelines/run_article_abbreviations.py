@@ -370,6 +370,8 @@ def run(
         llm_scoped = run_llm(
             entities=scoped_entities,
             output_path=LLM_OUTPUT.parent / "_tmp_llm_scoped.json",
+            article_category_records=all_category_results,
+            article_description_records=all_description_results,
         )
         existing_llm = {
             record["category_description2"]: record

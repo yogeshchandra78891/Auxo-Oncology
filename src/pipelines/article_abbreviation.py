@@ -39,8 +39,16 @@ def load_knowledge_base() -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     if PUBMED.exists():
         for entry in read_json(PUBMED):
-            if isinstance(entry, dict) and entry.get("text", "").strip():
-                records.append({"source": "PubMed", "text": entry["text"].strip()})
+            if not isinstance(entry, dict):
+                continue
+            title    = entry.get("title", "").strip()
+            abstract = entry.get("text",  "").strip()
+            # Combine title + abstract so entity-token matching in
+            # relevant_context() works even when a disease-site token
+            # appears only in the title and not in the abstract body.
+            combined = f"{title} {abstract}".strip()
+            if combined:
+                records.append({"source": "PubMed", "text": combined})
     for trial in read_json(CLINICAL_TRIALS):
         if not isinstance(trial, dict):
             continue
