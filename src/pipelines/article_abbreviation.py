@@ -11,13 +11,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from config.config import CACHE, CANONICAL_INPUT, CATEGORY_OUTPUT, CLINICAL_TRIALS, DESCRIPTION_OUTPUT, PUBMED
+from config.config import CANONICAL_INPUT, CATEGORY_OUTPUT, CLINICAL_TRIALS, DESCRIPTION_OUTPUT, PUBMED
 from utils.azure_client import create_client
-from utils.cache import load, save
-from utils.json_utils import fingerprint, read_json, write_json
-
-
-PROMPT_VERSION = "knowledge-base-grounded-v4-multiclass-alias"
+from utils.json_utils import read_json, write_json
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
 TEXT_FIELDS = ("title", "summary", "condition", "interventions", "abstract")
 # These words describe a broad diagnosis but do not identify a disease or site.
@@ -43,8 +39,16 @@ def load_knowledge_base() -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     if PUBMED.exists():
         for entry in read_json(PUBMED):
-            if isinstance(entry, dict) and entry.get("text", "").strip():
-                records.append({"source": "PubMed", "text": entry["text"].strip()})
+            if not isinstance(entry, dict):
+                continue
+            title    = entry.get("title", "").strip()
+            abstract = entry.get("text",  "").strip()
+            # Combine title + abstract so entity-token matching in
+            # relevant_context() works even when a disease-site token
+            # appears only in the title and not in the abstract body.
+            combined = f"{title} {abstract}".strip()
+            if combined:
+                records.append({"source": "PubMed", "text": combined})
     for trial in read_json(CLINICAL_TRIALS):
         if not isinstance(trial, dict):
             continue
@@ -142,7 +146,6 @@ def run_abbreviations(
     mode: str,
     output_path: Path,
     top_k: int = 5,
-    refresh_cache: bool = False,
     knowledge_base: Optional[list] = None,
 ) -> list[dict]:
     """
@@ -153,7 +156,6 @@ def run_abbreviations(
         mode:           "category" or "description".
         output_path:    Where to write the output JSON.
         top_k:          Max KB records to include as evidence per query.
-        refresh_cache:  If True, ignore existing cache entries.
         knowledge_base: Pre-loaded KB records. If None, loads from PUBMED/CLINICAL_TRIALS files.
 
     Returns:
@@ -164,43 +166,28 @@ def run_abbreviations(
 
     field = "category" if mode == "category" else "description_2"
     payload_field = "payload_category" if mode == "category" else "payload_description"
-    cache_path = CACHE / f"{mode}_abbreviations_cache.json"
-    cache = {} if refresh_cache else load(cache_path)
 
     # Accept a pre-loaded KB (from orchestrator) or load from disk
     kb = knowledge_base if knowledge_base is not None else load_knowledge_base()
-    knowledge_base_version = fingerprint(kb)
-
-    def cache_key(query: str) -> str:
-        return fingerprint({
-            "mode": mode,
-            "query": query,
-            "top_k": top_k,
-            "knowledge_base_version": knowledge_base_version,
-            "prompt_version": PROMPT_VERSION,
-        })
 
     unique_queries = list(dict.fromkeys(
         str(entity.get(field, "")).strip() for entity in entities if entity.get(field)
     ))
-    missing = [query for query in unique_queries if cache_key(query) not in cache]
-    print(f"  [{mode}] {len(entities):,} entities | {len(unique_queries):,} unique queries | {len(missing):,} to process")
+    print(f"  [{mode}] {len(entities):,} entities | {len(unique_queries):,} unique queries")
 
+    results: dict[str, list[str]] = {}
     client = deployment = None
     try:
-        for query in missing:
-            key = cache_key(query)
+        for query in unique_queries:
             context = relevant_context(query, kb, top_k)
             if not context:
-                cache[key] = {"abbreviations": ["404"]}
-                save(cache, cache_path)
+                results[query] = ["404"]
                 continue
             if client is None:
                 client, deployment = create_client()
             for attempt in range(3):
                 try:
-                    cache[key] = {"abbreviations": abbreviations_from_entity(client, deployment, field, query, context)}
-                    save(cache, cache_path)
+                    results[query] = abbreviations_from_entity(client, deployment, field, query, context)
                     break
                 except Exception:
                     if attempt == 2:
@@ -213,13 +200,12 @@ def run_abbreviations(
     output = []
     for entity in entities:
         query = str(entity[field]).strip()
-        key = cache_key(query)
         output.append({
             "category_description2": entity["category_description2"],
             "category": entity["category"],
             "description_2": entity["description_2"],
             payload_field: {field: query},
-            "abbreviations": cache.get(key, {}).get("abbreviations", []),
+            "abbreviations": results.get(query, []),
         })
     write_json(output, output_path)
     print(f"  [{mode}] Wrote {len(output):,} records → {output_path.resolve()}")
@@ -232,7 +218,6 @@ def main() -> None:
     parser.add_argument("--input", default=str(CANONICAL_INPUT))
     parser.add_argument("--output")
     parser.add_argument("--top-k", type=int, default=5, help="Maximum relevant PubMed/trial records supplied as evidence.")
-    parser.add_argument("--refresh-cache", action="store_true")
     args = parser.parse_args()
 
     entities = read_json(Path(args.input))
@@ -243,7 +228,6 @@ def main() -> None:
         mode=args.mode,
         output_path=output_path,
         top_k=args.top_k,
-        refresh_cache=args.refresh_cache,
         knowledge_base=None,  # load from disk when run as CLI
     )
 

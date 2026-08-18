@@ -17,7 +17,7 @@ After all categories:
 
 Usage:
     python src/pipelines/run_article_abbreviations.py
-    python src/pipelines/run_article_abbreviations.py --top-k 5 --refresh-cache
+    python src/pipelines/run_article_abbreviations.py --top-k 5
     python src/pipelines/run_article_abbreviations.py --category "Lung Cancer"
     python src/pipelines/run_article_abbreviations.py --category "Liver Cancer"
     python src/pipelines/run_article_abbreviations.py --skip-llm
@@ -66,28 +66,158 @@ def flush_kb_files() -> None:
             print(f"  [flush] Removed {path.name}")
 
 
-def fetch_kb_for_query(query: str) -> list[dict]:
-    """Fetch both sources for one category *or* one description query only."""
+def fetch_kb_for_query(query: str, max_articles: int = 5) -> list[dict]:
+    """Fetch both sources for one category query only.
+
+    Args:
+        query:        The search term (category name).
+        max_articles: Maximum PubMed articles AND maximum ClinicalTrials studies
+                      to fetch for this query. Defaults to 5.
+    """
     flush_kb_files()
-    print(f"  [fetch] PubMed for {query!r}")
+    print(f"  [fetch] PubMed for {query!r} (max {max_articles})")
     try:
         fetch_top_pubmed_abstracts(
             topic=query,
-            max_results=10,
+            max_results=max_articles,
             output=PUBMED,
         )
     except Exception as exc:
         print(f"  [warn]  PubMed fetch failed for {query!r}: {exc}")
 
-    print(f"  [fetch] CTE for {query!r}")
+    print(f"  [fetch] CTE for {query!r} (max {max_articles})")
     try:
         fetch_top_10_clinical_trials(
             keyword=query,
-            max_results=10,
+            max_results=max_articles,
             output=CLINICAL_TRIALS,
         )
     except Exception as exc:
         print(f"  [warn]  CTE fetch failed for {query!r}: {exc}")
+    return load_knowledge_base()
+
+
+def fetch_description_kb(description: str, category: str, target: int = 10) -> list[dict]:
+    """Fetch a KB for a description_2 query with category top-up.
+
+    Strategy:
+      1. Fetch up to 5 PubMed articles using description_2 as the search term.
+      2. If fewer than 5 were returned, fetch (target - got) more using category
+         to fill up to ``target`` total PubMed articles (deduped by pmid).
+      3. Apply the same top-up logic independently for ClinicalTrials.
+      4. Write the merged results back to the shared PUBMED / CLINICAL_TRIALS
+         files so load_knowledge_base() picks them up correctly.
+
+    Args:
+        description: The description_2 string (ICD phrase used as primary query).
+        category:    The category name used as fallback when description yields
+                     fewer than 5 articles.
+        target:      Total articles aimed for across both queries (default 10).
+    """
+    import json as _json
+
+    desc_limit = target // 2          # 5 — primary quota from description_2
+    flush_kb_files()
+
+    # ------------------------------------------------------------------
+    # PubMed: description_2 first, category top-up
+    # ------------------------------------------------------------------
+    pubmed_records: list[dict] = []
+
+    print(f"  [fetch] PubMed desc  {description!r} (max {desc_limit})")
+    try:
+        fetch_top_pubmed_abstracts(
+            topic=description,
+            max_results=desc_limit,
+            output=PUBMED,
+        )
+        pubmed_records = read_json(PUBMED)
+    except Exception as exc:
+        print(f"  [warn]  PubMed fetch failed for {description!r}: {exc}")
+
+    desc_got = len(pubmed_records)
+    topup = target - desc_got          # how many more we need from category
+    print(f"  [fetch] PubMed desc  → got {desc_got} | top-up needed: {topup}")
+
+    if topup > 0:
+        print(f"  [fetch] PubMed cat   {category!r} (max {topup})")
+        _tmp_pubmed = PUBMED.parent / "_tmp_pubmed_topup.json"
+        try:
+            fetch_top_pubmed_abstracts(
+                topic=category,
+                max_results=topup,
+                output=_tmp_pubmed,
+            )
+            topup_records = read_json(_tmp_pubmed)
+            # Deduplicate by pmid
+            existing_pmids = {r["pmid"] for r in pubmed_records if r.get("pmid")}
+            for rec in topup_records:
+                if rec.get("pmid") and rec["pmid"] not in existing_pmids:
+                    pubmed_records.append(rec)
+                    existing_pmids.add(rec["pmid"])
+        except Exception as exc:
+            print(f"  [warn]  PubMed top-up fetch failed for {category!r}: {exc}")
+        finally:
+            if _tmp_pubmed.exists():
+                _tmp_pubmed.unlink(missing_ok=True)
+
+    # Write merged PubMed results back so load_knowledge_base() reads them
+    PUBMED.parent.mkdir(parents=True, exist_ok=True)
+    PUBMED.write_text(
+        _json.dumps(pubmed_records, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"  [fetch] PubMed total → {len(pubmed_records)} articles")
+
+    # ------------------------------------------------------------------
+    # ClinicalTrials: description_2 first, category top-up
+    # ------------------------------------------------------------------
+    cte_records: list[dict] = []
+
+    print(f"  [fetch] CTE   desc   {description!r} (max {desc_limit})")
+    try:
+        fetch_top_10_clinical_trials(
+            keyword=description,
+            max_results=desc_limit,
+            output=CLINICAL_TRIALS,
+        )
+        cte_records = read_json(CLINICAL_TRIALS)
+    except Exception as exc:
+        print(f"  [warn]  CTE fetch failed for {description!r}: {exc}")
+
+    cte_got = len(cte_records)
+    cte_topup = target - cte_got
+    print(f"  [fetch] CTE   desc   → got {cte_got} | top-up needed: {cte_topup}")
+
+    if cte_topup > 0:
+        print(f"  [fetch] CTE   cat    {category!r} (max {cte_topup})")
+        _tmp_cte = CLINICAL_TRIALS.parent / "_tmp_cte_topup.json"
+        try:
+            fetch_top_10_clinical_trials(
+                keyword=category,
+                max_results=cte_topup,
+                output=_tmp_cte,
+            )
+            topup_cte = read_json(_tmp_cte)
+            existing_ncts = {r["nct_id"] for r in cte_records if r.get("nct_id")}
+            for rec in topup_cte:
+                if rec.get("nct_id") and rec["nct_id"] not in existing_ncts:
+                    cte_records.append(rec)
+                    existing_ncts.add(rec["nct_id"])
+        except Exception as exc:
+            print(f"  [warn]  CTE top-up fetch failed for {category!r}: {exc}")
+        finally:
+            if _tmp_cte.exists():
+                _tmp_cte.unlink(missing_ok=True)
+
+    # Write merged CTE results back
+    CLINICAL_TRIALS.parent.mkdir(parents=True, exist_ok=True)
+    CLINICAL_TRIALS.write_text(
+        _json.dumps(cte_records, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"  [fetch] CTE   total  → {len(cte_records)} studies")
+
     return load_knowledge_base()
 
 
@@ -97,7 +227,6 @@ def fetch_kb_for_query(query: str) -> list[dict]:
 
 def run(
     top_k: int = 5,
-    refresh_cache: bool = False,
     only_category: Optional[str] = None,
     skip_llm: bool = False,
     skip_merge: bool = False,
@@ -143,7 +272,7 @@ def run(
         print(f"[{idx}/{len(categories_to_run)}] Category: {category!r}  ({len(cat_entities)} entities)")
 
         # Category search and category generation use category evidence only.
-        knowledge_base = fetch_kb_for_query(category)
+        knowledge_base = fetch_kb_for_query(category, max_articles=5)
         if not knowledge_base:
             print(f"  [warn]  No KB records loaded for category {category!r}.")
 
@@ -154,7 +283,6 @@ def run(
                 mode="category",
                 output_path=cat_output,
                 top_k=top_k,
-                refresh_cache=refresh_cache,
                 knowledge_base=knowledge_base,
             )
             all_category_results.extend(cat_results)
@@ -170,7 +298,7 @@ def run(
                 entity for entity in cat_entities if entity.get("description_2") == description
             ]
             print(f"  [description {description_index}/{len(descriptions)}] {description!r}")
-            description_kb = fetch_kb_for_query(description)
+            description_kb = fetch_description_kb(description, category, target=10)
             if not description_kb:
                 print(f"  [warn]  No KB records loaded for description {description!r}.")
             desc_output = DESCRIPTION_OUTPUT.parent / f"_tmp_desc_{idx:03d}_{description_index:03d}.json"
@@ -180,7 +308,6 @@ def run(
                     mode="description",
                     output_path=desc_output,
                     top_k=top_k,
-                    refresh_cache=refresh_cache,
                     knowledge_base=description_kb,
                 )
                 all_description_results.extend(desc_results)
@@ -243,7 +370,8 @@ def run(
         llm_scoped = run_llm(
             entities=scoped_entities,
             output_path=LLM_OUTPUT.parent / "_tmp_llm_scoped.json",
-            refresh_cache=refresh_cache,
+            article_category_records=all_category_results,
+            article_description_records=all_description_results,
         )
         existing_llm = {
             record["category_description2"]: record
@@ -295,10 +423,6 @@ def main() -> None:
         help="Max KB records used as evidence per query (default: 5).",
     )
     parser.add_argument(
-        "--refresh-cache", action="store_true",
-        help="Ignore existing cache entries and reprocess everything.",
-    )
-    parser.add_argument(
         "--category", default=None,
         help="Process only this one category (exact match). Useful for testing.",
     )
@@ -313,7 +437,6 @@ def main() -> None:
     args = parser.parse_args()
     run(
         top_k=args.top_k,
-        refresh_cache=args.refresh_cache,
         only_category=args.category,
         skip_llm=args.skip_llm,
         skip_merge=args.skip_merge,

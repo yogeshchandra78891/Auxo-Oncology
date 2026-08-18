@@ -9,142 +9,235 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from config.config import CACHE, CANONICAL_INPUT, LLM_OUTPUT
+from config.config import CANONICAL_INPUT, LLM_OUTPUT
 from utils.azure_client import create_client
-from utils.cache import load, save
-from utils.json_utils import fingerprint, read_json, write_json
+from utils.json_utils import read_json, write_json
 
 
-PROMPT_VERSION = "canonical-only-alias-v4-separate-fields"
+def generate(
+    client,
+    deployment: str,
+    payload: dict,
+    existing: list[str],
+    target_extra: int,
+) -> list[str]:
+    """Call the LLM to generate aliases for one entity.
 
+    Args:
+        payload:      {"category": ..., "description_2": ...} for the entity.
+        existing:     Aliases already produced (category + description article
+                      pipeline). LLM must not repeat any of these.
+        target_extra: Exact number of NEW aliases required so that
+                      len(existing) + len(new) >= 20.
+    """
+    existing_count = len(existing)
+    existing_block = (
+        "\n".join(f"  {i+1}. {a}" for i, a in enumerate(existing))
+        if existing
+        else "  (none yet)"
+    )
 
-def generate(client, deployment: str, payload: dict[str, str]) -> list[str]:
-    instructions = """Generate a complete, clinically valid alias family for exactly one canonical ICD field value.
+    instructions = f"""You are a clinical terminology expert. Your task is to generate EXACTLY {target_extra} new, unique aliases for the ICD entity below.
 
-Use only the supplied `field` and `value`. This is a canonical-only task: do not rely on PubMed articles, ClinicalTrials records, any other knowledge base, ICD codes, code_3, description_3, or other entities. Do not return aliases for a related condition simply because it shares an organ system or disease family.
+━━━ ENTITY ━━━
+category      : {{category}}
+description_2 : {{description_2}}
 
-Every returned phrase must refer to the exact site, disease, and histology represented by the supplied input. Preserve the site: never substitute a different site, organ, histology, stage, or metastasis.
+━━━ ALREADY HAVE ({existing_count} aliases — DO NOT REPEAT ANY OF THESE) ━━━
+{existing_block}
 
-━━━ WHAT TO INCLUDE ━━━
-- The canonical common disease name
-- <site> Cancer, <site> Carcinoma, <site> Malignancy, Malignancy of <site>
-- Established histological subtypes directly derivable from the input (e.g., "Hepatocellular Carcinoma", "Adenocarcinoma of Lung")
-- Widely used acronyms that unambiguously refer to this entity (e.g., "HCC", "NSCLC", "TNBC", "CLL", "AML")
-- Established anatomical synonyms for the same site (e.g., "Glossal Cancer" for tongue, "Hepatoma" for liver)
-- Lay terms in clinical use (e.g., "Voice Box Cancer" for laryngeal, "Womb Cancer" for uterine)
-- Directional or site-specific qualifiers when the description explicitly names a subsite (e.g., "Upper Lobe Lung Cancer")
-- Combination terms when the description explicitly covers multiple named subsites
+━━━ YOUR REQUIREMENT ━━━
+• You MUST return EXACTLY {target_extra} new aliases.
+• Every alias must be case-insensitively distinct from all entries in the ALREADY HAVE list above.
+• Every alias must refer to the EXACT same disease, anatomical site, and histology — never a different organ, cancer family, or disease.
+• The combined total (already have + your new ones) MUST reach at least 20.
 
-━━━ WHAT TO EXCLUDE ━━━
-- Standalone modifiers without a complete entity phrase (never "malignant" alone, "pulmonary" alone)
-- ICD or numeric codes of any kind
-- Aliases for a DIFFERENT cancer, organ, body system, or disease family
-- Duplicate values (case-insensitive)
-- Overly broad terms that apply to many entities (e.g., never "Cancer" alone, never "Leukemia" alone as the only entry)
+━━━ WHAT TO GENERATE ━━━
+Draw from ALL of the following categories until you have {target_extra} entries:
+1. Common disease name variants  — "<site> Cancer", "<site> Carcinoma", "<site> Malignancy", "Malignancy of <site>"
+2. Histological subtypes         — established subtypes directly derivable from the input (e.g. "Hepatocellular Carcinoma", "Adenocarcinoma of Lung", "Squamous Cell Carcinoma of Tongue")
+3. Acronyms                      — widely used clinical acronyms for this exact entity (e.g. "HCC", "NSCLC", "TNBC", "CLL", "AML", "CTCL")
+4. Anatomical synonyms           — established alternate site names (e.g. "Glossal Cancer" for tongue, "Hepatoma" for liver, "Renal Cell Carcinoma" for kidney)
+5. Lay / patient-facing terms    — terms used in clinical practice (e.g. "Voice Box Cancer" for laryngeal, "Womb Cancer" for uterine, "Bowel Cancer" for colorectal)
+6. Qualifier variants            — directional, laterality, or site-specific qualifiers when the description names a subsite (e.g. "Upper Lobe Lung Cancer", "Right Ovarian Cancer")
+7. Rare but established variants — recognized histological or molecular subtypes (e.g. sarcoma subtypes, lymphoma subtypes, specific mutation-defined variants)
+8. Combination terms             — when the description covers multiple named sites or overlapping conditions
+9. ICD phrase variant            — a natural-language rephrasing of the description_2 text itself (e.g. "Malignant Neoplasm of Main Bronchus")
 
-━━━ REQUIRED STYLE — STUDY THESE EXAMPLES ━━━
+━━━ STRICT RULES ━━━
+✗ Do NOT repeat anything from the ALREADY HAVE list (case-insensitive)
+✗ Do NOT include ICD or numeric codes of any kind
+✗ Do NOT include standalone modifiers ("malignant" alone, "pulmonary" alone)
+✗ Do NOT generate aliases for a DIFFERENT disease, organ, or cancer family
+✗ Do NOT include duplicates within your own output (case-insensitive)
+✗ Do NOT return fewer than {target_extra} entries — this is a hard requirement
 
-category="Lip Cancer", description="Malignant neoplasm of lip"
-→ ["Lip Cancer", "Lip Malignancy", "Malignancy of Lip", "Lip's Cancer", "Vermilion Border Cancer", "Lip Carcinoma"]
+━━━ REFERENCE EXAMPLES (depth and variety expected) ━━━
 
-category="Lung Cancer", description="Malignant neoplasm of upper lobe, bronchus or lung"
-→ ["Lung Cancer", "Pulmonary Cancer", "Lung Carcinoma", "Non-Small Cell Lung Cancer", "NSCLC", "Small Cell Lung Cancer", "SCLC", "Adenocarcinoma of Lung", "Bronchogenic Carcinoma", "Malignant Neoplasm of Upper Lobe of Lung"]
+category="Liver Cancer", description="Malignant neoplasm of liver and intrahepatic bile ducts"
+existing=[] → must return 20:
+["Liver Cancer","Liver Carcinoma","Hepatocellular Carcinoma","HCC","Hepatoma","Liver Cell Carcinoma",
+ "Intrahepatic Cholangiocarcinoma","ICC","Primary Liver Cancer","Malignant Neoplasm of Liver",
+ "Hepatic Sarcoma","Liver Sarcoma","Hepatic Angiosarcoma","Angiosarcoma of Liver",
+ "Hemangiosarcoma of Liver","Malignant Vascular Tumor of Liver","Endothelial Sarcoma of Liver",
+ "Bile Duct Cancer","Biliary Tract Cancer","Hepatic Malignancy"]
 
-category="Breast Cancer", description="Malignant neoplasm of central portion of female breast"
-→ ["Breast Cancer", "Mammary Carcinoma", "Breast Carcinoma", "IBC", "Ductal Carcinoma", "Lobular Carcinoma", "Triple-Negative Breast Cancer", "TNBC", "HER2-Positive Breast Cancer", "HER2+ BC", "Metastatic Breast Cancer", "mBC", "ER+ BC"]
+category="Lung Cancer", description="Malignant neoplasm of main bronchus"
+existing=["Lung Cancer","NSCLC"] → must return 18:
+["Pulmonary Cancer","Lung Carcinoma","Non-Small Cell Lung Cancer","Small Cell Lung Cancer","SCLC",
+ "Adenocarcinoma of Lung","Bronchogenic Carcinoma","Small-Cell Lung Cancer","Squamous Cell Lung Cancer",
+ "Large Cell Lung Carcinoma","Malignant Neoplasm of Main Bronchus","Bronchial Carcinoma",
+ "Pulmonary Carcinoma","Lung Malignancy","Malignant Neoplasm of Lung","Bronchoalveolar Carcinoma",
+ "Mesothelioma","Pleural Mesothelioma"]
 
-category="Lymphoma", description="Chronic lymphocytic leukemia/small lymphocytic lymphoma"
-→ ["CLL", "Chronic Lymphocytic Leukemia", "B-CLL", "Small Lymphocytic Lymphoma", "SLL", "CLL/SLL", "B-Cell Chronic Lymphocytic Leukemia", "Lymphoma"]
+category="Lymphoma", description="Mycosis fungoides of lymph nodes of multiple sites"
+existing=["Lymphoma","CTCL"] → must return 18:
+["T-Cell Lymphoma","T cell lymphoma","Cutaneous T-Cell Lymphoma","Mycosis Fungoides",
+ "C-TCL","NK Cell Lymphoma","T/NK-Cell Lymphoma","Mycosis Fungoides of Spleen",
+ "Spleen Mycosis Fungoides","Peripheral T-Cell Lymphoma","PTCL","Anaplastic Large Cell Lymphoma",
+ "ALCL","Cutaneous Lymphoma","Primary Cutaneous Lymphoma","Sezary Syndrome",
+ "Folliculotropic Mycosis Fungoides","Pagetoid Reticulosis"]
 
-category="Atherosclerosis", description="Atherosclerosis of native arteries of extremities with intermittent claudication"
-→ ["Atherosclerosis", "Peripheral Artery Disease", "PAD", "Peripheral Vascular Disease", "PVD", "ASCVD", "Atherosclerotic Cardiovascular Disease", "claudication"]
+━━━ OUTPUT FORMAT ━━━
+Return JSON only — no explanation, no markdown:
+{{"abbreviations": ["alias1","alias2",...]}}
+The array must contain EXACTLY {target_extra} unique new aliases."""
 
-category="Angina", description="Unstable angina"
-→ ["Angina", "Unstable Angina", "Chest Pain", "Crescendo Angina", "Pre-infarction Angina", "Coronary Artery Disease", "CAD", "Angina Pectoris"]
-
-
-━━━ SENTINEL RULE ━━━
-Return an empty array [] only when absolutely no clinically valid alias can be derived from the input. Never return ICD codes.
-
-Return JSON only in this exact form: {"abbreviations": ["..."]}."""
     response = client.chat.completions.create(
-        model=deployment, temperature=0, response_format={"type": "json_object"},
-        messages=[{"role": "system", "content": instructions}, {"role": "user", "content": json.dumps(payload)}],
+        model=deployment,
+        temperature=0.3,
+        response_format={"type": "json_object"},
+        messages=[
+            {"role": "system", "content": instructions.replace("{category}", payload.get("category","")).replace("{description_2}", payload.get("description_2",""))},
+            {"role": "user", "content": f"Generate exactly {target_extra} new aliases for: category=\"{payload.get('category','')}\" | description_2=\"{payload.get('description_2','')}\""},
+        ],
     )
     values = json.loads(response.choices[0].message.content or "{}").get("abbreviations", [])
     if not isinstance(values, list) or not all(isinstance(item, str) for item in values):
         raise ValueError("Azure OpenAI returned invalid abbreviations JSON")
-    return list(dict.fromkeys(item.strip() for item in values if item.strip()))
+
+    # Strip any that case-insensitively duplicate the existing list
+    existing_lower = {a.casefold() for a in existing}
+    deduped = list(dict.fromkeys(
+        item.strip() for item in values
+        if item.strip() and item.strip().casefold() not in existing_lower
+    ))
+    return deduped
 
 
 def run_llm(
     entities: list,
     output_path: Optional[Path] = None,
-    refresh_cache: bool = False,
+    article_category_records: Optional[list] = None,
+    article_description_records: Optional[list] = None,
+    min_total: int = 20,
 ) -> list:
     """Generate LLM-only abbreviations for *entities* and return the output list.
 
+    The LLM is told how many aliases already exist from the article (RAG) pipeline
+    for each entity and is asked to generate enough NEW aliases so that the combined
+    total reaches at least ``min_total``.
+
     Args:
-        entities:       List of canonical entity dicts (must have 'category' and
-                        'description_2' keys).
-        output_path:    Where to write the output JSON. Defaults to LLM_OUTPUT.
-        refresh_cache:  If True, ignore existing cache entries.
+        entities:                    Canonical entity dicts (must have 'category',
+                                     'description_2', 'category_description2').
+        output_path:                 Where to write the output JSON. Defaults to LLM_OUTPUT.
+        article_category_records:    Output of article_abbreviation category mode.
+                                     Used to count existing aliases per entity.
+        article_description_records: Output of article_abbreviation description mode.
+        min_total:                   Target minimum total aliases per entity (default 20).
 
     Returns:
         List of output dicts written to output_path.
     """
     output_path = output_path or LLM_OUTPUT
-    cache_path = CACHE / "llm_abbreviations_cache.json"
-    cache = {} if refresh_cache else load(cache_path)
 
-    def cache_key(field: str, value: str) -> str:
-        return fingerprint({"field": field, "value": value, "prompt_version": PROMPT_VERSION})
+    # Build per-entity lookup of already-known aliases from the article pipeline
+    # so we can tell the LLM what already exists and how many more are needed.
+    cat_by_id: dict[str, list[str]] = {
+        r["category_description2"]: r.get("abbreviations", [])
+        for r in (article_category_records or [])
+        if r.get("category_description2")
+    }
+    desc_by_id: dict[str, list[str]] = {
+        r["category_description2"]: r.get("abbreviations", [])
+        for r in (article_description_records or [])
+        if r.get("category_description2")
+    }
 
-    category_values = list(dict.fromkeys(
-        str(entity.get("category", "")).strip() for entity in entities if entity.get("category")
-    ))
-    description_values = list(dict.fromkeys(
-        str(entity.get("description_2", "")).strip() for entity in entities if entity.get("description_2")
-    ))
-    passes = (("category", category_values), ("description_2", description_values))
-    missing = [
-        (field, value)
-        for field, values in passes
-        for value in values
-        if cache_key(field, value) not in cache
-    ]
-    print(f"  [llm] category pass: {len(category_values):,} values; description pass: {len(description_values):,} values; {len(missing):,} to process")
+    print(f"  [llm] {len(entities):,} entities to process (min_total={min_total})")
 
+    results: dict[str, list[str]] = {}  # keyed by category_description2
     client = deployment = None
     try:
-        # The tuple order makes the category pass complete before descriptions.
-        for field, value in missing:
-            payload = {"field": field, "value": value}
-            key = cache_key(field, value)
+        for entity in entities:
+            eid        = entity["category_description2"]
+            category   = str(entity.get("category", "")).strip()
+            description = str(entity.get("description_2", "")).strip()
+
+            # Combine all aliases already produced by the article pipeline
+            existing: list[str] = []
+            seen_lower: set[str] = set()
+            for abbrev in cat_by_id.get(eid, []) + desc_by_id.get(eid, []):
+                a = abbrev.strip()
+                if a and a.casefold() != "404" and a.casefold() not in seen_lower:
+                    existing.append(a)
+                    seen_lower.add(a.casefold())
+
+            target_extra = max(0, min_total - len(existing))
+
+            payload = {"category": category, "description_2": description}
+
             if client is None:
                 client, deployment = create_client()
+
             for attempt in range(3):
                 try:
-                    cache[key] = {"abbreviations": generate(client, deployment, payload)}
-                    save(cache, cache_path)
+                    new_abbrevs = generate(client, deployment, payload, existing, target_extra)
+                    results[eid] = new_abbrevs
                     break
                 except Exception:
                     if attempt == 2:
                         raise
                     time.sleep(2 ** attempt)
+
+            # Hard count check: compute distinct total (existing + new, case-insensitive).
+            # If still below min_total, do one top-up call with the updated combined list.
+            combined_lower: set[str] = set()
+            combined_list: list[str] = []
+            for a in existing + results.get(eid, []):
+                key = a.casefold()
+                if key not in combined_lower:
+                    combined_lower.add(key)
+                    combined_list.append(a)
+
+            still_needed = min_total - len(combined_list)
+            if still_needed > 0:
+                print(f"  [llm] {eid!r}: {len(combined_list)} / {min_total} — top-up {still_needed} more")
+                for attempt in range(3):
+                    try:
+                        topup = generate(client, deployment, payload, combined_list, still_needed)
+                        results[eid] = results.get(eid, []) + topup
+                        break
+                    except Exception:
+                        if attempt == 2:
+                            raise
+                        time.sleep(2 ** attempt)
+
     finally:
         if client is not None:
             client.close()
 
     output = []
     for entity in entities:
-        category = str(entity["category"]).strip()
-        description = str(entity["description_2"]).strip()
-        values = cache[cache_key("category", category)]["abbreviations"] + cache[cache_key("description_2", description)]["abbreviations"]
+        eid = entity["category_description2"]
         output.append({
             **entity,
-            "payload_llm": {"category": category, "description_2": description},
-            "abbreviations": list(dict.fromkeys(value.strip() for value in values if value.strip())),
+            "payload_llm": {
+                "category": str(entity["category"]).strip(),
+                "description_2": str(entity["description_2"]).strip(),
+            },
+            "abbreviations": results.get(eid, []),
         })
 
     write_json(output, output_path)
@@ -156,10 +249,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate LLM-only abbreviations from canonical entities.")
     parser.add_argument("--input", default=str(CANONICAL_INPUT))
     parser.add_argument("--output", default=str(LLM_OUTPUT))
-    parser.add_argument("--refresh-cache", action="store_true")
     args = parser.parse_args()
     entities = read_json(Path(args.input))
-    run_llm(entities=entities, output_path=Path(args.output), refresh_cache=args.refresh_cache)
+    run_llm(entities=entities, output_path=Path(args.output))
 
 
 if __name__ == "__main__":

@@ -17,11 +17,8 @@ from openai import AzureOpenAI
 
 DEFAULT_INPUT = "data/ICD_raw_2025(in)-new.csv"
 DEFAULT_OUTPUT = "data/ICD_with_categories.csv"
-DEFAULT_CACHE = "data/icd_category_cache.json"
 DEFAULT_API_VERSION = "2025-01-01-preview"
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CACHE_PATH = PROJECT_ROOT / DEFAULT_CACHE
-LEGACY_CACHE_PATH = PROJECT_ROOT / "icd_category_cache_v2.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -40,31 +37,8 @@ def parse_args() -> argparse.Namespace:
         help="Azure GPT-4o mini deployment name. Overrides AZURE_OPENAI_DEPLOYMENT.",
     )
     parser.add_argument("--batch-size", type=int, default=70, help="Descriptions per API call.")
-    # Reuse the cache created before the data-directory restructuring when present.
-    default_cache = LEGACY_CACHE_PATH if not DEFAULT_CACHE_PATH.exists() and LEGACY_CACHE_PATH.exists() else DEFAULT_CACHE_PATH
-    parser.add_argument("--cache", default=str(default_cache), help="JSON cache path for resumable runs.")
     parser.add_argument("--limit", type=int, help="Only process this many distinct descriptions.")
-    parser.add_argument(
-        "--refresh-cache",
-        action="store_true",
-        help="Ignore prior cached labels and regenerate all categories with the LLM.",
-    )
     return parser.parse_args()
-
-def load_cache(path: Path) -> dict[str, str]:
-    if not path.exists():
-        return {}
-    with path.open(encoding="utf-8") as file:
-        raw_cache = json.load(file)
-    return {str(description): str(category) for description, category in raw_cache.items()}
-
-
-def save_cache(cache: dict[str, str], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary_path = path.with_suffix(path.suffix + ".tmp")
-    with temporary_path.open("w", encoding="utf-8") as file:
-        json.dump(cache, file, ensure_ascii=False, indent=2)
-    temporary_path.replace(path)
 
 def chunks(values: list[str], size: int) -> Iterable[list[str]]:
     for start in range(0, len(values), size):
@@ -173,7 +147,7 @@ def main() -> None:
     if args.batch_size < 1:
         raise SystemExit("--batch-size must be at least 1.")
 
-    input_path, output_path, cache_path = map(Path, (args.input, args.output, args.cache))
+    input_path, output_path = Path(args.input), Path(args.output)
     source = pd.read_csv(input_path, dtype=str, low_memory=False)
     if args.description_column not in source.columns:
         available = ", ".join(source.columns)
@@ -184,48 +158,46 @@ def main() -> None:
     if args.limit is not None:
         distinct = distinct[: args.limit]
 
-    cache = {} if args.refresh_cache else load_cache(cache_path)
-    pending = [description for description in distinct if description not in cache]
-    print(f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; {len(pending):,} to classify with Azure OpenAI.")
+    print(f"{len(descriptions):,} rows; {len(distinct):,} distinct descriptions; {len(distinct):,} to classify with Azure OpenAI.")
 
-    if pending:
-        endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-        api_key = os.getenv("AZURE_OPENAI_API_KEY")
-        deployment = args.deployment or os.getenv("AZURE_OPENAI_DEPLOYMENT") or os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
-        api_version = os.getenv("AZURE_OPENAI_API_VERSION", DEFAULT_API_VERSION)
-        missing = [
-            name
-            for name, value in {
-                "AZURE_OPENAI_ENDPOINT": endpoint,
-                "AZURE_OPENAI_API_KEY": api_key,
-                "AZURE_OPENAI_DEPLOYMENT": deployment,
-            }.items()
-            if not value
-        ]
-        if missing:
-            raise SystemExit(f"Missing .env values: {', '.join(missing)}")
+    results: dict[str, str] = {}
 
-        client = create_azure_client(endpoint, api_key, api_version)
-        try:
-            for batch_number, batch in enumerate(chunks(pending, args.batch_size), start=1):
-                for attempt in range(3):
-                    try:
-                        cache.update(categories_for_batch(client, deployment, batch))
-                        save_cache(cache, cache_path)
-                        completed = min(batch_number * args.batch_size, len(pending))
-                        print(f"Completed batch {batch_number} ({completed:,}/{len(pending):,}).")
-                        break
-                    except Exception as error:
-                        if attempt == 2:
-                            raise RuntimeError(f"Batch {batch_number} failed after 3 attempts.") from error
-                        wait_seconds = 2**attempt
-                        print(f"Batch {batch_number} failed ({error}); retrying in {wait_seconds}s.")
-                        time.sleep(wait_seconds)
-        finally:
-            client.close()
+    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    api_key = os.getenv("AZURE_OPENAI_API_KEY")
+    deployment = args.deployment or os.getenv("AZURE_OPENAI_DEPLOYMENT") or os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
+    api_version = os.getenv("AZURE_OPENAI_API_VERSION", DEFAULT_API_VERSION)
+    missing = [
+        name
+        for name, value in {
+            "AZURE_OPENAI_ENDPOINT": endpoint,
+            "AZURE_OPENAI_API_KEY": api_key,
+            "AZURE_OPENAI_DEPLOYMENT": deployment,
+        }.items()
+        if not value
+    ]
+    if missing:
+        raise SystemExit(f"Missing .env values: {', '.join(missing)}")
+
+    client = create_azure_client(endpoint, api_key, api_version)
+    try:
+        for batch_number, batch in enumerate(chunks(distinct, args.batch_size), start=1):
+            for attempt in range(3):
+                try:
+                    results.update(categories_for_batch(client, deployment, batch))
+                    completed = min(batch_number * args.batch_size, len(distinct))
+                    print(f"Completed batch {batch_number} ({completed:,}/{len(distinct):,}).")
+                    break
+                except Exception as error:
+                    if attempt == 2:
+                        raise RuntimeError(f"Batch {batch_number} failed after 3 attempts.") from error
+                    wait_seconds = 2**attempt
+                    print(f"Batch {batch_number} failed ({error}); retrying in {wait_seconds}s.")
+                    time.sleep(wait_seconds)
+    finally:
+        client.close()
 
     output = source.copy()
-    output["Category"] = descriptions.map(cache)
+    output["Category"] = descriptions.map(results)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output.to_csv(output_path, index=False, encoding="utf-8-sig")
     print(f"Wrote {len(output):,} rows to {output_path.resolve()}")

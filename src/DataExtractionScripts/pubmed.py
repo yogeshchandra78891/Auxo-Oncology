@@ -30,12 +30,16 @@ def fetch_top_pubmed_abstracts(
     for term in terms:
  
         limit = per_term_limit if len(terms) > 1 else max_results
+
+        # Fetch a larger candidate pool so we have fallback articles when
+        # some results have no abstract.  3x gives enough headroom in practice.
+        candidate_limit = limit * 3
  
         try:
             handle = Entrez.esearch(
                 db="pubmed",
                 term=term,
-                retmax=limit,
+                retmax=candidate_limit,
                 sort="relevance",
             )
  
@@ -53,11 +57,12 @@ def fetch_top_pubmed_abstracts(
         print(f"[warn] No PubMed articles found for: {terms}")
         return
  
-    # Preserve PubMed relevance order
-    ordered_ids = list(seen_ids.keys())[:max_results]
+    # Preserve PubMed relevance order — keep the full candidate pool so we
+    # can skip abstract-less articles and still reach max_results.
+    ordered_ids = list(seen_ids.keys())
  
     print(f"\nSearch: {terms}")
-    print(f"PMIDs found: {ordered_ids}")
+    print(f"PMIDs found (candidate pool): {ordered_ids}")
  
     # ------------------------------------------------------------
     # Fetch article information
@@ -80,38 +85,52 @@ def fetch_top_pubmed_abstracts(
  
     # ------------------------------------------------------------
     # Extract PMID + title + abstract
+    # Skip any article whose abstract is absent or empty and move
+    # on to the next candidate until max_results are collected.
     # ------------------------------------------------------------
- 
-    records = []
- 
+
+    # Build a pmid->article lookup to preserve relevance order
+    article_lookup: dict[str, dict] = {}
+
     for article in data["PubmedArticle"]:
- 
+
         medline = article["MedlineCitation"]
- 
+
         pmid = str(medline["PMID"])
- 
+
         article_data = medline["Article"]
- 
+
         title = str(article_data.get("ArticleTitle", ""))
- 
+
         abstract_parts = []
- 
+
         abstract = article_data.get("Abstract")
- 
+
         if abstract:
             for item in abstract.get("AbstractText", []):
                 abstract_parts.append(str(item))
- 
-        abstract_text = " ".join(abstract_parts)
- 
-        records.append(
-            {
-                "pmid": pmid,
-                "title": title,
-                "text": abstract_text,
-                "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
-            }
-        )
+
+        abstract_text = " ".join(abstract_parts).strip()
+
+        article_lookup[pmid] = {
+            "pmid": pmid,
+            "title": title,
+            "text": abstract_text,
+            "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+        }
+
+    records = []
+
+    for pmid in ordered_ids:
+        if len(records) >= max_results:
+            break
+        entry = article_lookup.get(pmid)
+        if entry is None:
+            continue
+        if not entry["text"]:
+            print(f"[skip] PMID {pmid} has no abstract — trying next candidate")
+            continue
+        records.append(entry)
  
     # ------------------------------------------------------------
     # Save JSON

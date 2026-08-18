@@ -10,13 +10,82 @@
       "Lip Cancer",
       "Lip Carcinoma",
       "Malignancy of Lip",
+      "Malignant Neoplasm of Lip",
       "Lower Lip Cancer",
       "Lower Lip Carcinoma",
       "Squamous Cell Carcinoma of Lip",
       "Basal Cell Carcinoma of Lip",
       "Keratoacanthoma of Lip",
-      "Actinic Keratosis of Lip",
-      "Malignant Neoplasm of Lip"
+      "Actinic Keratosis of Lip"
+    ]
+  },
+  {
+    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
+    "category": "Tongue Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
+    "payload_description": {
+      "description_2": "Malignant neoplasm of other and unspecified parts of tongue"
+    },
+    "abbreviations": [
+      "Tongue Cancer",
+      "Tongue Carcinoma",
+      "Malignant Neoplasm of Tongue",
+      "Malignancy of Tongue",
+      "Malignant Neoplasm of Other and Unspecified Parts of Tongue"
+    ]
+  },
+  {
+    "category_description2": "skin cancer|malignant melanoma of skin",
+    "category": "Skin Cancer",
+    "description_2": "Malignant melanoma of skin",
+    "payload_description": {
+      "description_2": "Malignant melanoma of skin"
+    },
+    "abbreviations": [
+      "Cutaneous Melanoma",
+      "Malignant Melanoma",
+      "Skin Melanoma",
+      "MM",
+      "Acral Melanoma",
+      "Malignant Neoplasm of Skin",
+      "Skin Cancer"
+    ]
+  },
+  {
+    "category_description2": "gum cancer|malignant neoplasm of gum",
+    "category": "Gum Cancer",
+    "description_2": "Malignant neoplasm of gum",
+    "payload_description": {
+      "description_2": "Malignant neoplasm of gum"
+    },
+    "abbreviations": [
+      "Gum Cancer",
+      "Gum Carcinoma",
+      "Malignancy of Gum",
+      "Oral Cancer",
+      "Mouth Cancer"
+    ]
+  },
+  {
+    "category_description2": "palate cancer|malignant neoplasm of palate",
+    "category": "Palate Cancer",
+    "description_2": "Malignant neoplasm of palate",
+    "payload_description": {
+      "description_2": "Malignant neoplasm of palate"
+    },
+    "abbreviations": [
+      "Palate Cancer",
+      "Palate Carcinoma",
+      "Malignancy of Palate",
+      "Malignant Neoplasm of Palate",
+      "Squamous Cell Carcinoma of Palate",
+      "Myoepithelial Carcinoma of Palate",
+      "Malignant Myoepithelioma of Palate",
+      "Mucoepidermoid Carcinoma of Palate",
+      "MEC",
+      "Malignant Neoplasm of Hard Palate",
+      "Hard Palate Cancer",
+      "Hard Palate Carcinoma"
     ]
   }
 ]
