@@ -53,13 +53,15 @@ def run_merge(
     """
     output_path = output_path or MASTER_OUTPUT
 
-    cat   = by_id(category_records    if category_records    is not None else read_json(CATEGORY_OUTPUT))
+    cat   = by_id(category_records   if category_records   is not None else read_json(CATEGORY_OUTPUT))
     desc  = by_id(description_records if description_records is not None else read_json(DESCRIPTION_OUTPUT))
     llm   = by_id(llm_records         if llm_records         is not None else read_json(LLM_OUTPUT))
 
-    ids = set(cat) | set(desc) | set(llm)
+    # Preserve natural insertion order across input sources (Category -> Description -> LLM)
+    ordered_ids = list(dict.fromkeys(list(cat.keys()) + list(desc.keys()) + list(llm.keys())))
+
     master = []
-    for key in sorted(ids):
+    for key in ordered_ids:
         records = [table.get(key) for table in (cat, desc, llm) if table.get(key)]
         if not records:
             continue
@@ -83,7 +85,6 @@ def run_merge(
     write_json(master, output_path)
     print(f"  [merge] Wrote {len(master):,} master records → {output_path.resolve()}")
     return master
-
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Merge source-specific abbreviation tables by category_description2.")
