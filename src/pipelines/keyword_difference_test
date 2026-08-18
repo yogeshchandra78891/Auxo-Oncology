@@ -116,9 +116,9 @@ if scenario not in ["1", "2"]:
 # ============================================================
 
 if scenario == "1":
-    OUTPUT_CSV = "difference_oncology_minus_master.csv"
+    OUTPUT_CSV = "data/difference_oncology_minus_master.csv"
 else:
-    OUTPUT_CSV = "difference_master_minus_oncology.csv"
+    OUTPUT_CSV = "data/difference_master_minus_oncology.csv"
 
 
 # ============================================================
