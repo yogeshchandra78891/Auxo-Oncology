@@ -1,4 +1,5 @@
 import argparse
+import csv
 import sys
 from pathlib import Path
 from typing import Optional
@@ -10,17 +11,22 @@ if str(PROJECT_ROOT) not in sys.path:
 from config.config import CATEGORY_OUTPUT, DESCRIPTION_OUTPUT, LLM_OUTPUT, MASTER_OUTPUT
 from utils.json_utils import read_json, write_json
 
-
 def by_id(records):
     return {record["category_description2"]: record for record in records}
 
-
 def final_abbreviations(*sources):
-    """Combine source lists in order, removing case-insensitive duplicates and 404."""
     combined = []
     seen = set()
     for source in sources:
-        for value in source:
+        if isinstance(source, dict):
+            items = []
+            for val_list in source.values():
+                if isinstance(val_list, list):
+                    items.extend(val_list)
+        else:
+            items = source or []
+
+        for value in items:
             abbreviation = str(value).strip()
             key = abbreviation.casefold()
             if not abbreviation or key == "404" or key in seen:
@@ -29,6 +35,43 @@ def final_abbreviations(*sources):
             combined.append(abbreviation)
     return combined if combined else ["404"]
 
+def write_master_csv(records: list, csv_path: Path):
+    with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "category_desc2",
+            "category",
+            "description2",
+            "pubmed abbreviations",
+            "clinical abbreviations",
+            "llm abbreviations",
+            "final abbreviations"
+        ])
+        for r in records:
+            cat_abbr = r.get("abbreviations_category", {})
+            desc_abbr = r.get("abbreviations_description", {})
+
+            pubmed_raw = cat_abbr.get("pubmed", []) + desc_abbr.get("pubmed", [])
+            pubmed_clean = list(dict.fromkeys(p for p in pubmed_raw if p and p.casefold() != "404"))
+
+            clinical_raw = cat_abbr.get("clinical_trials", []) + desc_abbr.get("clinical_trials", [])
+            clinical_clean = list(dict.fromkeys(c for c in clinical_raw if c and c.casefold() != "404"))
+
+            llm_raw = r.get("abbreviations_llm", [])
+            llm_clean = list(dict.fromkeys(x for x in llm_raw if x and x.casefold() != "404"))
+            
+            final_raw = r.get("final_abbreviations", [])
+            final_clean = list(dict.fromkeys(x for x in final_raw if x and x.casefold() != "404"))
+
+            writer.writerow([
+                r.get("category_description2", ""),
+                r.get("category", ""),
+                r.get("description_2", ""),
+                ", ".join(pubmed_clean),
+                ", ".join(clinical_clean),
+                ", ".join(llm_clean),
+                ", ".join(final_clean)
+            ])
 
 def run_merge(
     category_records: Optional[list] = None,
@@ -36,28 +79,12 @@ def run_merge(
     llm_records: Optional[list] = None,
     output_path: Optional[Path] = None,
 ) -> list:
-    """Merge category, description, and LLM abbreviation tables into a master output.
-
-    Each argument accepts either an in-memory list of records (passed directly
-    from the orchestrator) or None, in which case the corresponding default
-    file path from config is read from disk.
-
-    Args:
-        category_records:    Records from the article category mode. None = read CATEGORY_OUTPUT.
-        description_records: Records from the article description mode. None = read DESCRIPTION_OUTPUT.
-        llm_records:         Records from the LLM-only pipeline. None = read LLM_OUTPUT.
-        output_path:         Where to write the master JSON. Defaults to MASTER_OUTPUT.
-
-    Returns:
-        List of merged master records.
-    """
     output_path = output_path or MASTER_OUTPUT
 
     cat   = by_id(category_records   if category_records   is not None else read_json(CATEGORY_OUTPUT))
     desc  = by_id(description_records if description_records is not None else read_json(DESCRIPTION_OUTPUT))
-    llm   = by_id(llm_records         if llm_records         is not None else read_json(LLM_OUTPUT))
+    llm   = by_id(llm_records        if llm_records        is not None else read_json(LLM_OUTPUT))
 
-    # Preserve natural insertion order across input sources (Category -> Description -> LLM)
     ordered_ids = list(dict.fromkeys(list(cat.keys()) + list(desc.keys()) + list(llm.keys())))
 
     master = []
@@ -66,9 +93,11 @@ def run_merge(
         if not records:
             continue
         base = records[0]
-        cat_abbrevs  = cat.get(key,  {}).get("abbreviations", [])
-        desc_abbrevs = desc.get(key, {}).get("abbreviations", [])
+        
+        cat_abbrevs  = cat.get(key,  {}).get("abbreviations", {})
+        desc_abbrevs = desc.get(key, {}).get("abbreviations", {})
         llm_abbrevs  = llm.get(key,  {}).get("abbreviations", [])
+        
         master.append({
             "category_description2": key,
             "category":              base["category"],
@@ -83,23 +112,28 @@ def run_merge(
         })
 
     write_json(master, output_path)
-    print(f"  [merge] Wrote {len(master):,} master records → {output_path.resolve()}")
+    print(f"  [merge] Wrote {len(master):,} master records JSON → {output_path.resolve()}")
+    
+    csv_path = output_path.with_suffix('.csv')
+    write_master_csv(master, csv_path)
+    print(f"  [merge] Wrote {len(master):,} master records CSV → {csv_path.resolve()}")
+    
     return master
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Merge source-specific abbreviation tables by category_description2.")
+    parser = argparse.ArgumentParser()
     parser.add_argument("--category",    default=str(CATEGORY_OUTPUT))
     parser.add_argument("--description", default=str(DESCRIPTION_OUTPUT))
     parser.add_argument("--llm",         default=str(LLM_OUTPUT))
     parser.add_argument("--output",      default=str(MASTER_OUTPUT))
     args = parser.parse_args()
+    
     run_merge(
         category_records=read_json(Path(args.category)),
         description_records=read_json(Path(args.description)),
         llm_records=read_json(Path(args.llm)),
         output_path=Path(args.output),
     )
-
 
 if __name__ == "__main__":
     main()

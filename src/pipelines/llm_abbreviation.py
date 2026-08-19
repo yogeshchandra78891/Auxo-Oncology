@@ -21,15 +21,6 @@ def generate(
     existing: list[str],
     target_extra: int,
 ) -> list[str]:
-    """Call the LLM to generate aliases for one entity.
-
-    Args:
-        payload:      {"category": ..., "description_2": ...} for the entity.
-        existing:     Aliases already produced (category + description article
-                      pipeline). LLM must not repeat any of these.
-        target_extra: Exact number of NEW aliases required so that
-                      len(existing) + len(new) >= 20.
-    """
     existing_count = len(existing)
     existing_block = (
         "\n".join(f"  {i+1}. {a}" for i, a in enumerate(existing))
@@ -116,7 +107,6 @@ The array must contain EXACTLY {target_extra} unique new aliases."""
     if not isinstance(values, list) or not all(isinstance(item, str) for item in values):
         raise ValueError("Azure OpenAI returned invalid abbreviations JSON")
 
-    # Strip any that case-insensitively duplicate the existing list
     existing_lower = {a.casefold() for a in existing}
     deduped = list(dict.fromkeys(
         item.strip() for item in values
@@ -132,42 +122,22 @@ def run_llm(
     article_description_records: Optional[list] = None,
     min_total: int = 20,
 ) -> list:
-    """Generate LLM-only abbreviations for *entities* and return the output list.
-
-    The LLM is told how many aliases already exist from the article (RAG) pipeline
-    for each entity and is asked to generate enough NEW aliases so that the combined
-    total reaches at least ``min_total``.
-
-    Args:
-        entities:                    Canonical entity dicts (must have 'category',
-                                     'description_2', 'category_description2').
-        output_path:                 Where to write the output JSON. Defaults to LLM_OUTPUT.
-        article_category_records:    Output of article_abbreviation category mode.
-                                     Used to count existing aliases per entity.
-        article_description_records: Output of article_abbreviation description mode.
-        min_total:                   Target minimum total aliases per entity (default 20).
-
-    Returns:
-        List of output dicts written to output_path.
-    """
     output_path = output_path or LLM_OUTPUT
 
-    # Build per-entity lookup of already-known aliases from the article pipeline
-    # so we can tell the LLM what already exists and how many more are needed.
-    cat_by_id: dict[str, list[str]] = {
-        r["category_description2"]: r.get("abbreviations", [])
+    cat_by_id = {
+        r["category_description2"]: r.get("abbreviations", {})
         for r in (article_category_records or [])
         if r.get("category_description2")
     }
-    desc_by_id: dict[str, list[str]] = {
-        r["category_description2"]: r.get("abbreviations", [])
+    desc_by_id = {
+        r["category_description2"]: r.get("abbreviations", {})
         for r in (article_description_records or [])
         if r.get("category_description2")
     }
 
     print(f"  [llm] {len(entities):,} entities to process (min_total={min_total})")
 
-    results: dict[str, list[str]] = {}  # keyed by category_description2
+    results = {}
     client = deployment = None
     try:
         for entity in entities:
@@ -175,10 +145,16 @@ def run_llm(
             category   = str(entity.get("category", "")).strip()
             description = str(entity.get("description_2", "")).strip()
 
-            # Combine all aliases already produced by the article pipeline
             existing: list[str] = []
             seen_lower: set[str] = set()
-            for abbrev in cat_by_id.get(eid, []) + desc_by_id.get(eid, []):
+
+            c_data = cat_by_id.get(eid, {})
+            d_data = desc_by_id.get(eid, {})
+            
+            c_list = c_data.get("pubmed", []) + c_data.get("clinical_trials", []) if isinstance(c_data, dict) else (c_data if isinstance(c_data, list) else [])
+            d_list = d_data.get("pubmed", []) + d_data.get("clinical_trials", []) if isinstance(d_data, dict) else (d_data if isinstance(d_data, list) else [])
+
+            for abbrev in c_list + d_list:
                 a = abbrev.strip()
                 if a and a.casefold() != "404" and a.casefold() not in seen_lower:
                     existing.append(a)
@@ -201,10 +177,8 @@ def run_llm(
                         raise
                     time.sleep(2 ** attempt)
 
-            # Hard count check: compute distinct total (existing + new, case-insensitive).
-            # If still below min_total, do one top-up call with the updated combined list.
-            combined_lower: set[str] = set()
-            combined_list: list[str] = []
+            combined_lower = set()
+            combined_list = []
             for a in existing + results.get(eid, []):
                 key = a.casefold()
                 if key not in combined_lower:
@@ -246,7 +220,7 @@ def run_llm(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate LLM-only abbreviations from canonical entities.")
+    parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=str(CANONICAL_INPUT))
     parser.add_argument("--output", default=str(LLM_OUTPUT))
     args = parser.parse_args()

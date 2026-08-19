@@ -1,329 +1,82 @@
 [
   {
-    "category_description2": "lip cancer|malignant neoplasm of lip",
-    "category": "Lip Cancer",
-    "description_2": "Malignant neoplasm of lip",
-    "payload_category": {
-      "category": "Lip Cancer"
-    },
-    "abbreviations_category": [
-      "Lip Cancer",
-      "Lip Carcinoma",
-      "Lip Malignancy",
-      "Lip Squamous Cell Carcinoma",
-      "Lip SCC",
-      "Malignant Neoplasm of Lip",
-      "Oral Cancer",
-      "Actinic Cheilitis"
-    ],
-    "payload_description": {
-      "description_2": "Malignant neoplasm of lip"
-    },
-    "abbreviations_description": [
-      "Lip Cancer",
-      "Lip Carcinoma",
-      "Malignant Neoplasm of Lip",
-      "Lower Lip Cancer",
-      "Lower Lip Carcinoma",
-      "Squamous Cell Carcinoma of Lip",
-      "Basal Cell Carcinoma of Lip",
-      "Keratoacanthoma of Lip",
-      "Actinic Keratosis of Lip",
-      "Malignant Tumors of Lip"
-    ],
-    "payload_llm": {
-      "category": "Lip Cancer",
-      "description_2": "Malignant neoplasm of lip"
-    },
-    "abbreviations_llm": [
-      "Cheilocarcinoma",
-      "Malignant Lip Tumor",
-      "Upper Lip Cancer",
-      "Lip Malignant Neoplasm",
-      "Lip Neoplasm"
-    ],
-    "final_abbreviations": [
-      "Lip Cancer",
-      "Lip Carcinoma",
-      "Lip Malignancy",
-      "Lip Squamous Cell Carcinoma",
-      "Lip SCC",
-      "Malignant Neoplasm of Lip",
-      "Oral Cancer",
-      "Actinic Cheilitis",
-      "Lower Lip Cancer",
-      "Lower Lip Carcinoma",
-      "Squamous Cell Carcinoma of Lip",
-      "Basal Cell Carcinoma of Lip",
-      "Keratoacanthoma of Lip",
-      "Actinic Keratosis of Lip",
-      "Malignant Tumors of Lip",
-      "Cheilocarcinoma",
-      "Malignant Lip Tumor",
-      "Upper Lip Cancer",
-      "Lip Malignant Neoplasm",
-      "Lip Neoplasm"
-    ]
-  },
-  {
-    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
-    "category": "Tongue Cancer",
-    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
-    "payload_category": {
-      "category": "Tongue Cancer"
-    },
-    "abbreviations_category": [
-      "Tongue Cancer",
-      "Tongue Carcinoma",
-      "Malignancy of Tongue",
-      "Glossal Cancer",
-      "Lingual Cancer"
-    ],
-    "payload_description": {
-      "description_2": "Malignant neoplasm of other and unspecified parts of tongue"
-    },
-    "abbreviations_description": [
-      "Tongue Cancer",
-      "Tongue Carcinoma",
-      "Malignant Neoplasm of Tongue",
-      "Malignancy of Tongue",
-      "Malignant Neoplasm of Other and Unspecified Parts of Tongue"
-    ],
-    "payload_llm": {
-      "category": "Tongue Cancer",
-      "description_2": "Malignant neoplasm of other and unspecified parts of tongue"
-    },
-    "abbreviations_llm": [
-      "Oral Tongue Cancer",
-      "Carcinoma of Tongue",
-      "Squamous Cell Carcinoma of Tongue",
-      "Tongue Malignancy",
-      "Malignant Tumor of Tongue",
-      "Neoplasm of Tongue",
-      "Cancer of Lingual Tissue",
-      "Malignant Lesion of Tongue",
-      "Non-Specified Tongue Cancer",
-      "Tongue Neoplasm",
-      "Cancer of Other Parts of Tongue",
-      "Malignant Growth of Tongue",
-      "Unspecified Tongue Malignancy"
-    ],
-    "final_abbreviations": [
-      "Tongue Cancer",
-      "Tongue Carcinoma",
-      "Malignancy of Tongue",
-      "Glossal Cancer",
-      "Lingual Cancer",
-      "Malignant Neoplasm of Tongue",
-      "Malignant Neoplasm of Other and Unspecified Parts of Tongue",
-      "Oral Tongue Cancer",
-      "Carcinoma of Tongue",
-      "Squamous Cell Carcinoma of Tongue",
-      "Tongue Malignancy",
-      "Malignant Tumor of Tongue",
-      "Neoplasm of Tongue",
-      "Cancer of Lingual Tissue",
-      "Malignant Lesion of Tongue",
-      "Non-Specified Tongue Cancer",
-      "Tongue Neoplasm",
-      "Cancer of Other Parts of Tongue",
-      "Malignant Growth of Tongue",
-      "Unspecified Tongue Malignancy"
-    ]
-  },
-  {
-    "category_description2": "skin cancer|malignant melanoma of skin",
-    "category": "Skin Cancer",
-    "description_2": "Malignant melanoma of skin",
-    "payload_category": {
-      "category": "Skin Cancer"
-    },
-    "abbreviations_category": [
-      "Skin Cancer",
-      "Melanoma",
-      "Nonmelanoma Skin Cancer",
-      "Basal Cell Carcinoma",
-      "Squamous Cell Carcinoma",
-      "Keratinocyte Carcinoma",
-      "Cutaneous Melanoma",
-      "BCC",
-      "SCC"
-    ],
-    "payload_description": {
-      "description_2": "Malignant melanoma of skin"
-    },
-    "abbreviations_description": [
-      "Cutaneous Melanoma",
-      "Malignant Melanoma",
-      "Skin Melanoma",
-      "MM",
-      "Acral Melanoma",
-      "Malignant Neoplasm of Skin",
-      "Skin Cancer"
-    ],
-    "payload_llm": {
-      "category": "Skin Cancer",
-      "description_2": "Malignant melanoma of skin"
-    },
-    "abbreviations_llm": [
-      "Cutaneous Malignancy",
-      "Malignant Melanoma of Skin",
-      "Skin Malignancy",
-      "Superficial Melanoma",
-      "Primary Melanoma of Skin",
-      "Dermal Melanoma"
-    ],
-    "final_abbreviations": [
-      "Skin Cancer",
-      "Melanoma",
-      "Nonmelanoma Skin Cancer",
-      "Basal Cell Carcinoma",
-      "Squamous Cell Carcinoma",
-      "Keratinocyte Carcinoma",
-      "Cutaneous Melanoma",
-      "BCC",
-      "SCC",
-      "Malignant Melanoma",
-      "Skin Melanoma",
-      "MM",
-      "Acral Melanoma",
-      "Malignant Neoplasm of Skin",
-      "Cutaneous Malignancy",
-      "Malignant Melanoma of Skin",
-      "Skin Malignancy",
-      "Superficial Melanoma",
-      "Primary Melanoma of Skin",
-      "Dermal Melanoma"
-    ]
-  },
-  {
     "category_description2": "gum cancer|malignant neoplasm of gum",
     "category": "Gum Cancer",
     "description_2": "Malignant neoplasm of gum",
     "payload_category": {
       "category": "Gum Cancer"
     },
-    "abbreviations_category": [
-      "Gum Cancer",
-      "Gum Malignancy",
-      "Gum Carcinoma",
-      "Gum Neoplasm"
-    ],
+    "abbreviations_category": {
+      "pubmed": [
+        "Gum Cancer",
+        "Gum Malignancy",
+        "Malignant Neoplasm of Gum",
+        "Gingival Cancer",
+        "Gingival Carcinoma"
+      ],
+      "clinical_trials": [
+        "Gum Cancer",
+        "Oral Cancer",
+        "Malignancy of Gum",
+        "Gum Malignancy",
+        "Gum Disease"
+      ]
+    },
     "payload_description": {
       "description_2": "Malignant neoplasm of gum"
     },
-    "abbreviations_description": [
-      "Gum Cancer",
-      "Gum Carcinoma",
-      "Malignancy of Gum",
-      "Oral Cancer",
-      "Mouth Cancer"
-    ],
+    "abbreviations_description": {
+      "pubmed": [
+        "Gum Cancer",
+        "Gum Carcinoma",
+        "Malignancy of Gum",
+        "Oral Cancer",
+        "Mouth Cancer"
+      ],
+      "clinical_trials": [
+        "Gum Cancer",
+        "Gum Carcinoma",
+        "Malignancy of Gum",
+        "Oral Cancer",
+        "Oral Malignancy"
+      ]
+    },
     "payload_llm": {
       "category": "Gum Cancer",
       "description_2": "Malignant neoplasm of gum"
     },
     "abbreviations_llm": [
-      "Gingival Cancer",
-      "Gingival Carcinoma",
-      "Malignancy of Gingiva",
-      "Gum Sarcoma",
       "Gingival Malignancy",
-      "Gum Squamous Cell Carcinoma",
-      "Gum Cell Carcinoma",
-      "Malignant Tumor of Gum",
       "Gingival Neoplasm",
-      "Gum Tissue Cancer",
-      "Gingival Tumor",
-      "Malignant Growth of Gum",
-      "Gum Adenocarcinoma"
+      "Neoplasm of Gum",
+      "Malignant Gum Tumor",
+      "Gum Neoplasm",
+      "Gum Squamous Cell Carcinoma",
+      "Gingival Sarcoma",
+      "Malignant Tumor of Gingiva",
+      "Gingival Lesion"
     ],
     "final_abbreviations": [
       "Gum Cancer",
       "Gum Malignancy",
-      "Gum Carcinoma",
-      "Gum Neoplasm",
-      "Malignancy of Gum",
-      "Oral Cancer",
-      "Mouth Cancer",
+      "Malignant Neoplasm of Gum",
       "Gingival Cancer",
       "Gingival Carcinoma",
-      "Malignancy of Gingiva",
-      "Gum Sarcoma",
+      "Oral Cancer",
+      "Malignancy of Gum",
+      "Gum Disease",
+      "Gum Carcinoma",
+      "Mouth Cancer",
+      "Oral Malignancy",
       "Gingival Malignancy",
-      "Gum Squamous Cell Carcinoma",
-      "Gum Cell Carcinoma",
-      "Malignant Tumor of Gum",
       "Gingival Neoplasm",
-      "Gum Tissue Cancer",
-      "Gingival Tumor",
-      "Malignant Growth of Gum",
-      "Gum Adenocarcinoma"
-    ]
-  },
-  {
-    "category_description2": "palate cancer|malignant neoplasm of palate",
-    "category": "Palate Cancer",
-    "description_2": "Malignant neoplasm of palate",
-    "payload_category": {
-      "category": "Palate Cancer"
-    },
-    "abbreviations_category": [
-      "Palate Cancer",
-      "Hard Palate Cancer",
-      "Soft Palate Cancer",
-      "Squamous Cell Carcinoma of the Soft Palate",
-      "SCCSP",
-      "Malignant Neoplasm of the Palate",
-      "Palatal Malignancy"
-    ],
-    "payload_description": {
-      "description_2": "Malignant neoplasm of palate"
-    },
-    "abbreviations_description": [
-      "Palate Cancer",
-      "Palate Carcinoma",
-      "Malignancy of Palate",
-      "Malignant Neoplasm of Palate",
-      "Squamous Cell Carcinoma of Palate",
-      "Myoepithelial Carcinoma of Palate",
-      "Malignant Myoepithelioma of Palate",
-      "Mucoepidermoid Carcinoma of Palate",
-      "MEC",
-      "Malignant Neoplasm of Hard Palate",
-      "Hard Palate Cancer",
-      "Hard Palate Carcinoma"
-    ],
-    "payload_llm": {
-      "category": "Palate Cancer",
-      "description_2": "Malignant neoplasm of palate"
-    },
-    "abbreviations_llm": [
-      "Palatal Carcinoma",
-      "Palate Malignancy",
-      "Malignant Tumor of Palate"
-    ],
-    "final_abbreviations": [
-      "Palate Cancer",
-      "Hard Palate Cancer",
-      "Soft Palate Cancer",
-      "Squamous Cell Carcinoma of the Soft Palate",
-      "SCCSP",
-      "Malignant Neoplasm of the Palate",
-      "Palatal Malignancy",
-      "Palate Carcinoma",
-      "Malignancy of Palate",
-      "Malignant Neoplasm of Palate",
-      "Squamous Cell Carcinoma of Palate",
-      "Myoepithelial Carcinoma of Palate",
-      "Malignant Myoepithelioma of Palate",
-      "Mucoepidermoid Carcinoma of Palate",
-      "MEC",
-      "Malignant Neoplasm of Hard Palate",
-      "Hard Palate Carcinoma",
-      "Palatal Carcinoma",
-      "Palate Malignancy",
-      "Malignant Tumor of Palate"
+      "Neoplasm of Gum",
+      "Malignant Gum Tumor",
+      "Gum Neoplasm",
+      "Gum Squamous Cell Carcinoma",
+      "Gingival Sarcoma",
+      "Malignant Tumor of Gingiva",
+      "Gingival Lesion"
     ]
   }
 ]

@@ -1,85 +1,26 @@
 [
   {
-    "category_description2": "lip cancer|malignant neoplasm of lip",
-    "category": "Lip Cancer",
-    "description_2": "Malignant neoplasm of lip",
-    "payload_category": {
-      "category": "Lip Cancer"
-    },
-    "abbreviations": [
-      "Lip Cancer",
-      "Lip Carcinoma",
-      "Lip Malignancy",
-      "Lip Squamous Cell Carcinoma",
-      "Lip SCC",
-      "Malignant Neoplasm of Lip",
-      "Oral Cancer",
-      "Actinic Cheilitis"
-    ]
-  },
-  {
-    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
-    "category": "Tongue Cancer",
-    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
-    "payload_category": {
-      "category": "Tongue Cancer"
-    },
-    "abbreviations": [
-      "Tongue Cancer",
-      "Tongue Carcinoma",
-      "Malignancy of Tongue",
-      "Glossal Cancer",
-      "Lingual Cancer"
-    ]
-  },
-  {
-    "category_description2": "skin cancer|malignant melanoma of skin",
-    "category": "Skin Cancer",
-    "description_2": "Malignant melanoma of skin",
-    "payload_category": {
-      "category": "Skin Cancer"
-    },
-    "abbreviations": [
-      "Skin Cancer",
-      "Melanoma",
-      "Nonmelanoma Skin Cancer",
-      "Basal Cell Carcinoma",
-      "Squamous Cell Carcinoma",
-      "Keratinocyte Carcinoma",
-      "Cutaneous Melanoma",
-      "BCC",
-      "SCC"
-    ]
-  },
-  {
     "category_description2": "gum cancer|malignant neoplasm of gum",
     "category": "Gum Cancer",
     "description_2": "Malignant neoplasm of gum",
     "payload_category": {
       "category": "Gum Cancer"
     },
-    "abbreviations": [
-      "Gum Cancer",
-      "Gum Malignancy",
-      "Gum Carcinoma",
-      "Gum Neoplasm"
-    ]
-  },
-  {
-    "category_description2": "palate cancer|malignant neoplasm of palate",
-    "category": "Palate Cancer",
-    "description_2": "Malignant neoplasm of palate",
-    "payload_category": {
-      "category": "Palate Cancer"
-    },
-    "abbreviations": [
-      "Palate Cancer",
-      "Hard Palate Cancer",
-      "Soft Palate Cancer",
-      "Squamous Cell Carcinoma of the Soft Palate",
-      "SCCSP",
-      "Malignant Neoplasm of the Palate",
-      "Palatal Malignancy"
-    ]
+    "abbreviations": {
+      "pubmed": [
+        "Gum Cancer",
+        "Gum Malignancy",
+        "Malignant Neoplasm of Gum",
+        "Gingival Cancer",
+        "Gingival Carcinoma"
+      ],
+      "clinical_trials": [
+        "Gum Cancer",
+        "Oral Cancer",
+        "Malignancy of Gum",
+        "Gum Malignancy",
+        "Gum Disease"
+      ]
+    }
   }
 ]

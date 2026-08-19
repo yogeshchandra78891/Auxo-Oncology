@@ -1,10 +1,10 @@
 from __future__ import annotations
 import argparse
 import json
+from pathlib import Path
 import re
 import sys
 import time
-from pathlib import Path
 from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -14,10 +14,10 @@ if str(PROJECT_ROOT) not in sys.path:
 from config.config import CANONICAL_INPUT, CATEGORY_OUTPUT, CLINICAL_TRIALS, DESCRIPTION_OUTPUT, PUBMED
 from utils.azure_client import create_client
 from utils.json_utils import read_json, write_json
+
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
 TEXT_FIELDS = ("title", "summary", "condition", "interventions", "abstract")
-# These words describe a broad diagnosis but do not identify a disease or site.
-# They must never be enough to make a PubMed/trial record eligible as evidence.
+
 GENERIC_ENTITY_TOKENS = frozenset({
     "and", "are", "cancer", "disease", "disorder", "ill", "malignant",
     "neoplasm", "of", "organ", "organs", "other", "specified", "system",
@@ -30,43 +30,45 @@ def tokens(value: str) -> set[str]:
 
 
 def entity_tokens(value: str) -> set[str]:
-    """Return disease/site tokens that can prove a KB record is entity-specific."""
     return tokens(value) - GENERIC_ENTITY_TOKENS
 
 
 def load_knowledge_base() -> list[dict[str, str]]:
-    """Load the two approved evidence sources from the data directory."""
     records: list[dict[str, str]] = []
     if PUBMED.exists():
         for entry in read_json(PUBMED):
             if not isinstance(entry, dict):
                 continue
-            title    = entry.get("title", "").strip()
-            abstract = entry.get("text",  "").strip()
-            # Combine title + abstract so entity-token matching in
-            # relevant_context() works even when a disease-site token
-            # appears only in the title and not in the abstract body.
+            title = entry.get("title", "").strip()
+            abstract = entry.get("text", "").strip()
             combined = f"{title} {abstract}".strip()
             if combined:
                 records.append({"source": "PubMed", "text": combined})
-    for trial in read_json(CLINICAL_TRIALS):
-        if not isinstance(trial, dict):
-            continue
-        text = "\n".join(
-            f"{field}: {trial[field]}" for field in TEXT_FIELDS if trial.get(field)
-        )
-        if text:
-            records.append({"source": "ClinicalTrials.gov", "text": text})
+    if CLINICAL_TRIALS.exists():
+        for trial in read_json(CLINICAL_TRIALS):
+            if not isinstance(trial, dict):
+                continue
+            text = "\n".join(
+                f"{field}: {trial[field]}" for field in TEXT_FIELDS if trial.get(field)
+            )
+            if text:
+                records.append({"source": "ClinicalTrials.gov", "text": text})
     return records
 
 
-def relevant_context(query: str, knowledge_base: list[dict[str, str]], limit: int) -> str:
-    """Return evidence only when it mentions a disease/site-specific query token."""
+def relevant_context(
+    query: str, 
+    knowledge_base: list[dict[str, str]], 
+    limit: int, 
+    source: Optional[str] = None
+) -> str:
     specific_tokens = entity_tokens(query)
     if not specific_tokens:
         return ""
     matches = []
     for record in knowledge_base:
+        if source and record.get("source") != source:
+            continue
         score = len(specific_tokens & tokens(record["text"]))
         if score:
             matches.append((score, record))
@@ -148,26 +150,12 @@ def run_abbreviations(
     top_k: int = 5,
     knowledge_base: Optional[list] = None,
 ) -> list[dict]:
-    """
-    Core abbreviation logic — callable in-process by the orchestrator.
-
-    Args:
-        entities:       List of canonical entity dicts (category, description_2, category_description2).
-        mode:           "category" or "description".
-        output_path:    Where to write the output JSON.
-        top_k:          Max KB records to include as evidence per query.
-        knowledge_base: Pre-loaded KB records. If None, loads from PUBMED/CLINICAL_TRIALS files.
-
-    Returns:
-        List of output dicts written to output_path.
-    """
     if mode not in ("category", "description"):
         raise ValueError(f"mode must be 'category' or 'description', got {mode!r}")
 
     field = "category" if mode == "category" else "description_2"
     payload_field = "payload_category" if mode == "category" else "payload_description"
 
-    # Accept a pre-loaded KB (from orchestrator) or load from disk
     kb = knowledge_base if knowledge_base is not None else load_knowledge_base()
 
     unique_queries = list(dict.fromkeys(
@@ -175,24 +163,28 @@ def run_abbreviations(
     ))
     print(f"  [{mode}] {len(entities):,} entities | {len(unique_queries):,} unique queries")
 
-    results: dict[str, list[str]] = {}
+    sources = [("pubmed", "PubMed"), ("clinical_trials", "ClinicalTrials.gov")]
+    results: dict[str, dict[str, list[str]]] = {}
     client = deployment = None
+
     try:
         for query in unique_queries:
-            context = relevant_context(query, kb, top_k)
-            if not context:
-                results[query] = ["404"]
-                continue
-            if client is None:
-                client, deployment = create_client()
-            for attempt in range(3):
-                try:
-                    results[query] = abbreviations_from_entity(client, deployment, field, query, context)
-                    break
-                except Exception:
-                    if attempt == 2:
-                        raise
-                    time.sleep(2 ** attempt)
+            results[query] = {}
+            for source_key, source_name in sources:
+                context = relevant_context(query, kb, top_k, source=source_name)
+                if not context:
+                    results[query][source_key] = ["404"]
+                    continue
+                if client is None:
+                    client, deployment = create_client()
+                for attempt in range(3):
+                    try:
+                        results[query][source_key] = abbreviations_from_entity(client, deployment, field, query, context)
+                        break
+                    except Exception:
+                        if attempt == 2:
+                            raise
+                        time.sleep(2 ** attempt)
     finally:
         if client is not None:
             client.close()
@@ -205,7 +197,7 @@ def run_abbreviations(
             "category": entity["category"],
             "description_2": entity["description_2"],
             payload_field: {field: query},
-            "abbreviations": results.get(query, []),
+            "abbreviations": results.get(query, {"pubmed": ["404"], "clinical_trials": ["404"]}),
         })
     write_json(output, output_path)
     print(f"  [{mode}] Wrote {len(output):,} records → {output_path.resolve()}")
@@ -228,7 +220,7 @@ def main() -> None:
         mode=args.mode,
         output_path=output_path,
         top_k=args.top_k,
-        knowledge_base=None,  # load from disk when run as CLI
+        knowledge_base=None,
     )
 
 
