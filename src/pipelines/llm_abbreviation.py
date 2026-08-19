@@ -63,10 +63,12 @@ Draw from ALL of the following categories until you have {target_extra} entries:
 ✗ Do NOT include duplicates within your own output (case-insensitive)
 ✗ Do NOT return fewer than {target_extra} entries — this is a hard requirement
 
-━━━ REFERENCE EXAMPLES (depth and variety expected) ━━━
+━━━ REFERENCE EXAMPLES (relevance and variety expected) ━━━
 
 category="Liver Cancer", description="Malignant neoplasm of liver and intrahepatic bile ducts"
-existing=[] → must return 20:
+
+existing=[] → should generate around 8 highly relevant new aliases:
+
 ["Liver Cancer","Liver Carcinoma","Hepatocellular Carcinoma","HCC","Hepatoma","Liver Cell Carcinoma",
  "Intrahepatic Cholangiocarcinoma","ICC","Primary Liver Cancer","Malignant Neoplasm of Liver",
  "Hepatic Sarcoma","Liver Sarcoma","Hepatic Angiosarcoma","Angiosarcoma of Liver",
@@ -74,7 +76,9 @@ existing=[] → must return 20:
  "Bile Duct Cancer","Biliary Tract Cancer","Hepatic Malignancy"]
 
 category="Lung Cancer", description="Malignant neoplasm of main bronchus"
-existing=["Lung Cancer","NSCLC"] → must return 18:
+
+existing=["Lung Cancer","NSCLC"] → should generate around 8 highly relevant new aliases:
+
 ["Pulmonary Cancer","Lung Carcinoma","Non-Small Cell Lung Cancer","Small Cell Lung Cancer","SCLC",
  "Adenocarcinoma of Lung","Bronchogenic Carcinoma","Small-Cell Lung Cancer","Squamous Cell Lung Cancer",
  "Large Cell Lung Carcinoma","Malignant Neoplasm of Main Bronchus","Bronchial Carcinoma",
@@ -82,12 +86,18 @@ existing=["Lung Cancer","NSCLC"] → must return 18:
  "Mesothelioma","Pleural Mesothelioma"]
 
 category="Lymphoma", description="Mycosis fungoides of lymph nodes of multiple sites"
-existing=["Lymphoma","CTCL"] → must return 18:
+
+existing=["Lymphoma","CTCL"] → should generate around 8 highly relevant new aliases:
+
 ["T-Cell Lymphoma","T cell lymphoma","Cutaneous T-Cell Lymphoma","Mycosis Fungoides",
  "C-TCL","NK Cell Lymphoma","T/NK-Cell Lymphoma","Mycosis Fungoides of Spleen",
  "Spleen Mycosis Fungoides","Peripheral T-Cell Lymphoma","PTCL","Anaplastic Large Cell Lymphoma",
  "ALCL","Cutaneous Lymphoma","Primary Cutaneous Lymphoma","Sezary Syndrome",
  "Folliculotropic Mycosis Fungoides","Pagetoid Reticulosis"]
+
+The examples demonstrate that the model should prioritize RELEVANCY and CLINICAL ACCURACY over generating a large number of aliases.
+
+The target is approximately 8 high-quality, distinct aliases, but the model should NOT generate irrelevant or weak aliases merely to reach the target.
 
 ━━━ OUTPUT FORMAT ━━━
 Return JSON only — no explanation, no markdown:
@@ -120,7 +130,7 @@ def run_llm(
     output_path: Optional[Path] = None,
     article_category_records: Optional[list] = None,
     article_description_records: Optional[list] = None,
-    min_total: int = 20,
+    min_total: int = 10,
 ) -> list:
     output_path = output_path or LLM_OUTPUT
 

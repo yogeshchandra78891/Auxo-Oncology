@@ -8,23 +8,15 @@
       "description_2": "Malignant neoplasm of lip"
     },
     "abbreviations": [
-      "Upper Lip Cancer",
-      "Upper Lip Carcinoma",
       "Lip Malignant Neoplasm",
       "Lip Tumor",
       "Lip Neoplasm",
       "Malignant Lip Tumor",
-      "Lip Cancerous Lesion",
       "Malignant Lip Growth",
       "Oral Lip Cancer",
-      "Lip Adenocarcinoma",
-      "Lip Sarcoma",
       "Malignant Tumor of Lip",
       "Lip Cancer of Oral Cavity",
-      "Lip Cancerous Growth",
       "Malignant Lesion of Lip",
-      "Lip Neoplastic Disease",
-      "Lip Carcinogenic Lesion",
       "Neoplasm of Lip",
       "Malignant Lesion of Oral Lip"
     ]
@@ -41,23 +33,15 @@
       "Malignant Tongue Tumor",
       "Tongue Malignancy",
       "Neoplasm of Tongue",
-      "Oral Cavity Cancer",
       "Cancer of Lingual Tissue",
       "Malignant Glossal Neoplasm",
       "Unspecified Tongue Carcinoma",
       "Malignant Lesion of Tongue",
-      "Tongue Sarcoma",
-      "Tongue Neoplasm of Unknown Origin",
       "Malignant Growth of Tongue",
       "Lingual Malignancy",
       "Cancer of Other Parts of Tongue",
       "Malignant Tumor of Lingual Region",
-      "Lingual Neoplasm",
-      "Malignant Neoplasm of Lingual Tissue",
-      "Carcinoma of Unspecified Tongue Parts",
-      "Tongue Cancer of Unknown Origin",
-      "Malignant Neoplasm of Oral Tongue",
-      "Non-Specific Tongue Cancer"
+      "Lingual Neoplasm"
     ]
   },
   {
@@ -71,9 +55,7 @@
     "abbreviations": [
       "Malignant Melanoma of Cutaneous Tissue",
       "Skin Malignant Melanoma",
-      "Malignant Melanoma of Epidermis",
       "Epidermal Melanoma",
-      "Malignant Melanoma of Dermis",
       "Malignant Melanoma of Surface Skin",
       "Cutaneous Malignancy",
       "Primary Melanoma of Skin",
@@ -82,13 +64,7 @@
       "Malignant Neoplasm of Cutaneous Tissue",
       "Malignant Melanoma of Skin Surface",
       "Malignant Melanoma of Skin Layers",
-      "Skin Cancer of Melanocytes",
-      "Skin Melanoma Neoplasm",
-      "Malignant Melanoma of Superficial Skin",
-      "Dermal Melanoma",
-      "Skin Cancer of Melanocytic Origin",
-      "Malignant Melanoma of Skin Regions",
-      "Cutaneous Melanoma Neoplasm"
+      "Skin Cancer of Melanocytes"
     ]
   },
   {
@@ -102,24 +78,16 @@
     "abbreviations": [
       "Gingival Malignancy",
       "Gum Neoplasm",
-      "Gingival Sarcoma",
       "Gum Tumor",
       "Gingival Lesion",
       "Malignant Tumor of Gum",
-      "Gum Squamous Cell Carcinoma",
-      "Gum Adenocarcinoma",
       "Gingival Malignant Neoplasm",
       "Gingival Growth",
       "Oral Gingival Cancer",
-      "Gingival Neoplastic Disease",
       "Malignant Growth of Gum",
       "Gum Cell Carcinoma",
       "Gum Tissue Cancer",
-      "Gingival Cancerous Lesion",
-      "Gum Malignant Growth",
-      "Malignant Gingival Tumor",
-      "Gingival Oncological Disease",
-      "Malignant Gingival Neoplasm"
+      "Gum Malignant Growth"
     ]
   },
   {
@@ -136,20 +104,11 @@
       "Palate Neoplasm",
       "Palate Malignancy",
       "Carcinoma of the Palate",
-      "Palate Squamous Cell Carcinoma",
-      "Palate Adenocarcinoma",
-      "Adenocarcinoma of Palate",
-      "Palate Sarcoma",
       "Palatal Tumor",
       "Malignant Growth of Palate",
-      "Palate Cancerous Lesion",
       "Palate Malignant Neoplasm",
       "Neoplasm of the Palate",
       "Palate Tumor",
-      "Palate Cancer Variant",
-      "Palate Oncological Disease",
-      "Palate Neoplastic Disease",
-      "Palate Cancer Type",
       "Malignant Palate Growth"
     ]
   },
@@ -165,23 +124,14 @@
       "Salivary Gland Neoplasia",
       "Salivary Gland Tumor",
       "Malignant Salivary Gland Neoplasm",
-      "Salivary Gland Oncology",
-      "Salivary Gland Sarcoma",
       "Salivary Gland Malignant Tumor",
-      "Salivary Gland Neoplastic Disease",
       "Salivary Gland Cancers",
       "Malignant Tumor of Salivary Glands",
       "Salivary Gland Lesions",
-      "Salivary Gland Pathology",
       "Malignant Salivary Gland Growth",
-      "Salivary Gland Carcinogenicity",
       "Malignant Salivary Gland Conditions",
-      "Salivary Gland Cancer Types",
       "Salivary Gland Malignancies",
-      "Salivary Gland Tumorigenesis",
-      "Salivary Gland Carcinogenic Tumors",
-      "Malignant Salivary Gland Disorders",
-      "Salivary Gland Cancer Variants"
+      "Malignant Salivary Gland Disorders"
     ]
   },
   {
@@ -194,25 +144,16 @@
     },
     "abbreviations": [
       "Tonsillar Neoplasm",
-      "Tonsil Adenocarcinoma",
-      "Adenoid Cancer",
       "Tonsil Malignant Tumor",
       "Tonsil Carcinomatous Lesion",
       "Malignant Tumor of Tonsil",
-      "Tonsil Malignancy Type",
       "Tonsillar Malignant Neoplasm",
       "Tonsillar Tumor",
-      "Tonsil Carcinoma Variant",
-      "Tonsillar Lymphoid Malignancy",
-      "Tonsil Neoplastic Disease",
       "Tonsil Cell Carcinoma",
       "Tonsillar Growth",
-      "Tonsil Cancerous Growth",
       "Tonsil Neoplasm Type",
       "Tonsil Malignant Growth",
-      "Malignant Tonsillar Tumor",
-      "Tonsil Cancer Variant",
-      "Tonsil Oncological Disease"
+      "Malignant Tonsillar Tumor"
     ]
   },
   {
@@ -226,24 +167,13 @@
     "abbreviations": [
       "Oropharyngeal Neoplasm",
       "Oropharyngeal Tumor",
-      "Oropharyngeal Adenocarcinoma",
-      "Adenocarcinoma of Oropharynx",
-      "Oropharyngeal Sarcoma",
       "Oropharyngeal Lymphoma",
       "Malignant Tumor of Oropharynx",
       "Oropharyngeal Malignant Neoplasm",
-      "Oropharyngeal Cancerous Growth",
       "Oropharyngeal Lesion",
-      "Oropharyngeal Neoplastic Disease",
       "Oropharyngeal Carcinomatous Change",
-      "Oropharyngeal Malignancy Variant",
       "Oropharyngeal Tumorous Condition",
-      "Oropharyngeal Cancerous Lesion",
-      "Oropharyngeal Cancer of Unknown Primary",
-      "Oropharyngeal Neoplasm with Metastasis",
-      "Oropharyngeal Malignancy with HPV",
-      "Oropharyngeal Cancer Recurrence",
-      "Oropharyngeal Cancer Stage IV"
+      "Oropharyngeal Malignancy with HPV"
     ]
   },
   {
@@ -259,22 +189,13 @@
       "Carcinoma of Nasopharynx",
       "Malignant Nasopharyngeal Tumor",
       "Nasopharyngeal Neoplasm",
-      "Nasopharyngeal Sarcoma",
       "Primary Nasopharyngeal Cancer",
       "Malignant Tumor of Nasopharynx",
-      "Nasopharyngeal Squamous Cell Carcinoma",
       "SCC of Nasopharynx",
-      "Adenocarcinoma of Nasopharynx",
       "Malignant Lymphoma of Nasopharynx",
       "Nasopharyngeal Lymphoepithelial Carcinoma",
       "Lymphoepithelial Carcinoma of Nasopharynx",
-      "Nasopharyngeal Tumor",
-      "Malignant Neoplasm of Pharynx",
-      "Pharyngeal Cancer",
-      "Pharyngeal Carcinoma",
-      "Pharyngeal Malignancy",
-      "Malignant Neoplasm of Upper Pharynx",
-      "Upper Pharyngeal Cancer"
+      "Nasopharyngeal Tumor"
     ]
   },
   {
@@ -287,26 +208,12 @@
     },
     "abbreviations": [
       "Hypopharyngeal Tumor",
-      "Hypopharyngeal Neoplastic Disease",
-      "Hypopharyngeal Adenocarcinoma",
-      "Adenocarcinoma of Hypopharynx",
       "Hypopharyngeal Malignant Neoplasm",
-      "Hypopharyngeal Sarcoma",
       "Malignant Hypopharyngeal Growth",
-      "Hypopharyngeal Cancerous Lesion",
       "Hypopharyngeal Lesion",
-      "Hypopharyngeal Neoplasm of Unknown Primary",
-      "Hypopharyngeal Tumor of Unknown Origin",
-      "Hypopharyngeal Malignancy of Unknown Origin",
       "Malignant Hypopharyngeal Tumor",
-      "Hypopharyngeal Cancer with Metastasis",
       "Malignant Growth in Hypopharynx",
-      "Hypopharyngeal Cancer Stage IV",
-      "Hypopharyngeal Carcinoma in Situ",
-      "Hypopharyngeal Malignancy Stage II",
-      "Hypopharyngeal Neoplasm Stage III",
-      "Hypopharyngeal Cancer with Lymph Node Involvement",
-      "Hypopharyngeal Malignancy with Distant Metastasis"
+      "Hypopharyngeal Carcinoma in Situ"
     ]
   },
   {
@@ -322,21 +229,12 @@
       "Esophageal Neoplasm",
       "Esophageal Malignant Tumor",
       "Malignant Esophageal Carcinoma",
-      "Esophageal Neoplastic Disease",
       "Esophageal Tumor",
       "Malignant Tumor of Esophagus",
       "Esophageal Malignant Neoplasm",
-      "Esophageal Cancerous Growth",
-      "Adenocarcinoma of Esophageal Region",
-      "Esophageal Sarcoma",
-      "Esophageal Neuroendocrine Tumor",
       "Malignant Esophageal Growth",
-      "Esophagus Carcinogenic Lesion",
-      "Esophageal Cancer Variant",
       "Malignant Lesion of Esophagus",
       "Esophageal Cancer Disease",
-      "Esophageal Malignant Pathology",
-      "Esophageal Carcinogenic Neoplasm",
       "Malignant Esophageal Tissue"
     ]
   },
@@ -349,26 +247,18 @@
       "description_2": "Malignant neoplasm of stomach"
     },
     "abbreviations": [
-      "Adenocarcinoma of Stomach",
       "Stomach Malignancy",
-      "Gastric Adenocarcinoma",
       "Gastric Neoplasm",
-      "Gastric Carcinogenic Tumor",
       "Malignant Gastric Tumor",
-      "Gastric Sarcoma",
       "Gastric Mucosal Carcinoma",
       "Stomach Tumor",
       "Stomach Neoplasm",
-      "Gastric Cancerous Growth",
       "Malignant Gastric Neoplasm",
       "Gastric Epithelial Carcinoma",
-      "Gastric Cancer of Unknown Primary",
       "Malignant Gastric Lesion",
       "Gastric Carcinoma in Situ",
       "Stomach Malignant Growth",
-      "Gastric Solid Tumor",
-      "Stomach Epithelial Tumor",
-      "Malignant Stomach Growth"
+      "Gastric Solid Tumor"
     ]
   },
   {
@@ -387,20 +277,11 @@
       "Malignant Tumor of Small Intestine",
       "Small Intestine Malignancy",
       "Small Intestinal Lymphoma",
-      "Small Intestinal Neuroendocrine Carcinoma",
-      "Small Intestinal Sarcoma",
       "Primary Small Intestinal Cancer",
-      "Small Bowel Adenocarcinoma",
       "Small Intestine Tumor",
       "Small Intestinal Malignant Neoplasm",
       "Small Intestinal Mucosal Carcinoma",
-      "Small Intestine Malignant Tumor",
-      "Non-Hodgkin Lymphoma of Small Intestine",
-      "Small Intestine GIST",
-      "Small Intestine Carcinogenic Lesion",
-      "Small Intestinal Epithelial Carcinoma",
-      "Malignant Neoplasm of Jejunum and Ileum",
-      "Small Intestine Cancer of Unknown Primary"
+      "Small Intestine Malignant Tumor"
     ]
   },
   {
@@ -417,21 +298,12 @@
       "Malignant Tumor of Colon",
       "Colon Malignancy",
       "Colonic Neoplasm",
-      "Colonic Adenocarcinoma",
       "Malignant Colonic Growth",
       "Transverse Colon Cancer",
       "Descending Colon Carcinoma",
       "Ascending Colon Carcinoma",
-      "Adenocarcinoma of Colorectum",
-      "Bowel Malignancy",
-      "Bowel Carcinoma",
-      "Malignant Bowel Neoplasm",
-      "Colorectal Malignancy",
       "Colon Cell Carcinoma",
-      "Colonic Malignant Tumor",
-      "Colon Cancer Stage IV",
-      "Colon Cancer Stage III",
-      "Colon Cancer Stage II"
+      "Colonic Malignant Tumor"
     ]
   },
   {
@@ -446,7 +318,6 @@
       "Anorectal Cancer",
       "Anorectal Carcinoma",
       "Malignant Anorectal Neoplasm",
-      "Adenocarcinoma of Anus",
       "Anal Gland Carcinoma",
       "Anal Canal Malignancy",
       "Malignant Tumor of Anus",
@@ -455,14 +326,7 @@
       "Anal Canal Neoplasm",
       "Perianal Cancer",
       "Perianal Carcinoma",
-      "Adenocarcinoma of Anal Canal",
-      "Malignant Neoplasm of Perianal Region",
-      "Anal Carcinoma in Situ",
-      "Anal Squamous Cell Neoplasm",
-      "Anal Papillary Carcinoma",
-      "Anal Transitional Cell Carcinoma",
-      "Malignant Neoplasm of Rectum and Anus",
-      "Non-Squamous Anal Cancer"
+      "Malignant Neoplasm of Perianal Region"
     ]
   },
   {
@@ -481,19 +345,11 @@
       "Liver Neoplasm",
       "Liver Ductal Carcinoma",
       "Malignant Liver Tumor",
-      "Hepatic Adenocarcinoma",
       "Biliary Carcinoma",
       "Liver Duct Cancer",
       "Liver Bile Duct Malignancy",
       "Malignant Tumor of Liver",
-      "Hepatic Neoplasm",
-      "Malignant Biliary Neoplasm",
-      "Biliary Tract Malignancy",
-      "Cholangiocellular Carcinoma",
-      "Hepatic Duct Carcinoma",
-      "Liver Cancers",
-      "Intrahepatic Bile Duct Malignancy",
-      "Hepatic Carcinoma"
+      "Hepatic Neoplasm"
     ]
   },
   {
@@ -508,23 +364,15 @@
       "Biliary Duct Carcinoma",
       "Malignant Biliary Neoplasm",
       "Biliary Duct Malignancy",
-      "Bile Duct Adenocarcinoma",
-      "Adenocarcinoma of Biliary Tract",
-      "Biliary Tract Adenocarcinoma",
       "Bile Duct Neoplasm",
       "Biliary Carcinoma",
       "Malignant Neoplasm of Bile Ducts",
       "Bile Duct Malignant Tumor",
-      "Bile Duct Cancer of Unknown Origin",
       "Biliary Tract Tumor",
       "Biliary Neoplasm",
       "Bile Duct Cancer of Unspecified Site",
       "Malignant Neoplasm of Biliary Duct",
-      "Biliary Duct Tumor",
-      "Bile Duct Malignant Neoplasm",
-      "Biliary Duct Neoplasia",
-      "Bile Duct Cancer Variant",
-      "Biliary Carcinoma of Unspecified Location"
+      "Biliary Duct Tumor"
     ]
   },
   {
@@ -538,24 +386,16 @@
     "abbreviations": [
       "Pancreatic Neoplasm",
       "Malignant Pancreatic Neoplasm",
-      "Adenocarcinoma of the Pancreas",
       "Pancreatic Exocrine Carcinoma",
       "Malignant Neoplasm of Pancreatic Tail",
       "Malignant Neoplasm of Pancreatic Body",
-      "Pancreatic Islet Cell Carcinoma",
       "Neoplasm of the Pancreas",
-      "Pancreatic Cancerous Growth",
       "Malignant Endocrine Neoplasm of Pancreas",
-      "Pancreatic Acinar Carcinoma",
-      "Pancreatic Neuroendocrine Tumor",
       "Pancreatic Cancer of the Head",
       "Pancreatic Cancer of the Body",
       "Pancreatic Cancer of the Tail",
       "Pancreatic Solid Tumor",
-      "Malignant Cystic Neoplasm of Pancreas",
-      "Pancreatic Malignant Growth",
-      "Pancreatic Cancer Variant",
-      "Malignant Neoplasm of Pancreatic Region"
+      "Malignant Cystic Neoplasm of Pancreas"
     ]
   },
   {
@@ -573,20 +413,12 @@
       "Carcinoma of Accessory Sinuses",
       "Malignant Neoplasm of Accessory Sinus",
       "Sinusoidal Malignancy",
-      "Adenocarcinoma of Accessory Sinuses",
       "Carcinoma of Paranasal Sinus",
       "Sinus Neoplasm",
       "Malignant Accessory Sinus Tumor",
       "Paranasal Malignancy",
       "Cancer of Accessory Sinuses",
-      "Accessory Sinus Malignancy",
-      "Tumor of Accessory Sinuses",
-      "Malignant Neoplasm of Nasal Sinuses",
-      "Nasal Sinus Cancer",
-      "Nasal Sinus Carcinoma",
-      "Sinus Cancer of the Face",
-      "Facial Sinus Cancer",
-      "Malignant Neoplasm of Facial Sinuses"
+      "Accessory Sinus Malignancy"
     ]
   },
   {
@@ -600,22 +432,13 @@
     "abbreviations": [
       "Laryngeal Neoplasm",
       "Laryngeal Tumor",
-      "Laryngeal Squamous Cell Carcinoma",
-      "Laryngeal Sarcoma",
-      "Laryngeal Adenocarcinoma",
-      "Laryngeal Papillary Carcinoma",
       "Voice Box Malignancy",
       "Neoplasm of the Larynx",
       "Malignant Laryngeal Growth",
       "Laryngeal Malignant Neoplasm",
-      "Laryngeal Basaloid Carcinoma",
-      "Laryngeal Neuroendocrine Tumor",
-      "Laryngeal Transitional Cell Carcinoma",
       "Laryngeal Carcinoma in Situ",
       "Laryngeal Malignant Tumor",
-      "Laryngeal Clear Cell Carcinoma",
       "Laryngeal Undifferentiated Carcinoma",
-      "Laryngeal Mucosal Melanoma",
       "Laryngeal Malignant Mixed Tumor",
       "Malignant Laryngeal Lesion"
     ]
@@ -631,24 +454,13 @@
     "abbreviations": [
       "Bronchogenic Carcinoma",
       "Lung Neoplasm",
-      "Lung Cancer Stage IV",
       "Lung Malignant Tumor",
       "Lung Carcinoma in Situ",
-      "Lung Cancer with Metastasis",
       "Primary Lung Malignancy",
       "Malignant Lung Tumor",
-      "Lung Sarcoma",
       "Small Cell Carcinoma of Lung",
-      "Lung Cancer Subtype",
-      "Lung Cancer with Pleural Involvement",
-      "Right Lung Cancer",
-      "Left Lung Cancer",
       "Lobar Lung Cancer",
-      "Central Lung Cancer",
-      "Peripheral Lung Cancer",
-      "Lung Cancer with Lymph Node Involvement",
-      "Lung Cancer with Bone Metastasis",
-      "Lung Cancer with Brain Metastasis"
+      "Central Lung Cancer"
     ]
   },
   {
@@ -669,17 +481,9 @@
       "Skin Neoplasm",
       "Malignant Lesions of Skin",
       "Non-Melanoma Skin Lesions",
-      "Dermatologic Malignancy",
       "Non-Melanoma Epidermal Cancer",
       "Non-Melanoma Skin Tumor",
-      "Malignant Skin Growths",
-      "Non-Melanocytic Tumors of Skin",
-      "Cutaneous Malignant Neoplasm",
-      "Skin Cancer Types",
-      "Malignant Neoplasm of Epidermis",
-      "Epidermal Carcinoma",
-      "Cutaneous Neoplasia",
-      "Non-Melanoma Skin Pathology"
+      "Malignant Skin Growths"
     ]
   },
   {
@@ -693,7 +497,6 @@
     "abbreviations": [
       "Merkel Cell Tumor",
       "Merkel Cell Skin Cancer",
-      "Neuroendocrine Skin Carcinoma",
       "Primary Merkel Cell Carcinoma",
       "Merkel Cell Tumor of Skin",
       "Merkel Cell Neoplasia",
@@ -702,15 +505,8 @@
       "Merkel Cell Tumor Malignancy",
       "Merkel Cell Skin Neoplasm",
       "Merkel Cell Tumor Carcinoma",
-      "Neuroendocrine Tumor of Skin",
-      "Merkel Cell Carcinoma Variant",
       "Merkel Cell Skin Malignancy",
-      "Neuroendocrine Malignancy of Skin",
-      "Malignant Neoplasm of Merkel Cells",
-      "Skin Neuroendocrine Carcinoma",
-      "Merkel Cell Carcinoma of the Dermis",
-      "Merkel Cell Cancer of Skin",
-      "Malignant Merkel Cell Tumor"
+      "Malignant Neoplasm of Merkel Cells"
     ]
   },
   {
@@ -727,21 +523,13 @@
       "Kaposi Tumor",
       "Kaposiform Sarcoma",
       "Kaposiform Neoplasm",
-      "Vascular Tumor of Skin",
       "Cutaneous Kaposi's Sarcoma",
-      "AIDS-related Kaposi's Sarcoma",
-      "Multifocal Kaposi's Sarcoma",
       "Kaposi's Sarcoma of the Skin",
       "Kaposi's Sarcoma of Mucous Membranes",
       "Kaposiform Angioproliferative Disorder",
       "Kaposiform Lesion",
       "Kaposiform Vascular Tumor",
-      "HIV-associated Kaposi's Sarcoma",
-      "Classic Kaposi Tumor",
-      "Endemic KS",
-      "Iatrogenic KS",
-      "Malignant Vascular Neoplasm",
-      "Malignant Neoplasm of Skin (Kaposi's Sarcoma)"
+      "Classic Kaposi Tumor"
     ]
   },
   {
@@ -753,26 +541,18 @@
       "description_2": "Malignant neoplasm of peripheral nerves and autonomic nervous system"
     },
     "abbreviations": [
-      "Neurogenic Carcinoma",
       "Peripheral Nerve Malignancy",
       "Carcinoma of Peripheral Nerve Sheath",
       "Neoplasm of Peripheral Nerve",
       "Malignant Tumor of Autonomic Nervous System",
       "Nerve Sheath Neoplasm",
       "Malignant Autonomic Nerve Tumor",
-      "Peripheral Nerve Sarcoma",
       "Autonomic Nerve Malignancy",
       "Malignant Neoplasm of Nerve Sheath",
-      "Neurogenic Sarcoma",
       "Peripheral Nerve Sheath Neoplasm",
       "Malignant Nerve Tumor",
       "Nerve Sheath Carcinoma",
-      "Autonomic Nervous System Neoplasm",
-      "Malignant Tumor of Peripheral Nerves",
-      "Malignant Peripheral Nerve Neoplasm",
-      "Nerve Sheath Malignancy",
-      "Malignant Tumor of Autonomic Nerves",
-      "Malignant Neoplasm of Nerves"
+      "Autonomic Nervous System Neoplasm"
     ]
   },
   {
@@ -791,19 +571,11 @@
       "Cerebral Meningioma",
       "Meningeal Lesion",
       "Meningeal Growth",
-      "Meningeal Sarcomatoid Tumor",
       "Malignant Meningeal Growth",
       "Malignant Meningeal Neoplasm",
       "Cerebral Meningeal Carcinoma",
       "Malignant Tumor of Meninges",
-      "Meningeal Cancer of the Brain",
-      "Meningeal Malignancy of the Central Nervous System",
-      "Malignant Meningeal Disease",
-      "Meningeal Neoplasm of the Central Nervous System",
-      "Meningeal Malignancy of the Brain",
-      "Meningeal Neoplasm with Malignant Features",
-      "Meningeal Malignant Lesion",
-      "Meningeal Malignant Neoplasm"
+      "Meningeal Cancer of the Brain"
     ]
   },
   {
@@ -820,21 +592,11 @@
       "Retroperitoneal Malignant Neoplasm",
       "Peritoneal Carcinoma",
       "Malignant Neoplasm of Retroperitoneal Space",
-      "Retroperitoneal Adenocarcinoma",
-      "Peritoneal Sarcoma",
-      "Retroperitoneal Germ Cell Tumor",
       "Malignant Retroperitoneal Tumor",
-      "Retroperitoneal Mesothelioma",
       "Retroperitoneal Neuroblastoma",
-      "Retroperitoneal Sarcomatoid Carcinoma",
       "Primary Retroperitoneal Malignancy",
       "Retroperitoneal Mixed Tumor",
-      "Malignant Neoplasm of Abdominal Cavity",
-      "Retroperitoneal Fibrosarcoma",
-      "Peritoneal Mesothelioma",
-      "Retroperitoneal Tumor of Unknown Origin",
-      "Malignant Neoplasm of Peritoneal Cavity",
-      "Retroperitoneal Tumor with Metastasis"
+      "Malignant Neoplasm of Peritoneal Cavity"
     ]
   },
   {
@@ -846,26 +608,9 @@
       "description_2": "Malignant neoplasm of breast"
     },
     "abbreviations": [
-      "Invasive Ductal Carcinoma",
-      "Ductal Carcinoma in Situ",
-      "Triple-Negative Breast Cancer",
       "TNBC",
-      "Adenocarcinoma of Breast",
-      "Paget's Disease of the Nipple",
-      "Inflammatory Breast Cancer",
-      "Mucinous Carcinoma of Breast",
-      "Medullary Carcinoma of Breast",
-      "Tubular Carcinoma of Breast",
-      "Breast Adenocarcinoma",
-      "Breast Sarcoma",
       "Metaplastic Breast Carcinoma",
-      "Breast Malignant Neoplasm",
-      "Right Breast Cancer",
-      "Left Breast Cancer",
-      "Unilateral Breast Cancer",
-      "Bilateral Breast Cancer",
-      "Breast Cancer Stage IV",
-      "Advanced Breast Cancer"
+      "Breast Malignant Neoplasm"
     ]
   },
   {
@@ -877,25 +622,16 @@
       "description_2": "Malignant neoplasm of ovary"
     },
     "abbreviations": [
-      "Ovarian Adenocarcinoma",
       "Ovarian Malignant Neoplasm",
-      "Ovarian Cancerous Growth",
       "Malignant Ovarian Neoplasm",
-      "Ovarian Neoplastic Disease",
-      "Ovarian Malignancy Type",
       "Ovarian Tumor Malignancy",
-      "Ovarian Cancer Variant",
       "Ovarian Tumor of Epithelial Origin",
       "Ovarian Malignant Tumor",
-      "Ovarian Cancer Subtype",
-      "Ovarian Cystadenocarcinoma",
       "Ovarian Malignant Growth",
       "Ovarian Cell Carcinoma",
       "Ovarian Neoplasm Malignancy",
       "Ovarian Cancer Diagnosis",
-      "Ovarian Cancer Pathology",
       "Ovarian Malignant Cell Tumor",
-      "Ovarian Cancer of Unknown Origin",
       "Ovarian Tumor of Malignant Nature"
     ]
   },
@@ -908,24 +644,15 @@
       "description_2": "Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system"
     },
     "abbreviations": [
-      "Neuro-oncology Malignancy",
       "CNS Malignancy",
       "Malignant Neoplasm of Neural Tissue",
       "Neural Cancer",
-      "Neurogenic Tumor",
       "Spinal Tumor",
       "Cranial Nerve Tumor",
-      "Malignant Neoplasm of Nerve Tissue",
-      "Neuroblastoma",
-      "Neuroepithelial Tumor",
       "Primary Brain Malignancy",
       "Spinal Cord Malignancy",
       "Malignant Tumor of Central Nervous System",
       "CNS Neoplasm",
-      "Neurocytoma",
-      "Malignant Nerve Tumor",
-      "Ependymoma",
-      "Medulloblastoma",
       "Central Nervous System Neoplasm",
       "Malignant Tumor of Spinal Cord"
     ]
@@ -940,23 +667,15 @@
     },
     "abbreviations": [
       "Vulvar Adenoma",
-      "Vulvar Sarcoma",
-      "Vulvar Carcinogenic Lesion",
-      "Vulvar Neoplastic Disease",
       "Vulvar Tumor",
       "Malignant Vulvar Neoplasm",
       "Vulvar Squamous Neoplasm",
-      "Vulvar Cancerous Growth",
       "Vulvar Malignant Tumor",
-      "Vulvar Carcinogenic Growth",
-      "Vulvar Invasive Carcinoma",
       "Vulvar Neoplasm of Squamous Type",
       "Primary Vulvar Cancer",
       "Vulvar Malignancy of Squamous Origin",
       "Vulvar Malignant Epithelial Tumor",
-      "Vulvar Squamous Cell Malignancy",
       "Vulvar Malignant Growth",
-      "Vulvar Cancer of Unknown Origin",
       "Vulvar Malignant Lesion",
       "Vulvar Neoplasm with Malignant Potential"
     ]
@@ -972,24 +691,16 @@
     "abbreviations": [
       "Cervical Squamous Carcinoma",
       "Cervical Adenosquamous Carcinoma",
-      "Cervical Sarcoma",
-      "Cervical Neoplastic Disease",
-      "Cervical Oncological Disorder",
       "Cervical Uterine Malignancy",
       "Cervical Tumor",
       "Cervical Uterine Neoplasm",
       "Malignant Cervical Growth",
       "Cervical Uterine Carcinoma",
-      "Cervical Cancerous Lesion",
-      "Cervical Carcinogenic Condition",
       "Cervical Malignant Tumor",
-      "Cervical Uterine Pathology",
       "Cervical Neoplasm of Uterus",
       "Cervical Cancer Disease",
       "Cervical Uterine Malignant Neoplasm",
-      "Cervical Tumor Disease",
-      "Cervical Cancer Pathology",
-      "Cervical Cancerous Growth"
+      "Cervical Tumor Disease"
     ]
   },
   {
@@ -1004,23 +715,15 @@
       "Womb Carcinoma",
       "Womb Malignancy",
       "Malignant Neoplasm of Uterus",
-      "Uterine Sarcoma",
-      "Clear Cell Carcinoma of Uterus",
-      "Mucinous Carcinoma of Uterus",
-      "Uterine Adenocarcinoma",
       "Uterine Malignant Neoplasm",
       "Corpus Uteri Malignancy",
       "Endometrial Malignancy",
       "Uterine Glandular Carcinoma",
-      "Uterine Papillary Carcinoma",
-      "Uterine Clear Cell Cancer",
       "Uterine Mixed Tumor",
       "Uterine Endometrial Carcinoma",
       "Uterine Tumor of Corpus",
       "Uterine Malignant Tumor",
-      "Uterine Neoplasm of Corpus",
-      "Uterine Cancer of Corpus",
-      "Uterine Corpus Malignancy"
+      "Uterine Neoplasm of Corpus"
     ]
   },
   {
@@ -1036,23 +739,14 @@
       "Tubal Malignancy",
       "Malignant Neoplasm of Fallopian Tubes",
       "Fallopian Tube Neoplasm",
-      "Fallopian Tube Sarcoma",
       "Malignant Tumor of Fallopian Tube",
-      "Fallopian Tube Adenocarcinoma",
       "Fallopian Tube Malignancy",
-      "Fallopian Tube Neoplastic Disease",
       "Tubal Cancer",
-      "Adenocarcinoma of Fallopian Tube",
       "Malignant Fallopian Tube Growth",
       "Fallopian Tube Tumor",
-      "Fallopian Tube Cancer of Unknown Origin",
       "Malignant Neoplasm of Female Reproductive Organs",
       "Malignancy of Tubal Origin",
-      "Primary Tubal Malignancy",
-      "Fallopian Tube Neoplastic Process",
-      "Malignant Fallopian Tube Lesion",
-      "Unspecified Fallopian Tube Cancer",
-      "Fallopian Tube Cancer Variant"
+      "Primary Tubal Malignancy"
     ]
   },
   {
@@ -1068,22 +762,14 @@
       "Penile Neoplasm Malignant",
       "Malignant Penile Lesion",
       "Penile Malignant Neoplasm",
-      "Penile Adenocarcinoma",
-      "Adenocarcinoma of Penis",
       "Malignant Penile Growth",
-      "Penile Sarcoma",
       "Penile Tumor",
       "Malignant Growth of Penis",
       "Penile Basal Cell Carcinoma",
       "Penile Carcinomatous Lesion",
       "Malignant Penile Disease",
       "Malignant Neoplasm of Prepuce",
-      "Penile Malignancy Syndrome",
-      "Penile Cancer Variant",
-      "Malignant Penile Pathology",
-      "Penile Tumor Malignancy",
-      "Penile Cancer Subtype",
-      "Penile Oncological Condition"
+      "Penile Malignancy Syndrome"
     ]
   },
   {
@@ -1099,22 +785,11 @@
       "Malignant Testicular Neoplasm",
       "Testicular Neoplasia",
       "Testicular Malignant Tumor",
-      "Embryonal Carcinoma",
-      "Choriocarcinoma",
-      "Yolk Sac Tumor",
-      "Mixed Germ Cell Tumor",
       "Testicular Neoplasm Malignancy",
       "Primary Testicular Cancer",
       "Testicular Tumor Malignancy",
-      "Malignant Germ Cell Tumor",
-      "Testicular Sarcoma",
-      "Testicular Oncological Disease",
-      "Testicular Cancerous Growth",
       "Neoplasm of Testis",
-      "Malignant Testis Tumor",
-      "Testicular Cancer Variant",
-      "Testicular Tumor Types",
-      "Testicular Malignancy Types"
+      "Malignant Testis Tumor"
     ]
   },
   {
@@ -1131,21 +806,13 @@
       "Ocular Malignancy",
       "Carcinoma of the Eye",
       "Malignant Tumor of Ocular Adnexa",
-      "Retinal Melanoma",
-      "Conjunctival Melanoma",
       "Malignant Neoplasm of Retinal Tissue",
       "Ocular Lymphoma",
       "Primary Ocular Lymphoma",
       "Lymphoma of the Eye",
       "Eyelid Carcinoma",
       "Malignant Neoplasm of Eyelid",
-      "Ciliary Body Melanoma",
-      "Iris Melanoma",
-      "Orbital Melanoma",
-      "Malignant Neoplasm of Orbital Adnexa",
-      "Epithelial Tumors of the Eye",
-      "Malignant Neoplasm of Ocular Surface",
-      "Adnexal Carcinoma of the Eye"
+      "Malignant Neoplasm of Orbital Adnexa"
     ]
   },
   {
@@ -1157,25 +824,11 @@
       "description_2": "Malignant neoplasm of bladder"
     },
     "abbreviations": [
-      "Transitional Cell Carcinoma of Bladder",
-      "Bladder Transitional Cell Carcinoma",
-      "Invasive Bladder Cancer",
-      "Non-Muscle Invasive Bladder Cancer",
       "Bladder Neoplasm",
       "Bladder Tumor",
-      "Bladder Squamous Cell Carcinoma",
-      "Bladder Sarcoma",
-      "Malignant Urothelial Tumor",
-      "Bladder Neoplastic Disease",
-      "Bladder Adenocarcinoma",
       "Carcinoma of Urinary Bladder",
-      "Bladder Cancer of Unknown Primary",
-      "High-Grade Bladder Cancer",
-      "Low-Grade Bladder Cancer",
       "Bladder Neoplasm of Malignant Potential",
-      "Malignant Urothelial Neoplasm",
       "Bladder Cancer with Lymphatic Invasion",
-      "Bladder Cancer with Metastasis",
       "Malignant Neoplasm of Vesica Urinaria"
     ]
   },
@@ -1189,26 +842,17 @@
     },
     "abbreviations": [
       "Malignant Tumor of Male Genitalia",
-      "Malignant Neoplasm of Testicular Region",
       "Malignant Neoplasm of Male Reproductive Organs",
-      "Malignancy of Testicular Tissue",
       "Malignancy of Male Reproductive System",
       "Malignant Neoplasm of Scrotum",
       "Malignant Neoplasm of Penis",
       "Malignant Neoplasm of Male Genital Area",
       "Malignant Tumor of Penis",
-      "Malignant Tumor of Testes",
-      "Malignant Neoplasm of Male External Genitalia",
       "Malignant Neoplasm of Male Genital Tract",
       "Malignant Neoplasm of Male Genital Structures",
-      "Malignant Neoplasm of Male Sexual Organs",
       "Malignant Neoplasm of Male Genital Region",
       "Malignant Neoplasm of Male Reproductive Organs, Unspecified",
-      "Malignant Tumor of Male Genital Organs",
-      "Malignant Neoplasm of Male Genital System",
-      "Malignancy of Male Genital Structures",
-      "Malignant Neoplasm of Male Genitalia, Unspecified",
-      "Malignant Tumor of Male Reproductive Organs"
+      "Malignant Tumor of Male Genital Organs"
     ]
   },
   {
@@ -1222,24 +866,16 @@
     "abbreviations": [
       "Renal Malignancy",
       "Kidney Neoplasm",
-      "Adenocarcinoma of Kidney",
       "Malignant Kidney Tumor",
       "Kidney Tumor",
-      "Papillary Renal Cell Carcinoma",
-      "pRCC",
       "Chromophobe Renal Cell Carcinoma",
-      "ChRCC",
-      "Kidney Adenocarcinoma",
       "Malignant Renal Neoplasm",
       "Primary Kidney Cancer",
-      "Kidney Sarcoma",
-      "Renal Sarcoma",
       "Malignant Tumor of Kidney",
       "Kidney Oncocytoma",
       "Malignant Renal Cell Neoplasm",
       "Kidney Cancer, Not Renal Pelvis",
-      "Renal Malignant Neoplasm",
-      "Malignant Neoplasm of Kidney Tissue"
+      "Renal Malignant Neoplasm"
     ]
   },
   {
@@ -1255,22 +891,10 @@
       "Renal Pelvis Tumor",
       "Malignant Renal Pelvis Neoplasm",
       "Renal Pelvic Neoplasm",
-      "Renal Pelvis Sarcoma",
-      "Renal Pelvis Urothelial Carcinoma",
-      "Malignant Urothelial Tumor of Renal Pelvis",
-      "Renal Pelvis Adenocarcinoma",
-      "Renal Pelvis Transitional Cell Carcinoma",
       "Malignant Tumor of Upper Urinary Tract",
-      "Renal Pelvis Oncological Disease",
       "Upper Urinary Tract Cancer",
-      "Renal Urothelial Malignancy",
       "Renal Pelvis Malignant Growth",
-      "Urothelial Neoplasm of Renal Pelvis",
-      "Renal Pelvis Cancer of the Kidney",
-      "Malignant Renal Urothelium",
-      "Renal Pelvis Carcinogenic Growth",
-      "Urothelial Malignancy of Renal Pelvis",
-      "Renal Pelvis Neoplastic Disease"
+      "Renal Pelvis Cancer of the Kidney"
     ]
   },
   {
@@ -1285,22 +909,9 @@
       "Ureter Malignant Neoplasm",
       "Ureteral Malignant Tumor",
       "Ureteral Neoplasm of Malignant Potential",
-      "Ureteral Transitional Cell Carcinoma",
-      "Ureteral Squamous Cell Carcinoma",
-      "Ureteral Adenocarcinoma",
       "Ureteral Tumor",
-      "Ureteral Neoplastic Disease",
-      "Ureteral Oncological Condition",
-      "Ureteral Malignancy of Transitional Cells",
-      "Ureteral Cancer of Unknown Primary",
       "Malignant Ureteral Growth",
-      "Ureteral Cancerous Lesion",
       "Ureteral Neoplasm with Malignant Features",
-      "Ureteral Sarcoma",
-      "Ureteral Cancer with Metastasis",
-      "Ureteral Malignant Transformation",
-      "Ureteral Neoplasm with Invasive Characteristics",
-      "Ureteral Malignant Pathology",
       "Ureteral Cancerous Mass"
     ]
   },
@@ -1313,25 +924,11 @@
       "description_2": "Malignant neoplasm of brain"
     },
     "abbreviations": [
-      "Cerebral Malignancy",
-      "Cerebral Carcinoma",
-      "Neuro-oncology Tumor",
       "Primary CNS Malignancy",
-      "Malignant Neuroepithelial Tumor",
-      "Neuroglial Tumor",
-      "Malignant Astrocytoma",
-      "Anaplastic Astrocytoma",
-      "Oligodendroglioma",
-      "Malignant Ependymoma",
       "Brain Neoplasm",
       "Brain Malignancy",
       "Neural Tumor",
-      "Cerebral Neoplasm",
-      "Malignant Neuroectodermal Tumor",
       "Brain Stem Tumor",
-      "Malignant Medulloblastoma",
-      "Malignant Tumor of the Cerebrum",
-      "Malignant Tumor of the Cerebellum",
       "Malignant Tumor of the Brainstem"
     ]
   },
@@ -1344,27 +941,18 @@
       "description_2": "Malignant neoplasm of adrenal gland"
     },
     "abbreviations": [
-      "Adrenal Cortical Carcinoma Variant",
       "Adrenal Gland Malignancy",
       "Malignant Adrenal Cortex Neoplasm",
-      "Adrenal Gland Oncological Disease",
       "Adrenal Tumor Malignancy",
       "Corticosteroid-Secreting Adrenal Tumor",
-      "Adrenal Gland Neoplastic Disease",
-      "Adrenal Medullary Carcinoma",
       "Malignant Neoplasm of Adrenal Cortex",
       "Adrenal Gland Neoplasm Malignancy",
-      "Adrenal Gland Sarcoma",
       "Adrenal Gland Tumor Malignancy",
-      "Adrenal Gland Cancer Variant",
       "Malignant Neoplasm of Suprarenal Gland",
       "Suprarenal Gland Cancer",
       "Suprarenal Carcinoma",
       "Adrenal Gland Neoplasm of Malignant Nature",
-      "Malignant Neoplasm of Adrenal Medulla",
-      "Adrenal Gland Tumor of Malignant Origin",
-      "Malignant Tumor of Adrenal Gland",
-      "Malignant Neoplasm of Adrenal Tissue"
+      "Malignant Neoplasm of Adrenal Medulla"
     ]
   },
   {
@@ -1378,24 +966,16 @@
     "abbreviations": [
       "Endocrine Carcinoma",
       "Malignancy of Endocrine Glands",
-      "Adenocarcinoma of Endocrine Glands",
       "Endocrine Malignant Neoplasm",
       "Neoplasm of Endocrine Structures",
       "Endocrine Gland Malignancy",
       "Malignant Endocrine Neoplasm",
       "Endocrine Gland Tumor",
-      "Endocrine Carcinoma of Unknown Origin",
       "Malignant Tumor of Endocrine Glands",
       "Neoplasm of Other Endocrine Glands",
       "Endocrine System Cancer",
       "Endocrine Gland Neoplasm",
-      "Endocrine Tissue Malignancy",
-      "Malignant Endocrine Tumor",
-      "Carcinoma of Endocrine Structures",
-      "Endocrine Gland Sarcoma",
-      "Endocrine Related Tumors",
-      "Endocrine Neoplasm of Various Sites",
-      "Malignant Endocrine Tissue Tumor"
+      "Endocrine Tissue Malignancy"
     ]
   },
   {
@@ -1410,23 +990,15 @@
       "Other Non-Hodgkin Lymphoma",
       "Unspecified Non-Hodgkin Lymphoma",
       "Non-Specified Non-Hodgkin Lymphoma",
-      "Non-Hodgkin Lymphoma Variants",
       "Lymphoproliferative Disorders",
-      "Lymphoma of Unknown Origin",
-      "Non-Hodgkin Lymphoma Subtypes",
       "Miscellaneous Non-Hodgkin Lymphoma",
-      "Lymphoma Not Otherwise Specified",
-      "NHL Variants",
       "Lymphoma with Unspecified Features",
       "Non-Hodgkin Lymphoma Types",
       "Lymphoma of Various Types",
-      "Lymphoma Subtypes and Variants",
       "Non-Hodgkin Lymphoma Other Specified",
       "Lymphoma with Other Features",
-      "Lymphoma of Undefined Type",
       "Lymphoma of Unspecified Type",
-      "Lymphoma with Mixed Features",
-      "Lymphoma of Indeterminate Type"
+      "Lymphoma with Mixed Features"
     ]
   },
   {
@@ -1439,26 +1011,14 @@
     },
     "abbreviations": [
       "Secondary Lymph Node Carcinoma",
-      "Lymph Node Sarcoma",
       "Lymph Node Tumor",
-      "Lymph Node Cancer Metastasis",
-      "Metastatic Lymph Node Malignancy",
-      "Non-Specific Lymph Node Cancer",
       "Lymph Node Infiltration",
-      "Lymph Node Neoplastic Disease",
       "Lymph Node Malignant Growth",
-      "Lymph Node Metastatic Disease",
       "Lymphatic System Cancer",
       "Lymph Node Secondary Tumor",
-      "Lymph Node Malignant Transformation",
-      "Lymph Node Neoplasm of Unknown Origin",
-      "Lymph Node Malignancy of Unknown Primary",
       "Lymphatic Neoplasm",
       "Lymph Node Malignant Disease",
-      "Lymph Node Carcinomatous Involvement",
-      "Lymph Node Metastatic Carcinoma",
-      "Lymph Node Malignant Lesion",
-      "Lymph Node Cancer of Unknown Origin"
+      "Lymph Node Malignant Lesion"
     ]
   },
   {
@@ -1475,21 +1035,13 @@
       "Lymphatic Hodgkin Lymphoma",
       "Hodgkin Lymphatic Malignancy",
       "Classic HL",
-      "Hodgkin Lymphoma Variant",
       "Lymphoma of Hodgkin Type",
-      "Hodgkin Lymphoma Subtype",
       "Hodgkin Lymphoma Neoplasm",
       "Hodgkin Lymphoma Malignancy",
       "Hodgkin Lymphoma of Lymph Nodes",
       "Lymphoma with Reed-Sternberg Cells",
       "Reed-Sternberg Lymphoma",
-      "Lymphoma with Nodular Involvement",
-      "Nodular Hodgkin Lymphoma",
-      "Lymphoma with Lymphocyte Predominance",
-      "Lymphoma with Mixed Cellularity",
-      "Hodgkin Lymphoma Staging",
-      "Hodgkin Lymphoma Presentation",
-      "Hodgkin Lymphoma Clinical Variant"
+      "Nodular Hodgkin Lymphoma"
     ]
   },
   {
@@ -1505,7 +1057,6 @@
       "T/NK Cell Lymphoma",
       "Mature T-cell Malignancy",
       "Mature NK-cell Malignancy",
-      "Peripheral T/NK-cell Lymphoma",
       "Anaplastic T-cell Lymphoma",
       "Nasal NK/T-cell Lymphoma",
       "Mature T-cell Neoplasm",
@@ -1513,14 +1064,7 @@
       "T-cell Malignancy",
       "NK-cell Malignancy",
       "T/NK-cell Neoplasm",
-      "Mature T-cell Lymphoproliferative Disorder",
-      "Mature T/NK-cell Neoplasm",
-      "Extranodal T-cell Lymphoma",
-      "Extranodal T/NK-cell Malignancy",
-      "Adult T/NK-cell Lymphoma",
-      "Mature T/NK-cell Tumor",
-      "T/NK-cell Lymphoproliferative Disease",
-      "Malignant T/NK-cell Lymphoma"
+      "Mature T-cell Lymphoproliferative Disorder"
     ]
   },
   {
@@ -1535,20 +1079,11 @@
       "Cell Type Leukemia",
       "Specific Cell Leukemia",
       "Leukemia of Specified Cell Type",
-      "Lymphoid Leukemia",
-      "Myeloid Malignancy",
-      "B-Cell Leukemia Variant",
-      "T-Cell Leukemia Variant",
-      "Acute Non-Lymphoblastic Leukemia",
-      "Chronic Non-Lymphoblastic Leukemia",
       "Mixed Cell Type Leukemia",
       "Secondary Leukemia",
       "Leukemia with Specific Cell Lineage",
       "Leukemia with Defined Cell Type",
       "Lymphoblastic Leukemia",
-      "Myeloid Leukemia Variants",
-      "Acute Leukemia Subtypes",
-      "Chronic Leukemia Subtypes",
       "Leukemia with Specific Histology",
       "Leukemia of Unspecified Type",
       "Leukemia of Other Cell Types"
@@ -1569,21 +1104,8 @@
       "B-Cell Follicular Lymphoma",
       "Follicular Lymphoma, Non-Hodgkin",
       "Indolent Follicular Lymphoma",
-      "Follicular Lymphoma Subtype",
-      "Follicular Lymphoma Variant",
       "Follicular Lymphoma of the Lymph Nodes",
-      "Follicular Lymphoma of Bone Marrow",
-      "Follicular Lymphoma, Grade 1",
-      "Follicular Lymphoma, Grade 2",
-      "Follicular Lymphoma, Grade 3",
-      "Chronic Follicular Lymphoma",
-      "Follicular Lymphoma with Transformation",
-      "Follicular Lymphoma, Advanced Stage",
-      "Follicular Lymphoma, Stage I",
-      "Follicular Lymphoma, Stage II",
-      "Follicular Lymphoma, Stage III",
-      "Follicular Lymphoma, Stage IV",
-      "Follicular Lymphoma, Relapsed"
+      "Follicular Lymphoma of Bone Marrow"
     ]
   },
   {
@@ -1597,11 +1119,7 @@
     "abbreviations": [
       "Non-Follicular B-cell Lymphoma",
       "Non-Follicular T-cell Lymphoma",
-      "Atypical Lymphoma",
       "Aggressive Non-Follicular Lymphoma",
-      "Lymphoma Not Otherwise Specified",
-      "High-Grade Non-Follicular Lymphoma",
-      "Lymphoma of Unknown Origin",
       "Lymphoproliferative Disorder",
       "Non-Follicular Lymphoproliferative Disease",
       "Secondary Non-Follicular Lymphoma",
@@ -1610,11 +1128,7 @@
       "Non-Follicular Neoplasm",
       "Lymphoma with Mixed Cell Types",
       "Lymphoma of the Immune System",
-      "Systemic Non-Follicular Lymphoma",
-      "Non-Follicular Lymphoid Malignancy",
-      "Lymphoma with Aggressive Behavior",
-      "Lymphoma with Poor Prognosis",
-      "Non-Follicular Lymphatic Malignancy"
+      "Non-Follicular Lymphoid Malignancy"
     ]
   },
   {
@@ -1634,18 +1148,10 @@
       "Plasma Cell Tumor",
       "Primary Plasma Cell Neoplasm",
       "Plasma Cell Dyscrasia",
-      "Multiple Myeloma Variant",
       "Myeloma with Amyloidosis",
       "Plasma Cell Lymphoma",
-      "Plasma Cell Neoplasm with Extramedullary Disease",
-      "Systemic Plasmacytoma",
       "Myeloma with Renal Impairment",
-      "Bence Jones Myeloma",
-      "Light Chain Myeloma",
-      "Monoclonal Plasma Cell Disorder",
-      "Plasma Cell Malignant Neoplasm",
-      "Myeloma with Bone Lesions",
-      "Multiple Myeloma with Hypercalcemia"
+      "Monoclonal Plasma Cell Disorder"
     ]
   },
   {
@@ -1657,26 +1163,18 @@
       "description_2": "Other specified types of T/NK-cell lymphoma"
     },
     "abbreviations": [
-      "Peripheral NK-cell Lymphoma",
       "T/NK-cell Malignancy",
       "Nasal NK-cell Lymphoma",
       "T-cell Non-Hodgkin Lymphoma",
       "NK-cell Malignancy",
       "T-cell Lymphoproliferative Disorder",
       "Anaplastic T-cell Lymphoma",
-      "T-cell Lymphoma of Unknown Origin",
       "Aggressive NK-cell Lymphoma",
       "T-cell Lymphoma with Eosinophilia",
       "Extranodal T/NK-cell Lymphoma",
-      "T/NK-cell Lymphoma Variants",
       "T-cell Lymphoma of Skin",
       "NK-cell Lymphoma of Soft Tissue",
-      "T/NK-cell Lymphoma Subtypes",
-      "Systemic T-cell Lymphoma",
-      "T-cell Lymphoma with Cytotoxic Features",
-      "NK-cell Lymphoma with Hemophagocytic Syndrome",
-      "T/NK-cell Lymphoma with Bone Marrow Involvement",
-      "Malignant T/NK-cell Neoplasm"
+      "T-cell Lymphoma with Cytotoxic Features"
     ]
   },
   {
@@ -1699,15 +1197,7 @@
       "B-Cell Lymphoproliferative Disease",
       "B-cell Lymphoid Malignancy",
       "Lymphoma of B-cells",
-      "B-cell Lymphoma Variants",
-      "Lymphoma of Immunoproliferative Origin",
-      "Malignant Lymphoproliferative Disease",
-      "B-cell Neoplastic Disease",
-      "Malignant B-cell Disorder",
-      "B-cell Cancer",
-      "Lymphoma of B-cell Origin",
-      "B-cell Hematologic Malignancy",
-      "B-cell Tumor Disease"
+      "Lymphoma of Immunoproliferative Origin"
     ]
   },
   {
@@ -1720,25 +1210,17 @@
     },
     "abbreviations": [
       "Lymphoblastic Leukemia",
-      "B-Cell Acute Lymphoblastic Leukemia",
-      "T-Cell Acute Lymphoblastic Leukemia",
       "Lymphoid Neoplasm",
       "Lymphoid Blood Cancer",
-      "Acute Lymphoid Leukemia",
       "Lymphoid Blood Malignancy",
       "Lymphoid Cell Malignancy",
       "Lymphoid Tumor",
-      "Acute Lymphocytic Blood Cancer",
       "B-Cell Leukemia",
       "T-Cell Leukemia",
       "Lymphatic Leukemia",
       "Lymphoid Hematologic Malignancy",
-      "Acute Lymphoid Malignancy",
       "Lymphoid Leukemia Syndrome",
-      "Lymphoid Neoplastic Disease",
-      "Lymphoid Cell Proliferation",
-      "Acute Lymphoid Neoplasm",
-      "Lymphoid Malignant Disease"
+      "Lymphoid Cell Proliferation"
     ]
   },
   {
@@ -1752,25 +1234,16 @@
     "abbreviations": [
       "Myeloid Malignancy",
       "Myeloid Neoplasm",
-      "Acute Myeloid Neoplasm",
       "Myeloid Blood Cancer",
       "Myeloid Hematologic Malignancy",
       "Myeloid Cell Leukemia",
-      "Acute Myeloid Blood Cancer",
       "Primary Myeloid Leukemia",
       "Myeloid Leukemic Disorder",
       "Myeloid Tumor",
-      "Chronic Myeloid Neoplasm",
-      "Acute Myeloid Leukemia Variant",
-      "Myeloid Leukemia Subtype",
       "Myeloid Leukemia with Genetic Mutations",
-      "Acute Myeloid Leukemia with Auer Rods",
       "Secondary Myeloid Leukemia",
       "Myeloid Blast Crisis",
-      "Myeloid Leukemia with Cytogenetic Abnormalities",
-      "Myeloid Leukemia in Adults",
-      "Myeloid Leukemia in Children",
-      "Acute Myeloid Leukemia with Minimal Residual Disease"
+      "Myeloid Leukemia with Cytogenetic Abnormalities"
     ]
   },
   {
@@ -1793,15 +1266,7 @@
       "Mixed Dyslipidemia",
       "Lipoprotein Abnormalities",
       "Lipoprotein Disorders",
-      "Lipid Transport Disorders",
-      "Cholesterol Transport Disorders",
-      "Dyslipoproteinemia",
-      "Lipid Disturbances",
-      "Lipid Excess",
-      "Hyperlipoproteinemia Type II",
-      "Hyperlipoproteinemia Type III",
-      "Lipid Metabolic Syndrome",
-      "Lipoprotein Metabolic Disorders"
+      "Lipid Transport Disorders"
     ]
   },
   {
@@ -1814,25 +1279,17 @@
     },
     "abbreviations": [
       "Monocytic Malignancy",
-      "Acute Monocytic Malignancy",
       "Monocytic Blood Cancer",
       "Monocytic Hematological Malignancy",
-      "Acute Monocytic Neoplasm",
-      "Monocytic Leukemia Variant",
       "M5 Leukemia",
-      "Acute Myelomonocytic Leukemia",
-      "Acute Myelomonocytic Neoplasm",
       "Monocytic Cell Leukemia",
       "Monocytic Neoplasm",
       "Monoblast Leukemia",
       "Monocytic Blast Crisis",
       "Monocytic Leukemia Syndrome",
-      "Acute Monoblast Leukemia",
       "Malignant Monocyte Disorder",
       "Monocytic Lymphoid Leukemia",
-      "Monocytic Leukemia Type",
-      "Acute Monocytic Hemopathy",
-      "Monocytic Hematologic Malignancy"
+      "Monocytic Leukemia Type"
     ]
   },
   {
@@ -1846,22 +1303,10 @@
     "abbreviations": [
       "Unspecified Leukemia",
       "Leukemia NOS",
-      "Leukemia of Unknown Cell Type",
-      "Non-Specific Leukemia",
       "Generalized Leukemia",
-      "Leukemia of Unknown Origin",
       "Leukemia, Unspecified",
-      "Leukemia, Not Otherwise Specified",
-      "Acute Unclassified Leukemia",
-      "Chronic Unspecified Leukemia",
-      "Leukemia of Indeterminate Cell Type",
       "Leukemia, Cell Type Unknown",
-      "Leukemia, Uncharacterized",
-      "Leukemia, Undefined",
-      "Leukemia, Non-Specific Type",
-      "Leukemia, Unidentified",
       "Leukemia, Non-Differentiated",
-      "Leukemia, Non-Subtyped",
       "Leukemia, Unclassified",
       "Leukemia, Generic Type"
     ]
@@ -1875,26 +1320,18 @@
       "description_2": "Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue"
     },
     "abbreviations": [
-      "Non-Specific Blood Cancer",
       "Unspecified Hematological Malignancy",
       "Other Lymphoid Malignancy",
       "Lymphoid and Hematopoietic Cancer",
       "Hematopoietic Neoplasm",
       "Malignant Lymphoid Disorders",
       "Hematologic Tumors",
-      "Non-Specific Hematologic Neoplasm",
-      "Lymphatic Cancer",
       "Lymphoid Tissue Malignancy",
       "Hematological Tumor",
       "Malignant Neoplasm of Hematopoietic and Lymphoid Tissue",
-      "Lymphatic Malignancy",
       "Hematopoietic Cancer",
       "Other Hematologic Malignancies",
-      "Lymphoid Neoplasm",
-      "Hematologic Malignancy of Unspecified Type",
-      "Lymphoid and Hematopoietic Tumors",
-      "Malignant Neoplasm of Related Tissue",
-      "Miscellaneous Blood Cancer"
+      "Lymphoid Neoplasm"
     ]
   },
   {
@@ -1908,19 +1345,11 @@
     "abbreviations": [
       "Angina of Effort",
       "Angina on Exertion",
-      "Unstable Angina",
       "Angina with Myocardial Ischemia",
-      "Angina due to Coronary Artery Disease",
-      "Angina due to Myocardial Ischemia",
-      "Typical Angina",
-      "Atypical Angina",
       "Angina with ST-Segment Depression",
       "Angina with ST-Segment Elevation",
-      "Angina due to Spasm",
       "Angina with Cardiac Ischemia",
-      "Exercise-Induced Angina",
       "Angina with Chest Discomfort",
-      "Chronic Stable Angina",
       "Angina with Radiating Pain",
       "Angina with Dyspnea",
       "Angina with Nausea",
@@ -1937,26 +1366,18 @@
       "description_2": "Acute myocardial infarction"
     },
     "abbreviations": [
-      "Coronary Thrombosis",
       "Cardiac Infarction",
       "Heart Muscle Infarction",
       "Ischemic Heart Attack",
-      "Acute Coronary Syndrome",
-      "Coronary Artery Occlusion",
       "Myocardial Ischemia",
       "Heart Attack Event",
-      "Cardiac Arrest due to MI",
-      "Acute Coronary Event",
       "Transmural Myocardial Infarction",
       "Subendocardial Myocardial Infarction",
-      "Acute Coronary Insufficiency",
       "Heart Attack Syndrome",
       "Myocardial Necrosis",
       "Cardiac Infarct",
       "Acute Cardiac Infarction",
-      "Coronary Heart Attack",
-      "Acute Ischemic Heart Disease",
-      "Acute Heart Failure due to MI"
+      "Coronary Heart Attack"
     ]
   },
   {
@@ -1970,24 +1391,16 @@
     "abbreviations": [
       "Atherosclerotic Plaque",
       "Atherosclerotic Vascular Disease",
-      "Peripheral Atherosclerosis",
       "Cerebral Atherosclerosis",
       "Atherosclerotic Lesions",
       "Atherosclerotic Cardiovascular Disease",
       "Atherogenic Dyslipidemia",
       "Atherosclerotic Artery Disease",
       "Atherosclerotic Heart Disease",
-      "Systemic Atherosclerosis",
       "Atherosclerotic Vascular Disorder",
       "Atherogenic Disease",
       "Atherosclerotic Narrowing",
-      "Atherosclerosis of the Aorta",
-      "Atherosclerosis of the Carotid Arteries",
-      "Atherosclerosis of the Coronary Arteries",
-      "Atherosclerosis of the Peripheral Arteries",
-      "Atherogenic Vascular Disease",
-      "Atherosclerotic Obstructive Disease",
-      "Atherosclerosis-Related Cardiovascular Events"
+      "Atherosclerosis of the Aorta"
     ]
   },
   {
@@ -1999,26 +1412,18 @@
       "description_2": "Chronic ischemic heart disease"
     },
     "abbreviations": [
-      "Chronic Ischemic Cardiopathy",
       "Chronic Coronary Disease",
       "Ischemic Heart Condition",
-      "Chronic Myocardial Ischemic Disease",
       "Persistent Ischemic Heart Disease",
       "Long-term Ischemic Heart Disease",
       "Ischemic Heart Syndrome",
-      "Chronic Angina Pectoris",
       "Stable Coronary Artery Disease",
       "Ischemic Heart Failure",
       "Cardiac Ischemia",
       "Ischemic Heart Disorder",
       "Chronic Coronary Heart Condition",
       "Cardiac Ischemic Disease",
-      "Ischemic Heart Affliction",
-      "Chronic Ischemic Heart Condition",
-      "Ischemic Myocardial Disease",
-      "Chronic Cardiac Ischemia",
-      "Ischemic Heart Malady",
-      "Cardiac Ischemic Syndrome"
+      "Chronic Ischemic Heart Condition"
     ]
   },
   {
@@ -2033,24 +1438,14 @@
       "Cerebral Vascular Accident",
       "CVA",
       "Ischemic Brain Attack",
-      "Transient Ischemic Attack",
       "TIA",
       "Focal Cerebral Ischemia",
       "Cerebral Thrombosis",
-      "Thrombotic Stroke",
-      "Embolic Stroke",
       "Cerebral Ischemic Event",
-      "Acute Cerebral Infarction",
-      "Neurovascular Accident",
       "Cerebral Infarction Syndrome",
       "Subcortical Infarction",
-      "Lacunar Infarction",
-      "Cerebral Infarction Due to Thrombosis",
-      "Cerebral Infarction Due to Embolism",
       "Cerebral Ischemic Attack",
-      "Cerebral Infarction with Hemorrhagic Transformation",
-      "Cerebral Ischemic Injury",
-      "Acute Focal Cerebral Ischemia"
+      "Cerebral Ischemic Injury"
     ]
   },
   {
@@ -2069,16 +1464,8 @@
       "Cerebral Artery Disease",
       "Intracranial Stenosis",
       "Intracranial Occlusion",
-      "Cerebral Circulation Impairment",
-      "Cerebral Ischemic Disease",
-      "Non-Infarct Cerebral Ischemia",
-      "Chronic Cerebral Artery Stenosis",
-      "Chronic Cerebral Artery Occlusion",
-      "Cerebral Atherosclerosis",
       "Cerebral Vascular Insufficiency",
       "Cerebral Artery Compromise",
-      "Cerebral Blood Flow Restriction",
-      "Cerebral Artery Pathology",
       "Cerebral Artery Thrombosis",
       "Cerebral Artery Lesion",
       "Cerebral Vascular Compromise"
@@ -2101,18 +1488,10 @@
       "Thrombosis of the Popliteal Artery",
       "Thrombosis of the Subclavian Artery",
       "Thrombosis of the Renal Arteries",
-      "Thromboembolic Disease",
       "Arterial Occlusion",
-      "Chronic Arterial Thrombosis",
       "Ischemic Arterial Disease",
       "Arterial Thromboembolism",
-      "Acute Limb Ischemia",
-      "Arterial Thrombus Formation",
-      "Peripheral Vascular Thrombosis",
-      "Lower Extremity Arterial Thrombosis",
-      "Thrombosis of the Brachial Artery",
-      "Thrombosis of the Vertebral Artery",
-      "Acute Ischemic Stroke"
+      "Arterial Thrombus Formation"
     ]
   },
   {
@@ -2132,18 +1511,8 @@
       "Vertebral Artery Occlusion",
       "Non-occlusive Stenosis of Precerebral Arteries",
       "Non-infarcting Occlusion of Precerebral Arteries",
-      "Cerebral Ischemia due to Precerebral Artery Stenosis",
-      "Cerebral Ischemia due to Precerebral Artery Occlusion",
-      "Non-embolic Stenosis of Precerebral Arteries",
-      "Non-embolic Occlusion of Precerebral Arteries",
-      "Chronic Stenosis of Precerebral Arteries",
-      "Chronic Occlusion of Precerebral Arteries",
-      "Transient Ischemic Attack due to Precerebral Artery Stenosis",
-      "Transient Ischemic Attack due to Precerebral Artery Occlusion",
       "Cerebrovascular Insufficiency from Precerebral Artery Stenosis",
       "Cerebrovascular Insufficiency from Precerebral Artery Occlusion",
-      "Subclinical Stenosis of Precerebral Arteries",
-      "Subclinical Occlusion of Precerebral Arteries",
       "Precerebral Artery Disease"
     ]
   }

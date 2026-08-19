@@ -1,4 +1,3 @@
-import json
 import pandas as pd
 
 
@@ -6,8 +5,10 @@ import pandas as pd
 # FILE PATHS
 # ============================================================
 
-MASTER_JSON = "data/master_abbreviations.json"
+ICD_CSV = "data/ICD_with_categories_updated.csv"
 ONCOLOGY_CSV = "data/Indication_Oncology(in).csv"
+
+OUTPUT_CSV = "data/ICD_with_categories_updated_difference.csv"
 
 
 # ============================================================
@@ -18,88 +19,104 @@ def normalize(text):
     """
     Normalize text for case-insensitive comparison.
     """
+    if pd.isna(text):
+        return ""
+
     return str(text).strip().casefold()
 
 
 def parse_abbreviations(value):
     """
-    Convert pipe-separated abbreviations into a list.
+    Convert abbreviations into a list.
+
+    Supports:
+    - A | B | C
+    - A, B, C
     """
 
     if pd.isna(value):
         return []
 
+    value = str(value).strip()
+
+    if not value:
+        return []
+
+    # Support both separators
+    value = value.replace("|", ",")
+
     return [
         item.strip()
-        for item in str(value).split("|")
+        for item in value.split(",")
         if item.strip()
     ]
 
 
-# ============================================================
-# READ MASTER JSON
-# ============================================================
+def create_match_key(description_2, description_3):
+    """
+    Create a matching key using BOTH description_2
+    and description_3.
+    """
 
-with open(MASTER_JSON, "r", encoding="utf-8") as f:
-    master_data = json.load(f)
-
-
-# ============================================================
-# CREATE DESCRIPTION_2 -> FINAL ABBREVIATIONS MAP
-# ============================================================
-
-master_description_map = {}
-
-for record in master_data:
-
-    description_2 = record.get("description_2")
-
-    if not description_2:
-        continue
-
-    final_abbreviations = record.get(
-        "final_abbreviations",
-        []
+    return (
+        normalize(description_2),
+        normalize(description_3)
     )
 
-    master_description_map[normalize(description_2)] = {
-        "description_2": description_2,
-        "final_abbreviations": final_abbreviations
-    }
+
+# ============================================================
+# READ ICD CSV
+# ============================================================
+
+print("\nReading ICD_with_categories_updated.csv...")
+
+icd_df = pd.read_csv(
+    ICD_CSV,
+    encoding="utf-8-sig"
+)
+
+print(f"ICD rows loaded: {len(icd_df)}")
 
 
 # ============================================================
 # READ ONCOLOGY CSV
 # ============================================================
 
-df = pd.read_csv(ONCOLOGY_CSV)
+print("Reading Indication_Oncology(in).csv...")
+
+oncology_df = pd.read_csv(
+    ONCOLOGY_CSV,
+    encoding="utf-8-sig"
+)
+
+print(f"Oncology rows loaded: {len(oncology_df)}")
 
 
 # ============================================================
-# ASK USER FOR SCENARIO
+# ASK USER FOR DIFFERENCE TYPE
 # ============================================================
 
 print("\n==============================================")
 print("       ABBREVIATION DIFFERENCE GENERATOR")
 print("==============================================")
 
-print("\nMatching will be done using:")
-print("description_2 (case-insensitive)")
+print("\nMatching Oncology rows using:")
+print("description_2 + description_3")
+print("(both case-insensitive)")
 
-print("\nOnly Oncology rows whose description_2")
-print("exists in master_abbreviations.json will be processed.")
+print("\nSelect the difference you want:\n")
 
-print("\nSelect the scenario:\n")
+print("1. Oncology - Final")
+print("   Oncology abbreviations NOT in ICD Final Abbreviations")
 
-print("1. Oncology - Master")
-print("   Oncology abbreviations NOT in Master")
-
-print("\n2. Master - Oncology")
-print("   Master abbreviations NOT in Oncology")
+print("\n2. Final - Oncology")
+print("   ICD Final Abbreviations NOT in Oncology")
 
 print("\n==============================================")
 
-scenario = input("\nEnter your choice (1 or 2): ").strip()
+scenario = input(
+    "\nEnter your choice (1 or 2): "
+).strip()
 
 
 # ============================================================
@@ -107,73 +124,110 @@ scenario = input("\nEnter your choice (1 or 2): ").strip()
 # ============================================================
 
 if scenario not in ["1", "2"]:
+
     print("\nInvalid choice. Please enter 1 or 2.")
     exit()
 
 
 # ============================================================
-# OUTPUT FILE
+# CREATE ONCOLOGY MATCH MAP
 # ============================================================
 
-if scenario == "1":
-    OUTPUT_CSV = "data/difference_oncology_minus_master.csv"
-else:
-    OUTPUT_CSV = "data/difference_master_minus_oncology.csv"
+oncology_match_map = {}
 
+for _, row in oncology_df.iterrows():
 
-# ============================================================
-# PROCESS ONCOLOGY ROWS
-# ============================================================
+    description_2 = row["description_2"]
+    description_3 = row["description_3"]
 
-output_rows = []
-
-matched_count = 0
-unmatched_count = 0
-
-
-for _, row in df.iterrows():
-
-    oncology_description = row["description_2"]
-
-    # Skip empty description_2
-    if pd.isna(oncology_description):
-        unmatched_count += 1
+    # Skip rows where both descriptions are empty
+    if pd.isna(description_2) and pd.isna(description_3):
         continue
 
-    description_key = normalize(
-        oncology_description
+    # --------------------------------------------------------
+    # MATCH USING description_2 + description_3
+    # --------------------------------------------------------
+
+    match_key = create_match_key(
+        description_2,
+        description_3
     )
-
-    # --------------------------------------------------------
-    # MATCH USING DESCRIPTION_2 ONLY
-    # --------------------------------------------------------
-
-    master_info = master_description_map.get(
-        description_key
-    )
-
-    # If description_2 does not exist in Master,
-    # DO NOT include this Oncology row
-    if master_info is None:
-        unmatched_count += 1
-        continue
-
-    matched_count += 1
-
-    # --------------------------------------------------------
-    # GET ABBREVIATIONS
-    # --------------------------------------------------------
 
     oncology_abbreviations = parse_abbreviations(
         row["abbreviations"]
     )
 
-    final_abbreviations = master_info[
-        "final_abbreviations"
-    ]
+    oncology_match_map[match_key] = oncology_abbreviations
+
+
+# ============================================================
+# CREATE NEW COLUMNS
+# ============================================================
+
+oncology_abbreviations_column = []
+difference_column = []
+
+
+# ============================================================
+# PROCESS EACH ICD ROW
+# ============================================================
+
+matched_count = 0
+unmatched_count = 0
+
+
+for _, row in icd_df.iterrows():
+
+    description_2 = row["description_2"]
+    description_3 = row["description_3"]
+
 
     # --------------------------------------------------------
-    # NORMALIZE FOR COMPARISON
+    # CREATE MATCH KEY
+    # --------------------------------------------------------
+
+    match_key = create_match_key(
+        description_2,
+        description_3
+    )
+
+
+    # --------------------------------------------------------
+    # FIND EXACT MATCH IN ONCOLOGY
+    # --------------------------------------------------------
+
+    oncology_abbreviations = oncology_match_map.get(
+        match_key
+    )
+
+
+    # --------------------------------------------------------
+    # NO MATCH
+    # --------------------------------------------------------
+
+    if oncology_abbreviations is None:
+
+        oncology_abbreviations_column.append("")
+        difference_column.append("")
+
+        unmatched_count += 1
+        continue
+
+
+    matched_count += 1
+
+
+    # --------------------------------------------------------
+    # GET ICD FINAL ABBREVIATIONS
+    # --------------------------------------------------------
+
+    final_abbreviations = parse_abbreviations(
+        row["final abbreviations"]
+    )
+
+
+    # --------------------------------------------------------
+    # NORMALIZE ABBREVIATIONS
     # --------------------------------------------------------
 
     oncology_normalized = {
@@ -181,28 +235,30 @@ for _, row in df.iterrows():
         for abbr in oncology_abbreviations
     }
 
-    master_normalized = {
+    final_normalized = {
         normalize(abbr)
         for abbr in final_abbreviations
     }
 
-    # --------------------------------------------------------
+
+    # ========================================================
     # SCENARIO 1
-    # ONCOLOGY - MASTER
-    # --------------------------------------------------------
+    # ONCOLOGY - FINAL
+    # ========================================================
 
     if scenario == "1":
 
         difference = [
             abbr
             for abbr in oncology_abbreviations
-            if normalize(abbr) not in master_normalized
+            if normalize(abbr) not in final_normalized
         ]
 
-    # --------------------------------------------------------
+
+    # ========================================================
     # SCENARIO 2
-    # MASTER - ONCOLOGY
-    # --------------------------------------------------------
+    # FINAL - ONCOLOGY
+    # ========================================================
 
     else:
 
@@ -212,37 +268,36 @@ for _, row in df.iterrows():
             if normalize(abbr) not in oncology_normalized
         ]
 
+
     # --------------------------------------------------------
-    # ADD OUTPUT ROW
+    # APPEND VALUES
     # --------------------------------------------------------
 
-    output_rows.append({
-    "Category": row["category"],
-    "Description_2": oncology_description,
+    oncology_abbreviations_column.append(
+        " | ".join(oncology_abbreviations)
+    )
 
-    "Oncology Abbreviations":
-        " | ".join(oncology_abbreviations),
-
-    "Final Abbreviations":
-        " | ".join(final_abbreviations),
-
-    "Difference":
+    difference_column.append(
         " | ".join(difference)
-})
+    )
 
 
 # ============================================================
-# CREATE OUTPUT DATAFRAME
+# APPEND NEW COLUMNS TO ICD DATAFRAME
 # ============================================================
 
-output_df = pd.DataFrame(output_rows)
+icd_df["Oncology Abbreviations"] = (
+    oncology_abbreviations_column
+)
+
+icd_df["Difference"] = difference_column
 
 
 # ============================================================
 # SAVE OUTPUT
 # ============================================================
 
-output_df.to_csv(
+icd_df.to_csv(
     OUTPUT_CSV,
     index=False,
     encoding="utf-8-sig"
@@ -258,17 +313,31 @@ print("             PROCESS COMPLETED")
 print("==============================================")
 
 if scenario == "1":
-    print("Scenario: Oncology - Master")
+
+    print("Difference type:")
+    print("Oncology - Final")
+
 else:
-    print("Scenario: Master - Oncology")
 
-print("\nMatching field:")
-print("description_2 (case-insensitive)")
+    print("Difference type:")
+    print("Final - Oncology")
 
-print(f"\nMatched Oncology rows: {matched_count}")
-print(f"Skipped Oncology rows: {unmatched_count}")
 
-print(f"\nOutput file:")
+print("\nMatching fields:")
+print("description_2 + description_3")
+print("(case-insensitive)")
+
+
+print(f"\nMatched ICD rows: {matched_count}")
+print(f"Unmatched ICD rows: {unmatched_count}")
+
+
+print("\nColumns appended:")
+print("1. Oncology Abbreviations")
+print("2. Difference")
+
+
+print("\nOutput file:")
 print(OUTPUT_CSV)
 
 print("==============================================\n")
