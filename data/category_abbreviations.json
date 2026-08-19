@@ -1,5 +1,95 @@
 [
   {
+    "category_description2": "lip cancer|malignant neoplasm of lip",
+    "category": "Lip Cancer",
+    "description_2": "Malignant neoplasm of lip",
+    "payload_category": {
+      "category": "Lip Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lip Cancer",
+        "Lip Carcinoma",
+        "Lip Malignancy",
+        "Lip Squamous Cell Carcinoma",
+        "Lip SCC",
+        "Malignant Neoplasm of Lip"
+      ],
+      "clinical_trials": [
+        "Lip Cancer",
+        "Lip Carcinoma",
+        "Lip SCC",
+        "Squamous Cell Carcinoma of the Lip",
+        "Malignant Neoplasm of Lip",
+        "Malignant Neoplasms of Lip Oral Cavity"
+      ]
+    }
+  },
+  {
+    "category_description2": "tongue cancer|malignant neoplasm of other and unspecified parts of tongue",
+    "category": "Tongue Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of tongue",
+    "payload_category": {
+      "category": "Tongue Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Tongue Cancer",
+        "Tongue Carcinoma",
+        "Malignancy of Tongue",
+        "Glossal Cancer",
+        "Lingual Cancer"
+      ],
+      "clinical_trials": [
+        "Tongue Cancer",
+        "Tongue Carcinoma",
+        "Cancer of the Tongue",
+        "Tongue Neoplasms",
+        "Squamous Cell Carcinoma of the Tongue",
+        "Oral Cancer",
+        "Tongue Tumor",
+        "Malignant Neoplasm of Tongue",
+        "Glossal Cancer"
+      ]
+    }
+  },
+  {
+    "category_description2": "skin cancer|malignant melanoma of skin",
+    "category": "Skin Cancer",
+    "description_2": "Malignant melanoma of skin",
+    "payload_category": {
+      "category": "Skin Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Skin Cancer",
+        "Melanoma",
+        "Nonmelanoma Skin Cancer",
+        "Basal Cell Carcinoma",
+        "Squamous Cell Carcinoma",
+        "Keratinocyte Carcinoma",
+        "Cutaneous Melanoma",
+        "BCC",
+        "SCC"
+      ],
+      "clinical_trials": [
+        "Skin Cancer",
+        "Malignant Skin Lesions",
+        "Basal Cell Carcinoma",
+        "BCC",
+        "Cutaneous Squamous Cell Carcinoma",
+        "C-SCC",
+        "Melanoma",
+        "Non-Melanocytic Skin Tumors",
+        "Melanocytic Skin Tumors",
+        "Actinic Keratosis",
+        "Superficial Squamous Cell Carcinoma",
+        "Seborrheic Keratosis",
+        "Melanocytic Nevi"
+      ]
+    }
+  },
+  {
     "category_description2": "gum cancer|malignant neoplasm of gum",
     "category": "Gum Cancer",
     "description_2": "Malignant neoplasm of gum",
@@ -17,9 +107,2011 @@
       "clinical_trials": [
         "Gum Cancer",
         "Oral Cancer",
-        "Malignancy of Gum",
-        "Gum Malignancy",
         "Gum Disease"
+      ]
+    }
+  },
+  {
+    "category_description2": "palate cancer|malignant neoplasm of palate",
+    "category": "Palate Cancer",
+    "description_2": "Malignant neoplasm of palate",
+    "payload_category": {
+      "category": "Palate Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Palate Cancer",
+        "Hard Palate Cancer",
+        "Soft Palate Cancer",
+        "Squamous Cell Carcinoma of the Soft Palate",
+        "SCCSP",
+        "Malignant Neoplasm of the Palate",
+        "Palatal Malignancy"
+      ],
+      "clinical_trials": [
+        "Palate Cancer",
+        "Soft Palate Cancer",
+        "Oropharyngeal Cancer",
+        "Malignancy of Soft Palate",
+        "Soft Palate Malignancy"
+      ]
+    }
+  },
+  {
+    "category_description2": "salivary gland cancer|malignant neoplasm of other and unspecified major salivary glands",
+    "category": "Salivary Gland Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified major salivary glands",
+    "payload_category": {
+      "category": "Salivary Gland Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Salivary Gland Cancer",
+        "Salivary Gland Carcinoma",
+        "Salivary Gland Malignancy",
+        "Salivary Gland Neoplasm",
+        "SGC",
+        "Mucoepidermoid Carcinoma",
+        "Adenoid Cystic Carcinoma"
+      ],
+      "clinical_trials": [
+        "Salivary Gland Cancer",
+        "Salivary Gland Carcinoma",
+        "Salivary Gland Malignancy",
+        "Salivary Gland Tumors",
+        "Adenoid Cystic Cancer",
+        "ACC",
+        "Mucoepidermoid Cancer",
+        "MEC",
+        "Salivary Duct Gland Cancer",
+        "Adenocarcinoma of Salivary Gland",
+        "Myoepithelial Carcinoma",
+        "Salivary Gland Malignant Neoplasms"
+      ]
+    }
+  },
+  {
+    "category_description2": "tonsil cancer|malignant neoplasm of tonsil",
+    "category": "Tonsil Cancer",
+    "description_2": "Malignant neoplasm of tonsil",
+    "payload_category": {
+      "category": "Tonsil Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Tonsil Cancer",
+        "Tonsillar Carcinoma",
+        "Tonsil Malignancy",
+        "Tonsillar Squamous Cell Carcinoma",
+        "TSCC",
+        "Base of Tongue Cancer",
+        "BOTSCC",
+        "Oropharyngeal Cancer",
+        "Tonsil SCC",
+        "Tonsillectomy-related Cancer"
+      ],
+      "clinical_trials": [
+        "Tonsil Cancer",
+        "Tonsil Carcinoma",
+        "Tonsil Malignancy",
+        "Tonsil Neoplasm",
+        "Tonsil Lymphoma",
+        "Base of Tongue Tumor",
+        "Base of Tongue Carcinoma",
+        "Oropharynx Cancer",
+        "Oropharynx Neoplasm"
+      ]
+    }
+  },
+  {
+    "category_description2": "oropharyngeal cancer|malignant neoplasm of oropharynx",
+    "category": "Oropharyngeal Cancer",
+    "description_2": "Malignant neoplasm of oropharynx",
+    "payload_category": {
+      "category": "Oropharyngeal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Oropharyngeal Cancer",
+        "Oropharyngeal Carcinoma",
+        "Oropharyngeal Malignancy",
+        "Oropharyngeal Squamous Cell Carcinoma",
+        "OSCC",
+        "Malignant Neoplasm of Oropharynx",
+        "Cancer of the Oropharynx"
+      ],
+      "clinical_trials": [
+        "Oropharyngeal Cancer",
+        "Oropharyngeal Carcinoma",
+        "OPC",
+        "Cancer of the Oropharynx",
+        "Recurrent Oropharyngeal Cancer",
+        "Recurrent Oropharynx Carcinoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "nasopharyngeal cancer|malignant neoplasm of nasopharynx",
+    "category": "Nasopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of nasopharynx",
+    "payload_category": {
+      "category": "Nasopharyngeal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Nasopharyngeal Cancer",
+        "Nasopharyngeal Carcinoma",
+        "NPC",
+        "Malignant Neoplasm of Nasopharynx",
+        "Head and Neck Cancer"
+      ],
+      "clinical_trials": [
+        "Nasopharyngeal Cancer",
+        "Nasopharyngeal Carcinoma",
+        "Malignant Neoplasm of Nasopharynx",
+        "Nasopharyngeal Cancers"
+      ]
+    }
+  },
+  {
+    "category_description2": "hypopharyngeal cancer|malignant neoplasm of hypopharynx",
+    "category": "Hypopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of hypopharynx",
+    "payload_category": {
+      "category": "Hypopharyngeal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Hypopharyngeal Cancer",
+        "Hypopharyngeal Carcinoma",
+        "Hypopharyngeal Malignancy",
+        "Squamous Cell Carcinoma of Hypopharynx",
+        "SCC of Hypopharynx",
+        "Laryngopharyngeal Cancer",
+        "Laryngeal Cancer",
+        "Hypopharyngeal Neoplasm"
+      ],
+      "clinical_trials": [
+        "Hypopharyngeal Cancer",
+        "Hypopharyngeal Carcinoma",
+        "Hypopharyngeal Squamous Cell Carcinoma",
+        "HPC"
+      ]
+    }
+  },
+  {
+    "category_description2": "esophageal cancer|malignant neoplasm of esophagus",
+    "category": "Esophageal Cancer",
+    "description_2": "Malignant neoplasm of esophagus",
+    "payload_category": {
+      "category": "Esophageal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Esophageal Cancer",
+        "Esophageal Carcinoma",
+        "Esophageal Squamous Cell Carcinoma",
+        "Esophageal Adenocarcinoma",
+        "ESCC",
+        "EAC",
+        "Malignancy of Esophagus"
+      ],
+      "clinical_trials": [
+        "Esophageal Cancer",
+        "Esophageal Carcinoma",
+        "Esophageal Malignancy",
+        "Squamous-cell Carcinoma of Esophagus",
+        "Adenocarcinoma of Esophagus",
+        "Superficial Esophageal Cancer"
+      ]
+    }
+  },
+  {
+    "category_description2": "stomach cancer|malignant neoplasm of stomach",
+    "category": "Stomach Cancer",
+    "description_2": "Malignant neoplasm of stomach",
+    "payload_category": {
+      "category": "Stomach Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Stomach Cancer",
+        "Gastric Cancer",
+        "Gastric Carcinoma",
+        "Malignancy of Stomach",
+        "Malignant Neoplasm of Stomach"
+      ],
+      "clinical_trials": [
+        "Stomach Cancer",
+        "Gastric Cancer",
+        "Gastric Malignancy",
+        "Malignant Neoplasm of Stomach",
+        "Gastric Tumor",
+        "Gastric Subepithelial Tumor"
+      ]
+    }
+  },
+  {
+    "category_description2": "small intestinal cancer|malignant neoplasm of small intestine",
+    "category": "Small Intestinal Cancer",
+    "description_2": "Malignant neoplasm of small intestine",
+    "payload_category": {
+      "category": "Small Intestinal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Small Intestinal Cancer",
+        "Small Intestinal Carcinoma",
+        "Small Bowel Cancer",
+        "Small Bowel Carcinoma",
+        "Malignancy of Small Intestine",
+        "Small Intestinal Malignancy",
+        "Adenocarcinoma of Small Intestine",
+        "Small Intestinal Neoplasm",
+        "Small Intestinal Tumor",
+        "Small Bowel Neoplasm",
+        "Small Bowel Tumor"
+      ],
+      "clinical_trials": [
+        "Small Intestinal Cancer",
+        "Small Bowel Cancer",
+        "Small Intestine Cancer",
+        "Small Intestine Adenocarcinoma",
+        "Advanced Small Intestine Cancer",
+        "Neuroendocrine Tumors of Small Intestine",
+        "Appendiceal Cancers",
+        "Cancer of the Small Intestine"
+      ]
+    }
+  },
+  {
+    "category_description2": "colon cancer|malignant neoplasm of colon",
+    "category": "Colon Cancer",
+    "description_2": "Malignant neoplasm of colon",
+    "payload_category": {
+      "category": "Colon Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Colon Cancer",
+        "Colon Carcinoma",
+        "Colorectal Cancer",
+        "Malignancy of Colon",
+        "Malignancy of Colorectum",
+        "Adenocarcinoma of Colon",
+        "Advanced Colon Cancer",
+        "Early Colon Cancer",
+        "Serrated Adenoma",
+        "Conventional Adenoma",
+        "Colonic Malignancy"
+      ],
+      "clinical_trials": [
+        "Colon Cancer",
+        "Colorectal Cancer",
+        "Cancer of the Colon",
+        "Colonic Cancer",
+        "Colorectal Carcinoma",
+        "CRC"
+      ]
+    }
+  },
+  {
+    "category_description2": "anal cancer|malignant neoplasm of anus and anal canal",
+    "category": "Anal Cancer",
+    "description_2": "Malignant neoplasm of anus and anal canal",
+    "payload_category": {
+      "category": "Anal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Anal Cancer",
+        "Anal Carcinoma",
+        "Anal Malignancy",
+        "Squamous Cell Carcinoma of the Anus",
+        "Anal SCC",
+        "Anal Squamous Cell Cancer",
+        "HPV-Related Anal Cancer",
+        "Malignant Neoplasm of Anal Canal"
+      ],
+      "clinical_trials": [
+        "Anal Cancer",
+        "Anal Neoplasm",
+        "Anus Neoplasms",
+        "High-Grade Anal Intraepithelial Neoplasia",
+        "HSIL",
+        "HGAIN"
+      ]
+    }
+  },
+  {
+    "category_description2": "liver cancer|malignant neoplasm of liver and intrahepatic bile ducts",
+    "category": "Liver Cancer",
+    "description_2": "Malignant neoplasm of liver and intrahepatic bile ducts",
+    "payload_category": {
+      "category": "Liver Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Liver Cancer",
+        "Liver Carcinoma",
+        "Hepatocellular Carcinoma",
+        "HCC",
+        "Intrahepatic Cholangiocarcinoma",
+        "ICC",
+        "Primary Liver Cancer",
+        "Malignant Neoplasm of Liver"
+      ],
+      "clinical_trials": [
+        "Liver Cancer",
+        "Liver Carcinoma",
+        "Hepatocellular Carcinoma",
+        "HCC",
+        "Primary Liver Carcinoma",
+        "Liver Tumour",
+        "Hepatic Tumors",
+        "Malignancy of Liver"
+      ]
+    }
+  },
+  {
+    "category_description2": "bile duct cancer|malignant neoplasm of other and unspecified parts of biliary tract",
+    "category": "Bile Duct Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of biliary tract",
+    "payload_category": {
+      "category": "Bile Duct Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Bile Duct Cancer",
+        "Bile Duct Carcinoma",
+        "Cholangiocarcinoma",
+        "Intrahepatic Cholangiocarcinoma",
+        "Extrahepatic Cholangiocarcinoma",
+        "Biliary Tract Cancer",
+        "Malignancy of Bile Duct",
+        "Malignant Neoplasm of Bile Duct"
+      ],
+      "clinical_trials": [
+        "Bile Duct Cancer",
+        "Bile Duct Carcinoma",
+        "Bile Duct Malignancy",
+        "Bile Duct Tumours",
+        "Bile Duct Neoplasms",
+        "Klatskin Tumor",
+        "Biliary Cancer"
+      ]
+    }
+  },
+  {
+    "category_description2": "pancreatic cancer|malignant neoplasm of pancreas",
+    "category": "Pancreatic Cancer",
+    "description_2": "Malignant neoplasm of pancreas",
+    "payload_category": {
+      "category": "Pancreatic Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Pancreatic Cancer",
+        "Pancreatic Carcinoma",
+        "Pancreatic Malignancy",
+        "Pancreatic Ductal Adenocarcinoma",
+        "PDAC",
+        "Malignant Neoplasm of Pancreas"
+      ],
+      "clinical_trials": [
+        "Pancreatic Cancer",
+        "Pancreatic Carcinoma",
+        "Malignancy of Pancreas",
+        "Malignant Neoplasm of Pancreas",
+        "Solid Pseudopapillary Neoplasm of the Pancreas",
+        "Frantz's Tumor of the Pancreas"
+      ]
+    }
+  },
+  {
+    "category_description2": "sinus cancer|malignant neoplasm of accessory sinuses",
+    "category": "Sinus Cancer",
+    "description_2": "Malignant neoplasm of accessory sinuses",
+    "payload_category": {
+      "category": "Sinus Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Sinus Cancer",
+        "Paranasal Sinus Cancer",
+        "Nasal Cavity Cancer",
+        "Sinus Malignancy",
+        "Malignancy of Sinus",
+        "Malignancy of Paranasal Sinus",
+        "Malignancy of Nasal Cavity"
+      ],
+      "clinical_trials": [
+        "Sinus Cancer",
+        "Paranasal Sinus Cancer",
+        "Maxillary Sinus Cancer",
+        "Paranasal Sinus Neoplasms",
+        "Maxillary Sinus Neoplasms",
+        "Malignant Neoplasm of Sinus"
+      ]
+    }
+  },
+  {
+    "category_description2": "laryngeal cancer|malignant neoplasm of larynx",
+    "category": "Laryngeal Cancer",
+    "description_2": "Malignant neoplasm of larynx",
+    "payload_category": {
+      "category": "Laryngeal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Laryngeal Cancer",
+        "Laryngeal Carcinoma",
+        "Malignancy of Larynx",
+        "Laryngeal Malignancy",
+        "Cancer of the Larynx"
+      ],
+      "clinical_trials": [
+        "Laryngeal Cancer",
+        "Larynx Cancer",
+        "Laryngeal Carcinoma",
+        "Cancer of Larynx"
+      ]
+    }
+  },
+  {
+    "category_description2": "lung cancer|malignant neoplasm of bronchus and lung",
+    "category": "Lung Cancer",
+    "description_2": "Malignant neoplasm of bronchus and lung",
+    "payload_category": {
+      "category": "Lung Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lung Cancer",
+        "Lung Carcinoma",
+        "Non-Small Cell Lung Cancer",
+        "NSCLC",
+        "Lung Adenocarcinoma",
+        "Lung Malignancy",
+        "Malignant Neoplasm of Lung",
+        "Squamous Cell Lung Carcinoma",
+        "Adenocarcinoma of Lung",
+        "Lung Cancer Death",
+        "Lung Cancer Treatment",
+        "Lung Cancer Diagnosis",
+        "Lung Cancer Screening"
+      ],
+      "clinical_trials": [
+        "Lung Cancer",
+        "Lung Carcinoma",
+        "Lung Malignancy",
+        "Lung Tumors",
+        "Pulmonary Neoplasms",
+        "Lung Malignancies",
+        "Lung Tumor",
+        "Lung Metastases"
+      ]
+    }
+  },
+  {
+    "category_description2": "non-melanoma skin cancer|other and unspecified malignant neoplasm of skin",
+    "category": "Non-Melanoma Skin Cancer",
+    "description_2": "Other and unspecified malignant neoplasm of skin",
+    "payload_category": {
+      "category": "Non-Melanoma Skin Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Non-Melanoma Skin Cancer",
+        "NMSC",
+        "Basal Cell Carcinoma",
+        "BCC",
+        "Squamous Cell Carcinoma",
+        "SCC",
+        "Actinic Keratosis",
+        "AK",
+        "Cutaneous Malignancy",
+        "Skin Cancer"
+      ],
+      "clinical_trials": [
+        "Non-Melanoma Skin Cancer",
+        "NMSC",
+        "Basal Cell Carcinoma",
+        "BCC",
+        "Squamous Cell Carcinoma",
+        "SCC",
+        "Squamous Cell Carcinoma In Situ",
+        "Non-Melanocytic Skin Tumors",
+        "Seborrheic Keratosis"
+      ]
+    }
+  },
+  {
+    "category_description2": "merkel cell carcinoma|merkel cell carcinoma",
+    "category": "Merkel cell carcinoma",
+    "description_2": "Merkel cell carcinoma",
+    "payload_category": {
+      "category": "Merkel cell carcinoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Merkel Cell Carcinoma",
+        "MCC",
+        "Neuroendocrine Carcinoma of Skin",
+        "Merkel Cell Neoplasm",
+        "Merkel Cell Malignancy",
+        "Cutaneous Neuroendocrine Carcinoma"
+      ],
+      "clinical_trials": [
+        "Merkel Cell Carcinoma",
+        "MCC",
+        "Merkel Cell Cancer",
+        "Neuroendocrine Carcinoma of the Skin",
+        "Merkel Cell Malignancy"
+      ]
+    }
+  },
+  {
+    "category_description2": "kaposi's sarcoma|kaposi's sarcoma",
+    "category": "Kaposi's sarcoma",
+    "description_2": "Kaposi's sarcoma",
+    "payload_category": {
+      "category": "Kaposi's sarcoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Kaposi's Sarcoma",
+        "KS",
+        "Kaposi Sarcoma",
+        "Kaposi's Sarcoma-associated Herpesvirus",
+        "KSHV",
+        "Human Gammaherpesvirus 8",
+        "HHV-8",
+        "Epidemic Kaposi's Sarcoma",
+        "Classical Kaposi's Sarcoma",
+        "Endemic Kaposi's Sarcoma",
+        "Iatrogenic Kaposi's Sarcoma",
+        "Angioproliferative Disorder"
+      ],
+      "clinical_trials": [
+        "Kaposi's Sarcoma",
+        "KS",
+        "Classical Kaposi's Sarcoma",
+        "HIV-related Kaposi's Sarcoma",
+        "Non-HIV-related Kaposi's Sarcoma",
+        "Kaposi Sarcoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "peripheral nerve sheath tumor|malignant neoplasm of peripheral nerves and autonomic nervous system",
+    "category": "Peripheral Nerve Sheath Tumor",
+    "description_2": "Malignant neoplasm of peripheral nerves and autonomic nervous system",
+    "payload_category": {
+      "category": "Peripheral Nerve Sheath Tumor"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Peripheral Nerve Sheath Tumor",
+        "Malignant Peripheral Nerve Sheath Tumor",
+        "MPNST",
+        "Neurogenic Malignant Tumor",
+        "Malignant Neoplasm of Peripheral Nerve Sheath"
+      ],
+      "clinical_trials": [
+        "Peripheral Nerve Sheath Tumor",
+        "Malignant Peripheral Nerve Sheath Tumor",
+        "MPNST",
+        "Nerve Sheath Tumors"
+      ]
+    }
+  },
+  {
+    "category_description2": "meningioma|malignant neoplasm of meninges",
+    "category": "Meningioma",
+    "description_2": "Malignant neoplasm of meninges",
+    "payload_category": {
+      "category": "Meningioma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Meningioma",
+        "Meningiomas",
+        "Intracranial Meningioma",
+        "Benign Meningioma",
+        "Atypical Meningioma",
+        "Malignant Meningioma",
+        "Papillary Meningioma",
+        "Haemangiopericytic Meningioma",
+        "Spinal Meningioma",
+        "Convexity Meningioma",
+        "Hyperostotic Meningioma",
+        "Meningioma en Plaque",
+        "Infiltrative Meningioma"
+      ],
+      "clinical_trials": [
+        "Meningioma",
+        "Benign Meningioma",
+        "Adult Meningioma",
+        "Recurrent Meningioma",
+        "Progressive Meningioma"
+      ]
+    }
+  },
+  {
+    "category_description2": "retroperitoneal cancer|malignant neoplasm of retroperitoneum and peritoneum",
+    "category": "Retroperitoneal Cancer",
+    "description_2": "Malignant neoplasm of retroperitoneum and peritoneum",
+    "payload_category": {
+      "category": "Retroperitoneal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Retroperitoneal Cancer",
+        "Retroperitoneal Sarcoma",
+        "Retroperitoneal Lymph Node Dissection",
+        "RPLND",
+        "Germ Cell Cancer",
+        "Testis Cancer",
+        "Testicular Cancer",
+        "Colorectal Cancer",
+        "Endometrial Cancer Metastatic to Retroperitoneal Space"
+      ],
+      "clinical_trials": [
+        "Retroperitoneal Cancer",
+        "Retroperitoneal Tumors",
+        "Retroperitoneal Neoplasms",
+        "Retroperitoneal Sarcoma",
+        "RPS",
+        "Retroperitoneal Liposarcoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "breast cancer|malignant neoplasm of breast",
+    "category": "Breast Cancer",
+    "description_2": "Malignant neoplasm of breast",
+    "payload_category": {
+      "category": "Breast Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Breast Cancer",
+        "Breast Carcinoma",
+        "Mammary Carcinoma",
+        "BC",
+        "Hereditary Breast Cancer",
+        "Hormone-Positive Breast Cancer",
+        "Luminal A Breast Cancer",
+        "Luminal B Breast Cancer"
+      ],
+      "clinical_trials": [
+        "Breast Cancer",
+        "Mammary Carcinoma",
+        "Mammary Tumor",
+        "Mammary Neoplasms",
+        "Malignant Neoplasm of the Breast",
+        "Breast Tumour",
+        "Breast Cancer Surgery",
+        "Breast Cancer Treatment"
+      ]
+    }
+  },
+  {
+    "category_description2": "ovarian cancer|malignant neoplasm of ovary",
+    "category": "Ovarian Cancer",
+    "description_2": "Malignant neoplasm of ovary",
+    "payload_category": {
+      "category": "Ovarian Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Ovarian Cancer",
+        "Ovarian Carcinoma",
+        "Malignancy of Ovary",
+        "Ovarian Malignancy",
+        "Epithelial Ovarian Cancer",
+        "Serous Ovarian Carcinoma",
+        "Clear Cell Ovarian Carcinoma",
+        "Endometrioid Ovarian Carcinoma",
+        "Mucinous Ovarian Carcinoma",
+        "BRCA1-related Ovarian Cancer",
+        "Hormone-dependent Ovarian Cancer",
+        "Ovarian Neoplasm",
+        "Ovarian Tumor"
+      ],
+      "clinical_trials": [
+        "Ovarian Cancer",
+        "Ovarian Carcinoma",
+        "Epithelial Ovarian Cancer",
+        "High-Grade Serous Ovarian Cancer",
+        "Ovarian Malignancy",
+        "Malignancy of Ovarian",
+        "Ovarian Cancers",
+        "Ovarian Epithelial Carcinoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "brain cancer|malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system",
+    "category": "Brain Cancer",
+    "description_2": "Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system",
+    "payload_category": {
+      "category": "Brain Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Brain Cancer",
+        "Brain Carcinoma",
+        "Malignant Brain Tumor",
+        "CNS Cancer",
+        "Central Nervous System Cancer",
+        "Brain Tumor",
+        "Neural Malignancy",
+        "Metastatic Brain Cancer",
+        "Brain Tumor Stem Cells",
+        "BTSC"
+      ],
+      "clinical_trials": [
+        "Brain Cancer",
+        "Brain Tumours",
+        "Glioblastoma",
+        "GBM",
+        "Meningioma",
+        "Glioma",
+        "Malignant Neoplasm of Brain"
+      ]
+    }
+  },
+  {
+    "category_description2": "brain cancer|malignant neoplasm of brain",
+    "category": "Brain Cancer",
+    "description_2": "Malignant neoplasm of brain",
+    "payload_category": {
+      "category": "Brain Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Brain Cancer",
+        "Brain Carcinoma",
+        "Malignant Brain Tumor",
+        "CNS Cancer",
+        "Central Nervous System Cancer",
+        "Brain Tumor",
+        "Neural Malignancy",
+        "Metastatic Brain Cancer",
+        "Brain Tumor Stem Cells",
+        "BTSC"
+      ],
+      "clinical_trials": [
+        "Brain Cancer",
+        "Brain Tumours",
+        "Glioblastoma",
+        "GBM",
+        "Meningioma",
+        "Glioma",
+        "Malignant Neoplasm of Brain"
+      ]
+    }
+  },
+  {
+    "category_description2": "vulvar cancer|malignant neoplasm of vulva",
+    "category": "Vulvar Cancer",
+    "description_2": "Malignant neoplasm of vulva",
+    "payload_category": {
+      "category": "Vulvar Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Vulvar Cancer",
+        "Vulvar Carcinoma",
+        "Vulvar Malignancy",
+        "Squamous Cell Carcinoma of Vulva",
+        "Vulvar Melanoma",
+        "Vulvar Paget Disease",
+        "Vulvar Intraepithelial Neoplasia",
+        "VIN",
+        "Vulvar Squamous Cell Carcinoma"
+      ],
+      "clinical_trials": [
+        "Vulvar Cancer",
+        "Vulvar Carcinoma",
+        "Vulvar Malignancy",
+        "Vulvar Neoplasia",
+        "Vulvar Squamous Cell Carcinoma",
+        "SCC",
+        "Malignant Neoplasm of Vulva"
+      ]
+    }
+  },
+  {
+    "category_description2": "cervical cancer|malignant neoplasm of cervix uteri",
+    "category": "Cervical Cancer",
+    "description_2": "Malignant neoplasm of cervix uteri",
+    "payload_category": {
+      "category": "Cervical Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Cervical Cancer",
+        "Cervical Carcinoma",
+        "Malignancy of Cervix",
+        "Cervical Malignancy",
+        "HPV-Associated Cervical Cancer",
+        "Human Papillomavirus-Associated Cervical Cancer"
+      ],
+      "clinical_trials": [
+        "Cervical Cancer",
+        "Cervix Cancer",
+        "Cervical Carcinoma",
+        "Cervix Carcinoma",
+        "Malignancy of Cervix",
+        "Cervical Malignancy",
+        "Uterine Cervix Cancer",
+        "Cervix Neoplasm",
+        "Cervical Neoplasm",
+        "Low-Dose Taxotere with Concurrent Radiotherapy",
+        "Docetaxel with Radiation Therapy"
+      ]
+    }
+  },
+  {
+    "category_description2": "uterine cancer|malignant neoplasm of corpus uteri",
+    "category": "Uterine Cancer",
+    "description_2": "Malignant neoplasm of corpus uteri",
+    "payload_category": {
+      "category": "Uterine Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Uterine Cancer",
+        "Endometrial Cancer",
+        "Uterine Carcinoma",
+        "Uterine Malignancy",
+        "Endometrioid Cancer",
+        "Serous Adenocarcinoma",
+        "Uterine Carcinosarcoma"
+      ],
+      "clinical_trials": [
+        "Uterine Cancer",
+        "Endometrial Cancer",
+        "Endometrial Carcinoma",
+        "Uterine Neoplasms",
+        "Malignant Uterine Tumor",
+        "Uterine Malignancy",
+        "Uterine Tumor"
+      ]
+    }
+  },
+  {
+    "category_description2": "fallopian tube cancer|malignant neoplasm of other and unspecified female genital organs",
+    "category": "Fallopian Tube Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified female genital organs",
+    "payload_category": {
+      "category": "Fallopian Tube Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Fallopian Tube Cancer",
+        "Fallopian Tube Carcinoma",
+        "Malignancy of Fallopian Tube",
+        "Malignant Neoplasm of Fallopian Tube",
+        "High-Grade Serous Carcinoma of Fallopian Tube",
+        "HGSC of Fallopian Tube",
+        "Primary Fallopian Tube Cancer",
+        "Epithelial Ovarian Cancer",
+        "Ovarian Cancer",
+        "Primary Peritoneal Cancer"
+      ],
+      "clinical_trials": [
+        "Fallopian Tube Cancer",
+        "Fallopian Tube Carcinoma",
+        "Malignant Neoplasm of Fallopian Tube",
+        "Fallopian Tubes Cancer",
+        "Primary Tubal Cancer"
+      ]
+    }
+  },
+  {
+    "category_description2": "penile cancer|malignant neoplasm of penis",
+    "category": "Penile Cancer",
+    "description_2": "Malignant neoplasm of penis",
+    "payload_category": {
+      "category": "Penile Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Penile Cancer",
+        "Penile Carcinoma",
+        "Penile Malignancy",
+        "Penile Squamous Cell Carcinoma",
+        "PSCC",
+        "Malignant Neoplasm of Penis"
+      ],
+      "clinical_trials": [
+        "Penile Cancer",
+        "Penile Carcinoma",
+        "Penile Neoplasm",
+        "Penile Malignancy",
+        "Penile Squamous Cell Carcinoma",
+        "SPC",
+        "Malignant Neoplasm of Penis",
+        "Penile Neoplasms Malignant"
+      ]
+    }
+  },
+  {
+    "category_description2": "testicular cancer|malignant neoplasm of testis",
+    "category": "Testicular Cancer",
+    "description_2": "Malignant neoplasm of testis",
+    "payload_category": {
+      "category": "Testicular Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Testicular Cancer",
+        "Testicular Carcinoma",
+        "Testicular Germ Cell Tumour",
+        "Germ Cell Tumour",
+        "Seminoma",
+        "Non-Seminoma",
+        "Testicular Malignancy",
+        "Testicular Tumour",
+        "Testicular Neoplasm"
+      ],
+      "clinical_trials": [
+        "Testicular Cancer",
+        "Testicular Carcinoma",
+        "Testicular Neoplasm",
+        "Testicular Germ Cell Tumor",
+        "TGCT",
+        "Testis Cancer",
+        "Germ Cell Tumor",
+        "Testicular Tumor"
+      ]
+    }
+  },
+  {
+    "category_description2": "eye cancer|malignant neoplasm of eye and adnexa",
+    "category": "Eye Cancer",
+    "description_2": "Malignant neoplasm of eye and adnexa",
+    "payload_category": {
+      "category": "Eye Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Eye Cancer",
+        "Ocular Cancer",
+        "Retinoblastoma",
+        "RB",
+        "Uveal Melanoma",
+        "UM",
+        "Ocular Melanoma",
+        "Cancer-Associated Retinopathy",
+        "CAR",
+        "Pediatric Eye Cancer",
+        "Rare Pediatric Eye Cancers",
+        "R-PECs"
+      ],
+      "clinical_trials": [
+        "Eye Cancer",
+        "Ocular Tumor",
+        "Choroidal Melanoma",
+        "Melanoma of the Eye",
+        "Eye Neoplasms",
+        "Malignancy of Eye",
+        "Malignant Neoplasm of Eye"
+      ]
+    }
+  },
+  {
+    "category_description2": "bladder cancer|malignant neoplasm of bladder",
+    "category": "Bladder Cancer",
+    "description_2": "Malignant neoplasm of bladder",
+    "payload_category": {
+      "category": "Bladder Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Bladder Cancer",
+        "Bladder Carcinoma",
+        "BCa",
+        "Malignancy of Bladder",
+        "Urinary Bladder Cancer",
+        "Genitourinary Malignancy"
+      ],
+      "clinical_trials": [
+        "Bladder Cancer",
+        "Bladder Carcinoma",
+        "Urothelial Cancer",
+        "Cancer of Bladder",
+        "Bladder Malignancy"
+      ]
+    }
+  },
+  {
+    "category_description2": "male genital cancer|malignant neoplasm of other and unspecified male genital organs",
+    "category": "Male Genital Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified male genital organs",
+    "payload_category": {
+      "category": "Male Genital Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Male Genital Cancer",
+        "Penile Cancer",
+        "Testicular Cancer",
+        "Prostate Cancer",
+        "Penile Carcinoma",
+        "Testicular Carcinoma",
+        "Prostate Carcinoma",
+        "Germ Cell Neoplasia in Situ",
+        "GCNIS",
+        "Neuroendocrine Tumor of Testis",
+        "Embryonic Neuroectodermal Tumor",
+        "ELOC-mutated RCC",
+        "Fumarate Hydratase-deficient RCC",
+        "Basal Cell Carcinoma of the Prostate",
+        "Adenoid-Cystic Carcinoma of the Prostate"
+      ],
+      "clinical_trials": [
+        "Male Genital Cancer",
+        "Prostate Cancer",
+        "Penile Cancer",
+        "Penis Carcinoma",
+        "Epidermoid Carcinoma of Penis",
+        "Malignant Neoplasms of Male Genital Organs",
+        "Genital Neoplasms, Male",
+        "Malignant Neoplasms of Genital Organs, Male"
+      ]
+    }
+  },
+  {
+    "category_description2": "kidney cancer|malignant neoplasm of kidney, except renal pelvis",
+    "category": "Kidney Cancer",
+    "description_2": "Malignant neoplasm of kidney, except renal pelvis",
+    "payload_category": {
+      "category": "Kidney Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Kidney Cancer",
+        "Renal Cell Carcinoma",
+        "RCC",
+        "Clear Cell Renal Cell Carcinoma",
+        "ccRCC",
+        "Malignant Neoplasm of Kidney",
+        "Kidney Malignancy",
+        "Hereditary Papillary Renal Cell Carcinoma",
+        "BAP1-Tumor Predisposition Syndrome",
+        "Tuberous Sclerosis Complex",
+        "Von Hippel-Lindau Syndrome",
+        "Birt-Hogg-Dubé Syndrome",
+        "Fumarate Hydratase Tumor Predisposition Syndrome",
+        "Cowden Syndrome"
+      ],
+      "clinical_trials": [
+        "404"
+      ]
+    }
+  },
+  {
+    "category_description2": "renal pelvis cancer|malignant neoplasm of renal pelvis",
+    "category": "Renal Pelvis Cancer",
+    "description_2": "Malignant neoplasm of renal pelvis",
+    "payload_category": {
+      "category": "Renal Pelvis Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Renal Pelvis Cancer",
+        "Renal Pelvis Carcinoma",
+        "Transitional Cell Carcinoma of Renal Pelvis",
+        "Malignancy of Renal Pelvis",
+        "Renal Pelvic Malignancy",
+        "Kidney and Renal Pelvis Cancer",
+        "KCa",
+        "Parenchymal Infiltrative Renal Pelvis Cancer"
+      ],
+      "clinical_trials": [
+        "Renal Pelvis Cancer",
+        "Renal Pelvic Carcinoma",
+        "Urothelial Carcinoma of the Renal Pelvis",
+        "Transitional Cell Carcinoma of Renal Pelvis",
+        "RPC",
+        "Upper Urinary Tract Urothelial Carcinoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "ureteral cancer|malignant neoplasm of ureter",
+    "category": "Ureteral Cancer",
+    "description_2": "Malignant neoplasm of ureter",
+    "payload_category": {
+      "category": "Ureteral Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Ureteral Cancer",
+        "Ureteral Carcinoma",
+        "Urothelial Carcinoma",
+        "Malignancy of Ureter",
+        "Upper Tract Urothelial Carcinoma",
+        "Papillary Urothelial Carcinoma",
+        "Non-Papillary Urothelial Carcinoma"
+      ],
+      "clinical_trials": [
+        "Ureteral Cancer",
+        "Ureteral Carcinoma",
+        "Ureteral Neoplasms",
+        "Urothelial Carcinoma",
+        "Renal Pelvic Cancer",
+        "Renal Pelvic Carcinoma",
+        "Malignant Ureteral Obstruction",
+        "Extrinsic Ureteral Obstruction"
+      ]
+    }
+  },
+  {
+    "category_description2": "adrenal cancer|malignant neoplasm of adrenal gland",
+    "category": "Adrenal Cancer",
+    "description_2": "Malignant neoplasm of adrenal gland",
+    "payload_category": {
+      "category": "Adrenal Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Adrenal Cancer",
+        "Adrenocortical Carcinoma",
+        "ACC",
+        "Malignant Adrenal Tumours",
+        "Malignant Pheochromocytoma",
+        "MPC",
+        "Adrenal Metastases",
+        "Adrenal Malignancy",
+        "Adrenal Incidentaloma"
+      ],
+      "clinical_trials": [
+        "Adrenal Cancer",
+        "Adrenocortical Carcinoma",
+        "ACC",
+        "Adrenal Malignancy",
+        "Adrenal Gland Neoplasm",
+        "Adrenal Tumor",
+        "Adrenal Gland Tumors"
+      ]
+    }
+  },
+  {
+    "category_description2": "endocrine gland cancer|malignant neoplasm of other endocrine glands and related structures",
+    "category": "Endocrine Gland Cancer",
+    "description_2": "Malignant neoplasm of other endocrine glands and related structures",
+    "payload_category": {
+      "category": "Endocrine Gland Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Endocrine Gland Cancer",
+        "Thyroid Cancer",
+        "Papillary Carcinoma",
+        "Follicular Carcinoma",
+        "Medullary Carcinoma",
+        "Anaplastic Carcinoma",
+        "MTC",
+        "Multiple Endocrine Neoplasia Type 1",
+        "MEN1",
+        "Multiple Endocrine Neoplasia Type 2A",
+        "MEN2A",
+        "Multiple Endocrine Neoplasia Type 2B",
+        "MEN2B",
+        "Pheochromocytoma",
+        "Primary Hyperparathyroidism",
+        "Adrenocortical Carcinoma",
+        "Parathyroid Carcinoma",
+        "Endocrine Neoplasms",
+        "Neuroendocrine Tumors"
+      ],
+      "clinical_trials": [
+        "Endocrine Gland Cancer",
+        "Endocrine Tumor",
+        "Endocrine Neoplasia",
+        "Multiple Endocrine Neoplasia",
+        "MEN1",
+        "Neuroendocrine Tumors",
+        "Endocrine Neoplasms",
+        "Pituitary Tumors",
+        "Parathyroid Tumors",
+        "Pancreatic Tumors",
+        "Adrenal Tumors",
+        "Thyroid Tumors",
+        "Duodenal-Pancreatic Tumors"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|other specified and unspecified types of non-hodgkin lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Other specified and unspecified types of non-Hodgkin lymphoma",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|hodgkin lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Hodgkin lymphoma",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|mature t/nk-cell lymphomas",
+    "category": "Lymphoma",
+    "description_2": "Mature T/NK-cell lymphomas",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|follicular lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Follicular lymphoma",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|non-follicular lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Non-Follicular Lymphoma",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|other specified types of t/nk-cell lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Other specified types of T/NK-cell lymphoma",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymphoma|malignant immunoproliferative diseases and certain other b-cell lymphomas",
+    "category": "Lymphoma",
+    "description_2": "Malignant immunoproliferative diseases and certain other B-cell lymphomas",
+    "payload_category": {
+      "category": "Lymphoma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Hodgkin Lymphoma",
+        "B-cell Lymphoma",
+        "T-cell Lymphoma",
+        "Extranodal Marginal Zone B-cell Lymphoma",
+        "EMZL",
+        "Diffuse Large B-cell Lymphoma",
+        "Follicular Lymphoma",
+        "Mantle Cell Lymphoma",
+        "Mycosis Fungoides",
+        "Peripheral T-cell Lymphoma",
+        "Burkitt Lymphoma",
+        "Cutaneous Anaplastic Large-cell Lymphoma",
+        "Extranodal Natural Killer/T-cell Lymphoma",
+        "Nasal-type Lymphoma",
+        "Lymphomatoid Papulosis"
+      ],
+      "clinical_trials": [
+        "Malignant Lymphoma",
+        "Hodgkin's Lymphoma",
+        "Non-Hodgkin's Lymphoma",
+        "NHL",
+        "HL",
+        "Chronic Lymphoproliferative Diseases",
+        "Chronic Lymphocytic Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "lymph node cancer|secondary and unspecified malignant neoplasm of lymph nodes",
+    "category": "Lymph Node Cancer",
+    "description_2": "Secondary and unspecified malignant neoplasm of lymph nodes",
+    "payload_category": {
+      "category": "Lymph Node Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lymph Node Cancer",
+        "Lymphoma",
+        "Lymph Node Malignancy",
+        "Lymph Node Metastasis",
+        "Lymphatic Cancer",
+        "Lymph Node Involvement",
+        "Axillary Lymph Node Metastasis",
+        "Premetastatic Lymph Node Niche"
+      ],
+      "clinical_trials": [
+        "Lymph Node Cancer",
+        "Lymph Node Neoplasm",
+        "Lymph Node Malignancy",
+        "Lymph Node Metastasis",
+        "Cancer of Lymph Node",
+        "Mediastinal Lymph Node Cancer",
+        "Mediastinal Lymph Node Neoplasm",
+        "Mediastinal Lymph Node Malignancy"
+      ]
+    }
+  },
+  {
+    "category_description2": "leukemia|other leukemias of specified cell type",
+    "category": "Leukemia",
+    "description_2": "Other leukemias of specified cell type",
+    "payload_category": {
+      "category": "Leukemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphocytic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Chronic Lymphocytic Leukemia",
+        "CLL",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Hematological Malignancies"
+      ],
+      "clinical_trials": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphoblastic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Myeloid Leukemia",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Malignant Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "leukemia|lymphoid leukemia",
+    "category": "Leukemia",
+    "description_2": "Lymphoid Leukemia",
+    "payload_category": {
+      "category": "Leukemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphocytic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Chronic Lymphocytic Leukemia",
+        "CLL",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Hematological Malignancies"
+      ],
+      "clinical_trials": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphoblastic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Myeloid Leukemia",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Malignant Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "leukemia|myeloid leukemia",
+    "category": "Leukemia",
+    "description_2": "Myeloid Leukemia",
+    "payload_category": {
+      "category": "Leukemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphocytic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Chronic Lymphocytic Leukemia",
+        "CLL",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Hematological Malignancies"
+      ],
+      "clinical_trials": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphoblastic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Myeloid Leukemia",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Malignant Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "leukemia|monocytic leukemia",
+    "category": "Leukemia",
+    "description_2": "Monocytic leukemia",
+    "payload_category": {
+      "category": "Leukemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphocytic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Chronic Lymphocytic Leukemia",
+        "CLL",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Hematological Malignancies"
+      ],
+      "clinical_trials": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphoblastic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Myeloid Leukemia",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Malignant Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "leukemia|leukemia of unspecified cell type",
+    "category": "Leukemia",
+    "description_2": "Leukemia of unspecified cell type",
+    "payload_category": {
+      "category": "Leukemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphocytic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Chronic Lymphocytic Leukemia",
+        "CLL",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Hematological Malignancies"
+      ],
+      "clinical_trials": [
+        "Leukemia",
+        "Acute Leukemia",
+        "Acute Lymphoblastic Leukemia",
+        "ALL",
+        "Acute Myeloid Leukemia",
+        "AML",
+        "Myeloid Leukemia",
+        "Chronic Myeloid Leukemia",
+        "CML",
+        "Malignant Leukemia"
+      ]
+    }
+  },
+  {
+    "category_description2": "multiple myeloma|multiple myeloma and malignant plasma cell neoplasms",
+    "category": "Multiple Myeloma",
+    "description_2": "Multiple myeloma and malignant plasma cell neoplasms",
+    "payload_category": {
+      "category": "Multiple Myeloma"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Multiple Myeloma",
+        "MM",
+        "Plasma Cell Myeloma",
+        "Myeloma",
+        "Malignant Plasma Cell Neoplasm"
+      ],
+      "clinical_trials": [
+        "Multiple Myeloma",
+        "Myeloma",
+        "Myeloma-Multiple",
+        "Relapsed Refractory Multiple Myeloma",
+        "RRMM",
+        "Daratumumab in Multiple Myeloma",
+        "MM",
+        "Multiple Myeloma Patients",
+        "MMAPPIN' Study"
+      ]
+    }
+  },
+  {
+    "category_description2": "lipidemia|disorders of lipoprotein metabolism and other lipidemias",
+    "category": "Lipidemia",
+    "description_2": "Disorders of lipoprotein metabolism and other lipidemias",
+    "payload_category": {
+      "category": "Lipidemia"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Lipidemia",
+        "Hyperlipidemia",
+        "Dyslipidemia",
+        "Postprandial Lipidemia",
+        "Non-fasting Lipidemia",
+        "PL",
+        "FL",
+        "Total Cholesterol",
+        "LDL Cholesterol",
+        "Triglycerides",
+        "VLDL Cholesterol"
+      ],
+      "clinical_trials": [
+        "Lipidemia",
+        "Hyperlipidemia",
+        "Dyslipidemia",
+        "High Lipids",
+        "Cholesterol Disorders"
+      ]
+    }
+  },
+  {
+    "category_description2": "blood cancer|other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue",
+    "category": "Blood Cancer",
+    "description_2": "Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue",
+    "payload_category": {
+      "category": "Blood Cancer"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Blood Cancer",
+        "Hematologic Cancer",
+        "Hematological Malignancy",
+        "Leukemia",
+        "Lymphoma",
+        "Myeloma",
+        "Myeloid Malignancy",
+        "Pediatric Blood Cancer"
+      ],
+      "clinical_trials": [
+        "Blood Cancer",
+        "Hematological Malignancy",
+        "Blood Cancers",
+        "Malignant Hematological Diseases",
+        "Leukemia",
+        "Lymphoma"
+      ]
+    }
+  },
+  {
+    "category_description2": "angina|angina pectoris",
+    "category": "Angina",
+    "description_2": "Angina pectoris",
+    "payload_category": {
+      "category": "Angina"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Angina Pectoris",
+        "Stable Angina",
+        "Mixed Angina",
+        "Primary Angina",
+        "Secondary Angina",
+        "Angina Micturition"
+      ],
+      "clinical_trials": [
+        "Angina",
+        "Angina Pectoris",
+        "Vasospastic Angina",
+        "Refractory Angina Pectoris",
+        "Stable Angina Pectoris",
+        "Atherosclerotic Heart Disease with Angina"
+      ]
+    }
+  },
+  {
+    "category_description2": "heart attack|acute myocardial infarction",
+    "category": "Heart Attack",
+    "description_2": "Acute myocardial infarction",
+    "payload_category": {
+      "category": "Heart Attack"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Heart Attack",
+        "Myocardial Infarction",
+        "MI",
+        "Myocardial Infarct"
+      ],
+      "clinical_trials": [
+        "Heart Attack",
+        "Myocardial Infarction",
+        "MI",
+        "Acute Myocardial Infarction",
+        "AMI"
+      ]
+    }
+  },
+  {
+    "category_description2": "atherosclerosis|atherosclerosis",
+    "category": "Atherosclerosis",
+    "description_2": "Atherosclerosis",
+    "payload_category": {
+      "category": "Atherosclerosis"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Atherosclerosis",
+        "Atherosclerotic Disease",
+        "Chronic Inflammatory Disease",
+        "Vascular Chronic Inflammation",
+        "Cardiovascular Disease",
+        "LDL Cholesterol as a Causal Agent of Atherosclerosis"
+      ],
+      "clinical_trials": [
+        "Atherosclerosis",
+        "Coronary Atherosclerosis",
+        "Atheromatosis",
+        "Atheroma",
+        "Cardiovascular Disease",
+        "CAD"
+      ]
+    }
+  },
+  {
+    "category_description2": "ischemic heart disease|chronic ischemic heart disease",
+    "category": "Ischemic Heart Disease",
+    "description_2": "Chronic ischemic heart disease",
+    "payload_category": {
+      "category": "Ischemic Heart Disease"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Ischemic Heart Disease",
+        "IHD",
+        "Coronary Artery Disease",
+        "CAD",
+        "Myocardial Ischemia",
+        "Myocardial Infarction",
+        "MI",
+        "Stable Ischemic Heart Disease",
+        "Atherosclerotic Heart Disease"
+      ],
+      "clinical_trials": [
+        "Ischemic Heart Disease",
+        "Ischemic Cardiopathy",
+        "Coronary Artery Disease",
+        "CAD",
+        "Ischemic Heart Diseases",
+        "Coronary Heart Disease",
+        "CHD"
+      ]
+    }
+  },
+  {
+    "category_description2": "ischemic stroke|cerebral infarction",
+    "category": "Ischemic Stroke",
+    "description_2": "Cerebral infarction",
+    "payload_category": {
+      "category": "Ischemic Stroke"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Ischemic Stroke",
+        "Acute Ischemic Stroke",
+        "Cerebral Infarction",
+        "Ischaemic Stroke",
+        "Stroke"
+      ],
+      "clinical_trials": [
+        "Ischemic Stroke",
+        "Arterial Ischemic Stroke",
+        "AIS",
+        "Acute Ischemic Stroke",
+        "Stroke"
+      ]
+    }
+  },
+  {
+    "category_description2": "occlusion and stenosis of cerebral arteries|occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction",
+    "category": "Occlusion And Stenosis Of Cerebral Arteries",
+    "description_2": "Occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction",
+    "payload_category": {
+      "category": "Occlusion And Stenosis Of Cerebral Arteries"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Cerebral Artery Stenosis",
+        "Cerebral Artery Occlusion",
+        "Middle Cerebral Artery Stenosis",
+        "Middle Cerebral Artery Occlusion",
+        "MCA Stenosis",
+        "MCA Occlusion",
+        "Internal Carotid Artery Stenosis",
+        "Internal Carotid Artery Occlusion",
+        "ICA Stenosis",
+        "ICA Occlusion",
+        "Vertebral Artery Stenosis",
+        "Vertebral Artery Occlusion",
+        "VA Stenosis",
+        "VA Occlusion",
+        "Basilar Artery Stenosis",
+        "Basilar Artery Occlusion",
+        "BA Stenosis",
+        "BA Occlusion",
+        "Intracranial Atherosclerotic Disease",
+        "ICAD"
+      ],
+      "clinical_trials": [
+        "Cerebral Artery Occlusion",
+        "Cerebral Artery Stenosis",
+        "Cerebral Ischemia",
+        "Ischemic Stroke",
+        "Artery Occlusion",
+        "Carotid Stenosis",
+        "Occlusion of Artery",
+        "Artery Stenosis"
+      ]
+    }
+  },
+  {
+    "category_description2": "arterial thrombosis|arterial embolism and thrombosis",
+    "category": "Arterial Thrombosis",
+    "description_2": "Arterial embolism and thrombosis",
+    "payload_category": {
+      "category": "Arterial Thrombosis"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Arterial Thrombosis",
+        "Systemic Arterial Thrombosis",
+        "Peripheral Arterial Thrombosis",
+        "Neonatal Arterial Thrombosis",
+        "Aortic Thrombosis",
+        "Iliac Artery Thrombosis",
+        "Abdominal Aorta Thrombosis",
+        "Mesenteric Thrombosis",
+        "Thrombosis of the Iliac Arteries",
+        "Thrombosis of the Abdominal Aorta",
+        "Thrombosis of the Superior Mesenteric Artery",
+        "Thrombosis of the Left Renal Artery",
+        "Thrombosis Associated with Nephrotic Syndrome"
+      ],
+      "clinical_trials": [
+        "Arterial Thrombosis",
+        "Arterial Thrombus",
+        "Thromboembolism",
+        "Peripheral Arterial Thrombosis",
+        "Acute Arterial Thrombosis",
+        "Subacute Arterial Thrombosis"
+      ]
+    }
+  },
+  {
+    "category_description2": "occlusion and stenosis of precerebral arteries|occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction",
+    "category": "Occlusion And Stenosis Of Precerebral Arteries",
+    "description_2": "Occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction",
+    "payload_category": {
+      "category": "Occlusion And Stenosis Of Precerebral Arteries"
+    },
+    "abbreviations": {
+      "pubmed": [
+        "Occlusion of Precerebral Arteries",
+        "Stenosis of Precerebral Arteries",
+        "Precerebral Artery Stenosis",
+        "Precerebral Artery Occlusion",
+        "ICA Stenosis",
+        "Internal Carotid Artery Stenosis",
+        "Internal Carotid Artery Occlusion"
+      ],
+      "clinical_trials": [
+        "Occlusion and Stenosis of Precerebral Arteries",
+        "Precerebral Artery Stenosis",
+        "Precerebral Artery Occlusion",
+        "Stenosis of Precerebral Arteries",
+        "Occlusion of Precerebral Arteries"
       ]
     }
   }

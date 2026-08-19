@@ -135,7 +135,7 @@ def run_llm(
         if r.get("category_description2")
     }
 
-    print(f"  [llm] {len(entities):,} entities to process (min_total={min_total})")
+    print(f"  [llm] {len(entities):,} entities to process (always generating {min_total})")
 
     results = {}
     client = deployment = None
@@ -160,7 +160,8 @@ def run_llm(
                     existing.append(a)
                     seen_lower.add(a.casefold())
 
-            target_extra = max(0, min_total - len(existing))
+            # Always generate min_total regardless of existing articles
+            target_extra = min_total
 
             payload = {"category": category, "description_2": description}
 
@@ -185,9 +186,9 @@ def run_llm(
                     combined_lower.add(key)
                     combined_list.append(a)
 
-            still_needed = min_total - len(combined_list)
+            still_needed = min_total - len(results.get(eid, []))
             if still_needed > 0:
-                print(f"  [llm] {eid!r}: {len(combined_list)} / {min_total} — top-up {still_needed} more")
+                print(f"  [llm] {eid!r}: {len(results.get(eid, []))} / {min_total} — top-up {still_needed} more")
                 for attempt in range(3):
                     try:
                         topup = generate(client, deployment, payload, combined_list, still_needed)
@@ -220,7 +221,7 @@ def run_llm(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Generate LLM-only abbreviations from canonical entities.")
     parser.add_argument("--input", default=str(CANONICAL_INPUT))
     parser.add_argument("--output", default=str(LLM_OUTPUT))
     args = parser.parse_args()

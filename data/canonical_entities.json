@@ -23,5 +23,325 @@
     "category_description2": "palate cancer|malignant neoplasm of palate",
     "category": "Palate Cancer",
     "description_2": "Malignant neoplasm of palate"
+  },
+  {
+    "category_description2": "salivary gland cancer|malignant neoplasm of other and unspecified major salivary glands",
+    "category": "Salivary Gland Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified major salivary glands"
+  },
+  {
+    "category_description2": "tonsil cancer|malignant neoplasm of tonsil",
+    "category": "Tonsil Cancer",
+    "description_2": "Malignant neoplasm of tonsil"
+  },
+  {
+    "category_description2": "oropharyngeal cancer|malignant neoplasm of oropharynx",
+    "category": "Oropharyngeal Cancer",
+    "description_2": "Malignant neoplasm of oropharynx"
+  },
+  {
+    "category_description2": "nasopharyngeal cancer|malignant neoplasm of nasopharynx",
+    "category": "Nasopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of nasopharynx"
+  },
+  {
+    "category_description2": "hypopharyngeal cancer|malignant neoplasm of hypopharynx",
+    "category": "Hypopharyngeal Cancer",
+    "description_2": "Malignant neoplasm of hypopharynx"
+  },
+  {
+    "category_description2": "esophageal cancer|malignant neoplasm of esophagus",
+    "category": "Esophageal Cancer",
+    "description_2": "Malignant neoplasm of esophagus"
+  },
+  {
+    "category_description2": "stomach cancer|malignant neoplasm of stomach",
+    "category": "Stomach Cancer",
+    "description_2": "Malignant neoplasm of stomach"
+  },
+  {
+    "category_description2": "small intestinal cancer|malignant neoplasm of small intestine",
+    "category": "Small Intestinal Cancer",
+    "description_2": "Malignant neoplasm of small intestine"
+  },
+  {
+    "category_description2": "colon cancer|malignant neoplasm of colon",
+    "category": "Colon Cancer",
+    "description_2": "Malignant neoplasm of colon"
+  },
+  {
+    "category_description2": "anal cancer|malignant neoplasm of anus and anal canal",
+    "category": "Anal Cancer",
+    "description_2": "Malignant neoplasm of anus and anal canal"
+  },
+  {
+    "category_description2": "liver cancer|malignant neoplasm of liver and intrahepatic bile ducts",
+    "category": "Liver Cancer",
+    "description_2": "Malignant neoplasm of liver and intrahepatic bile ducts"
+  },
+  {
+    "category_description2": "bile duct cancer|malignant neoplasm of other and unspecified parts of biliary tract",
+    "category": "Bile Duct Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified parts of biliary tract"
+  },
+  {
+    "category_description2": "pancreatic cancer|malignant neoplasm of pancreas",
+    "category": "Pancreatic Cancer",
+    "description_2": "Malignant neoplasm of pancreas"
+  },
+  {
+    "category_description2": "sinus cancer|malignant neoplasm of accessory sinuses",
+    "category": "Sinus Cancer",
+    "description_2": "Malignant neoplasm of accessory sinuses"
+  },
+  {
+    "category_description2": "laryngeal cancer|malignant neoplasm of larynx",
+    "category": "Laryngeal Cancer",
+    "description_2": "Malignant neoplasm of larynx"
+  },
+  {
+    "category_description2": "lung cancer|malignant neoplasm of bronchus and lung",
+    "category": "Lung Cancer",
+    "description_2": "Malignant neoplasm of bronchus and lung"
+  },
+  {
+    "category_description2": "non-melanoma skin cancer|other and unspecified malignant neoplasm of skin",
+    "category": "Non-Melanoma Skin Cancer",
+    "description_2": "Other and unspecified malignant neoplasm of skin"
+  },
+  {
+    "category_description2": "merkel cell carcinoma|merkel cell carcinoma",
+    "category": "Merkel cell carcinoma",
+    "description_2": "Merkel cell carcinoma"
+  },
+  {
+    "category_description2": "kaposi's sarcoma|kaposi's sarcoma",
+    "category": "Kaposi's sarcoma",
+    "description_2": "Kaposi's sarcoma"
+  },
+  {
+    "category_description2": "peripheral nerve sheath tumor|malignant neoplasm of peripheral nerves and autonomic nervous system",
+    "category": "Peripheral Nerve Sheath Tumor",
+    "description_2": "Malignant neoplasm of peripheral nerves and autonomic nervous system"
+  },
+  {
+    "category_description2": "meningioma|malignant neoplasm of meninges",
+    "category": "Meningioma",
+    "description_2": "Malignant neoplasm of meninges"
+  },
+  {
+    "category_description2": "retroperitoneal cancer|malignant neoplasm of retroperitoneum and peritoneum",
+    "category": "Retroperitoneal Cancer",
+    "description_2": "Malignant neoplasm of retroperitoneum and peritoneum"
+  },
+  {
+    "category_description2": "breast cancer|malignant neoplasm of breast",
+    "category": "Breast Cancer",
+    "description_2": "Malignant neoplasm of breast"
+  },
+  {
+    "category_description2": "ovarian cancer|malignant neoplasm of ovary",
+    "category": "Ovarian Cancer",
+    "description_2": "Malignant neoplasm of ovary"
+  },
+  {
+    "category_description2": "brain cancer|malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system",
+    "category": "Brain Cancer",
+    "description_2": "Malignant neoplasm of spinal cord, cranial nerves and other parts of central nervous system"
+  },
+  {
+    "category_description2": "vulvar cancer|malignant neoplasm of vulva",
+    "category": "Vulvar Cancer",
+    "description_2": "Malignant neoplasm of vulva"
+  },
+  {
+    "category_description2": "cervical cancer|malignant neoplasm of cervix uteri",
+    "category": "Cervical Cancer",
+    "description_2": "Malignant neoplasm of cervix uteri"
+  },
+  {
+    "category_description2": "uterine cancer|malignant neoplasm of corpus uteri",
+    "category": "Uterine Cancer",
+    "description_2": "Malignant neoplasm of corpus uteri"
+  },
+  {
+    "category_description2": "fallopian tube cancer|malignant neoplasm of other and unspecified female genital organs",
+    "category": "Fallopian Tube Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified female genital organs"
+  },
+  {
+    "category_description2": "penile cancer|malignant neoplasm of penis",
+    "category": "Penile Cancer",
+    "description_2": "Malignant neoplasm of penis"
+  },
+  {
+    "category_description2": "testicular cancer|malignant neoplasm of testis",
+    "category": "Testicular Cancer",
+    "description_2": "Malignant neoplasm of testis"
+  },
+  {
+    "category_description2": "eye cancer|malignant neoplasm of eye and adnexa",
+    "category": "Eye Cancer",
+    "description_2": "Malignant neoplasm of eye and adnexa"
+  },
+  {
+    "category_description2": "bladder cancer|malignant neoplasm of bladder",
+    "category": "Bladder Cancer",
+    "description_2": "Malignant neoplasm of bladder"
+  },
+  {
+    "category_description2": "male genital cancer|malignant neoplasm of other and unspecified male genital organs",
+    "category": "Male Genital Cancer",
+    "description_2": "Malignant neoplasm of other and unspecified male genital organs"
+  },
+  {
+    "category_description2": "kidney cancer|malignant neoplasm of kidney, except renal pelvis",
+    "category": "Kidney Cancer",
+    "description_2": "Malignant neoplasm of kidney, except renal pelvis"
+  },
+  {
+    "category_description2": "renal pelvis cancer|malignant neoplasm of renal pelvis",
+    "category": "Renal Pelvis Cancer",
+    "description_2": "Malignant neoplasm of renal pelvis"
+  },
+  {
+    "category_description2": "ureteral cancer|malignant neoplasm of ureter",
+    "category": "Ureteral Cancer",
+    "description_2": "Malignant neoplasm of ureter"
+  },
+  {
+    "category_description2": "brain cancer|malignant neoplasm of brain",
+    "category": "Brain Cancer",
+    "description_2": "Malignant neoplasm of brain"
+  },
+  {
+    "category_description2": "adrenal cancer|malignant neoplasm of adrenal gland",
+    "category": "Adrenal Cancer",
+    "description_2": "Malignant neoplasm of adrenal gland"
+  },
+  {
+    "category_description2": "endocrine gland cancer|malignant neoplasm of other endocrine glands and related structures",
+    "category": "Endocrine Gland Cancer",
+    "description_2": "Malignant neoplasm of other endocrine glands and related structures"
+  },
+  {
+    "category_description2": "lymphoma|other specified and unspecified types of non-hodgkin lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Other specified and unspecified types of non-Hodgkin lymphoma"
+  },
+  {
+    "category_description2": "lymph node cancer|secondary and unspecified malignant neoplasm of lymph nodes",
+    "category": "Lymph Node Cancer",
+    "description_2": "Secondary and unspecified malignant neoplasm of lymph nodes"
+  },
+  {
+    "category_description2": "lymphoma|hodgkin lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Hodgkin lymphoma"
+  },
+  {
+    "category_description2": "lymphoma|mature t/nk-cell lymphomas",
+    "category": "Lymphoma",
+    "description_2": "Mature T/NK-cell lymphomas"
+  },
+  {
+    "category_description2": "leukemia|other leukemias of specified cell type",
+    "category": "Leukemia",
+    "description_2": "Other leukemias of specified cell type"
+  },
+  {
+    "category_description2": "lymphoma|follicular lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Follicular lymphoma"
+  },
+  {
+    "category_description2": "lymphoma|non-follicular lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Non-Follicular Lymphoma"
+  },
+  {
+    "category_description2": "multiple myeloma|multiple myeloma and malignant plasma cell neoplasms",
+    "category": "Multiple Myeloma",
+    "description_2": "Multiple myeloma and malignant plasma cell neoplasms"
+  },
+  {
+    "category_description2": "lymphoma|other specified types of t/nk-cell lymphoma",
+    "category": "Lymphoma",
+    "description_2": "Other specified types of T/NK-cell lymphoma"
+  },
+  {
+    "category_description2": "lymphoma|malignant immunoproliferative diseases and certain other b-cell lymphomas",
+    "category": "Lymphoma",
+    "description_2": "Malignant immunoproliferative diseases and certain other B-cell lymphomas"
+  },
+  {
+    "category_description2": "leukemia|lymphoid leukemia",
+    "category": "Leukemia",
+    "description_2": "Lymphoid Leukemia"
+  },
+  {
+    "category_description2": "leukemia|myeloid leukemia",
+    "category": "Leukemia",
+    "description_2": "Myeloid Leukemia"
+  },
+  {
+    "category_description2": "lipidemia|disorders of lipoprotein metabolism and other lipidemias",
+    "category": "Lipidemia",
+    "description_2": "Disorders of lipoprotein metabolism and other lipidemias"
+  },
+  {
+    "category_description2": "leukemia|monocytic leukemia",
+    "category": "Leukemia",
+    "description_2": "Monocytic leukemia"
+  },
+  {
+    "category_description2": "leukemia|leukemia of unspecified cell type",
+    "category": "Leukemia",
+    "description_2": "Leukemia of unspecified cell type"
+  },
+  {
+    "category_description2": "blood cancer|other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue",
+    "category": "Blood Cancer",
+    "description_2": "Other and unspecified malignant neoplasms of lymphoid, hematopoietic and related tissue"
+  },
+  {
+    "category_description2": "angina|angina pectoris",
+    "category": "Angina",
+    "description_2": "Angina pectoris"
+  },
+  {
+    "category_description2": "heart attack|acute myocardial infarction",
+    "category": "Heart Attack",
+    "description_2": "Acute myocardial infarction"
+  },
+  {
+    "category_description2": "atherosclerosis|atherosclerosis",
+    "category": "Atherosclerosis",
+    "description_2": "Atherosclerosis"
+  },
+  {
+    "category_description2": "ischemic heart disease|chronic ischemic heart disease",
+    "category": "Ischemic Heart Disease",
+    "description_2": "Chronic ischemic heart disease"
+  },
+  {
+    "category_description2": "ischemic stroke|cerebral infarction",
+    "category": "Ischemic Stroke",
+    "description_2": "Cerebral infarction"
+  },
+  {
+    "category_description2": "occlusion and stenosis of cerebral arteries|occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction",
+    "category": "Occlusion And Stenosis Of Cerebral Arteries",
+    "description_2": "Occlusion and stenosis of cerebral arteries, not resulting in cerebral infarction"
+  },
+  {
+    "category_description2": "arterial thrombosis|arterial embolism and thrombosis",
+    "category": "Arterial Thrombosis",
+    "description_2": "Arterial embolism and thrombosis"
+  },
+  {
+    "category_description2": "occlusion and stenosis of precerebral arteries|occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction",
+    "category": "Occlusion And Stenosis Of Precerebral Arteries",
+    "description_2": "Occlusion and stenosis of precerebral arteries, not resulting in cerebral infarction"
   }
 ]
