@@ -48,6 +48,7 @@ def parse_abbreviations(value):
     return [
         item.strip()
         for item in value.split(",")
+        for item in value.split(",")
         if item.strip()
     ]
  
@@ -65,6 +66,7 @@ def create_match_key(description_2, description_3):
  
  
 # ============================================================
+# READ ICD CSV
 # READ ICD CSV
 # ============================================================
  
@@ -93,6 +95,7 @@ print(f"Oncology rows loaded: {len(oncology_df)}")
  
  
 # ============================================================
+# ASK USER FOR DIFFERENCE TYPE
 # ASK USER FOR DIFFERENCE TYPE
 # ============================================================
  
@@ -131,6 +134,7 @@ if scenario not in ["1", "2"]:
  
 # ============================================================
 # CREATE ONCOLOGY MATCH MAP
+# CREATE ONCOLOGY MATCH MAP
 # ============================================================
  
 oncology_match_map = {}
@@ -161,6 +165,7 @@ for _, row in oncology_df.iterrows():
  
  
 # ============================================================
+# CREATE NEW COLUMNS
 # CREATE NEW COLUMNS
 # ============================================================
  
@@ -194,6 +199,7 @@ for _, row in icd_df.iterrows():
  
     # --------------------------------------------------------
     # FIND EXACT MATCH IN ONCOLOGY
+    # FIND EXACT MATCH IN ONCOLOGY
     # --------------------------------------------------------
  
     oncology_abbreviations = oncology_match_map.get(
@@ -219,6 +225,7 @@ for _, row in icd_df.iterrows():
  
     # --------------------------------------------------------
     # GET ICD FINAL ABBREVIATIONS
+    # GET ICD FINAL ABBREVIATIONS
     # --------------------------------------------------------
  
     final_abbreviations = parse_abbreviations(
@@ -227,6 +234,7 @@ for _, row in icd_df.iterrows():
  
  
     # --------------------------------------------------------
+    # NORMALIZE ABBREVIATIONS
     # NORMALIZE ABBREVIATIONS
     # --------------------------------------------------------
  
@@ -252,6 +260,7 @@ for _, row in icd_df.iterrows():
             abbr
             for abbr in oncology_abbreviations
             if normalize(abbr) not in final_normalized
+            if normalize(abbr) not in final_normalized
         ]
  
  
@@ -271,6 +280,7 @@ for _, row in icd_df.iterrows():
  
     # --------------------------------------------------------
     # APPEND VALUES
+    # APPEND VALUES
     # --------------------------------------------------------
  
     oncology_abbreviations_column.append(
@@ -283,6 +293,7 @@ for _, row in icd_df.iterrows():
  
  
 # ============================================================
+# APPEND NEW COLUMNS TO ICD DATAFRAME
 # APPEND NEW COLUMNS TO ICD DATAFRAME
 # ============================================================
  
