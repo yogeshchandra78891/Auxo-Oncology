@@ -5,4 +5,3 @@ data/
 category_mismatches.csv
 ICD_new.csv
 test_correct_category.py
-test_keyword_difference.py

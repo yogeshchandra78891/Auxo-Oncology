@@ -48,7 +48,6 @@ IMPORTANT CONTEXT:
 The input comes from canonical_entities.json.
 
 Each input record has this structure:
-
 {
   "category_description2": "merkel cell carcinoma|merkel cell carcinoma",
   "category": "Merkel cell carcinoma",
@@ -68,7 +67,6 @@ evidence.
 Prioritize:
 
 1. Canonical common disease names.
-
 2. Site-based variants:
    - <site> Cancer
    - <site> Carcinoma
@@ -78,19 +76,12 @@ Prioritize:
    - Carcinoma of <site>
 
 3. Established histological subtypes mentioned in the evidence.
-
 4. Widely used acronyms that unambiguously refer to this entity.
-
 5. Established anatomical synonyms.
-
 6. Lay/clinical terms.
-
 7. Anatomical subsite variants.
-
 8. Directional/laterality-specific variants.
-
 9. Combination/overlapping-site variants.
-
 10. Histology + anatomical-site combinations.
 
 
@@ -105,7 +96,6 @@ The following values already exist and MUST NOT be returned:
 Compare case-insensitively.
 
 If a candidate already exists in this list, exclude it.
-
 Also remove duplicates within the LLM output itself.
 
 
@@ -151,18 +141,6 @@ NEVER return:
 - Duplicate values
 
 The sentinel "404" must NEVER appear together with real values.
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-404 RULE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-If there are NO valid NEW entity-specific variants, return:
-
-["404"]
-
-If at least one valid variant exists, NEVER return "404".
-
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EXAMPLES

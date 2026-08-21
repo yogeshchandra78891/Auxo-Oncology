@@ -19,7 +19,6 @@ Usage:
     python src/pipelines/run_article_abbreviations.py
     python src/pipelines/run_article_abbreviations.py --top-k 5
     python src/pipelines/run_article_abbreviations.py --category "Lung Cancer"
-    python src/pipelines/run_article_abbreviations.py --category "Liver Cancer"
     python src/pipelines/run_article_abbreviations.py --skip-llm
     python src/pipelines/run_article_abbreviations.py --skip-merge
 """

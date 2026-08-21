@@ -1,40 +1,39 @@
 from __future__ import annotations
- 
+
 import json
 from pathlib import Path
- 
+
 from Bio import Entrez
- 
- 
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "top10_pubmed_abstracts.json"
- 
+
 Entrez.email = "your_email@example.com"
- 
- 
+
+
 def fetch_top_pubmed_abstracts(
     topic: str | list[str],
     max_results: int = 10,
     per_term_limit: int = 5,
     output: Path = DEFAULT_OUTPUT,
 ) -> None:
- 
+
     terms = [topic] if isinstance(topic, str) else list(topic)
- 
+
     # ------------------------------------------------------------
     # Search PubMed
     # ------------------------------------------------------------
- 
+
     seen_ids: dict[str, int] = {}
- 
+
     for term in terms:
- 
+
         limit = per_term_limit if len(terms) > 1 else max_results
 
         # Fetch a larger candidate pool so we have fallback articles when
         # some results have no abstract.  3x gives enough headroom in practice.
         candidate_limit = limit * 3
- 
+
         try:
             handle = Entrez.esearch(
                 db="pubmed",
@@ -42,32 +41,32 @@ def fetch_top_pubmed_abstracts(
                 retmax=candidate_limit,
                 sort="relevance",
             )
- 
+
             results = Entrez.read(handle)
             handle.close()
- 
+
             for pmid in results.get("IdList", []):
                 if pmid not in seen_ids:
                     seen_ids[pmid] = len(seen_ids)
- 
+
         except Exception as exc:
             print(f"[warn] PubMed search failed for {term!r}: {exc}")
- 
+
     if not seen_ids:
         print(f"[warn] No PubMed articles found for: {terms}")
         return
- 
+
     # Preserve PubMed relevance order — keep the full candidate pool so we
     # can skip abstract-less articles and still reach max_results.
     ordered_ids = list(seen_ids.keys())
- 
+
     print(f"\nSearch: {terms}")
     print(f"PMIDs found (candidate pool): {ordered_ids}")
- 
+
     # ------------------------------------------------------------
     # Fetch article information
     # ------------------------------------------------------------
- 
+
     try:
         fetch_handle = Entrez.efetch(
             db="pubmed",
@@ -75,14 +74,14 @@ def fetch_top_pubmed_abstracts(
             rettype="abstract",
             retmode="xml",
         )
- 
+
         data = Entrez.read(fetch_handle)
         fetch_handle.close()
- 
+
     except Exception as exc:
         print(f"[warn] PubMed efetch failed: {exc}")
         return
- 
+
     # ------------------------------------------------------------
     # Extract PMID + title + abstract
     # Skip any article whose abstract is absent or empty and move
@@ -131,30 +130,30 @@ def fetch_top_pubmed_abstracts(
             print(f"[skip] PMID {pmid} has no abstract — trying next candidate")
             continue
         records.append(entry)
- 
+
     # ------------------------------------------------------------
     # Save JSON
     # ------------------------------------------------------------
- 
+
     output.parent.mkdir(parents=True, exist_ok=True)
- 
+
     output.write_text(
         json.dumps(records, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
- 
+
     print(
         f"[pubmed] Fetched {len(records)} articles "
         f"for {len(terms)} search term(s) → {output}"
     )
- 
- 
+
+
 def main():
     fetch_top_pubmed_abstracts(
         "lung cancer",
         max_results=10,
     )
- 
- 
+
+
 if __name__ == "__main__":
     main()

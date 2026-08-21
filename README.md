@@ -41,7 +41,7 @@ The output (`master_abbreviations.json`) is used downstream for entity recogniti
 
 2. **Create a virtual environment**
    ```bash
-   python -m venv env
+   python -m venv .venv
    source env/bin/activate  # On Windows: env\Scripts\activate
    ```
 
@@ -144,14 +144,13 @@ python/
 │   │
 │   ├── rag/                            # RAG pipeline components
 │   ├── generate_abbreviation_diff.py   # Quality check: compare vs reference
-│   └── test_keyword_difference.py      # Quality check: category-level comparison
+│   └── check_keyword_difference.py      # Quality check: category-level comparison
 │
 ├── utils/
 │   ├── azure_client.py     # Creates AzureOpenAI client from .env
 │   ├── cache.py            # load/save cache JSON helpers
 │   └── json_utils.py       # read_json, write_json, fingerprint, entity_id, normalize
 │
-├── .env                    # Local credentials (gitignored)
 ├── .env.example            # Credential template
 ├── requirements.txt        # Python dependencies
 ├── CONTEXT.md              # Detailed technical documentation
@@ -289,21 +288,6 @@ AZURE_OPENAI_DEPLOYMENT=your-deployment-name  # e.g., "gpt-4o"
 
 For reference, see `.env.example` in the repository.
 
----
-
-## 💾 Evidence Fetching & KB Management
-
-### How It Works
-- **Per-Category KB Fetching**: PubMed and ClinicalTrials evidence is fetched fresh for each category
-- **KB Flush Between Categories**: The orchestrator deletes old evidence files between categories to prevent cross-contamination
-- **Temporary Files**: `data/top10_pubmed_abstracts.json` and `data/top_10_clinical_trials.json` are working files, not persistent caches
-- **No Fingerprint Caching**: Abbreviation generation results are not formally cached; regenerated on each run
-
-### Optimizing for Performance
-- Use `--category` flag only when testing specific entities
-- Run full pipeline once per dataset update to minimize external API calls
-- Monitor PubMed and ClinicalTrials.gov rate limits in output logs
-- Consider caching if doing many repeated runs on the same data
 
 ---
 
@@ -361,42 +345,6 @@ python src/test_keyword_difference.py
 
 ---
 
-## 📝 Dependencies
-
-```
-pandas>=2.0                    # Data processing
-google-genai>=1.0              # Google AI integration
-python-dotenv>=1.0             # Environment variable management
-httpx>=0.28                    # HTTP client
-truststore>=0.10               # SSL certificate management
-openai>=1.0                    # Azure OpenAI API
-biopython>=1.80                # PubMed/Entrez integration
-```
-
-Install all at once:
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🤝 Contributing
-
-For bug reports or feature requests, please refer to the team. For code changes:
-
-1. Test with a single category first:
-   ```bash
-   python src/pipelines/run_article_abbreviations.py --category "Test Category" --top-k 5
-   ```
-2. Review generated abbreviations in `data/master_abbreviations.json` and `data/master_abbreviations.csv`
-3. Run quality checks:
-   ```bash
-   python src/generate_abbreviation_diff.py
-   ```
-4. Verify both JSON and CSV outputs are present and valid
-
----
-
 ## ⚡ Command-Line Options
 
 | Option | Type | Default | Description |
@@ -414,37 +362,3 @@ python src/pipelines/run_article_abbreviations.py --top-k 3  # Quick run with mi
 ```
 
 ---
-
-## 📚 For More Details
-
-See [CONTEXT.md](CONTEXT.md) for:
-- Detailed architecture and data flow
-- Token-based relevance scoring algorithm
-- KB fetching and normalization strategies
-- LLM prompt engineering and generation priorities
-- Data format reference for all intermediate files
-- Known issues and troubleshooting
-
----
-
-## 📄 License
-
-Proprietary — ProcDNA Analytics Pvt. Ltd.
-
----
-
-## 🆘 Support
-
-For issues or questions:
-- Check [CONTEXT.md](CONTEXT.md) for detailed technical documentation (architecture, strategies, token scoring, etc.)
-- Review `.env.example` for credential setup
-- Ensure all dependencies are installed: `pip install -r requirements.txt`
-- Test with a single category: `python src/pipelines/run_article_abbreviations.py --category "Test Category"`
-- Check both JSON and CSV outputs in `data/master_abbreviations.*`
-- Review `description_3` field for additional entity context (if available)
-
----
-
-**Last Updated**: 2026-08-20  
-**Version**: 1.0  
-**Status**: Production-ready

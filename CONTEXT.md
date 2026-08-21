@@ -452,10 +452,6 @@ To minimize external API calls:
 ## Quality Analysis Scripts
 
 ```bash
-# Compare master_abbreviations.json vs Indication_Oncology(in).csv
-# Outputs: data/abbreviation_difference.csv
-python src/generate_abbreviation_diff.py
-
 # Simpler category-level comparison (top 85 rows of reference CSV)
 # Outputs: data/category_abbreviation_comparison.csv
 python src/test_keyword_difference.py
